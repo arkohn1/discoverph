@@ -86,16 +86,16 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a href="./" class="nav-link <?= isset($page) && $page == 'home' ? "active" : "" ?>">Home</a>
+          <a href="./" class="nav-link home <?= isset($page) && $page == 'home' ? "active" : "" ?>">Home</a>
         </li>
         <li class="nav-item">
           <a href="./?page=products" class="nav-link <?= isset($page) && $page == 'products' ? "active" : "" ?>">Resorts</a>
         </li>
         <li class="nav-item">
-          <a href="./?page=about" class="nav-link <?= isset($page) && $page == 'about' ? "active" : "" ?>">About</a>
+          <a class="nav-link <?= isset($page) && $page == 'about' ? "active" : "" ?>" data-target-section="about" href="<?= isset($page) && $page != 'home' ? './#about' : 'javascript:void(0)' ?>">About</a>
         </li>
         <li class="nav-item">
-          <a href="./?page=contact_us" class="nav-link <?= isset($page) && $page == 'contact_us' ? "active" : "" ?>">Contact</a>
+          <a class="nav-link <?= isset($page) && $page == 'contact' ? "active" : "" ?>" data-target-section="contact" href="<?= isset($page) && $page != 'home' ? './#contact' : 'javascript:void(0)' ?>">Contact</a>
         </li>
         
 

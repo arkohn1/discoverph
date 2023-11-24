@@ -1,5 +1,16 @@
 <?php 
-$category_ids = isset($_GET['cids']) ? $_GET['cids'] : 'all';
+    $category_ids = isset($_GET['cids']) ? $_GET['cids'] : 'all';
+
+    function get_average_rating($productId, $conn) {
+        // Prepare the SQL query to get the average rating
+        $query = "SELECT AVG(rating) as average_rating FROM ratings_reviews WHERE product_id = ? AND status = 'approved'";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $productId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row ? round($row['average_rating'], 1) : 0; // Round to 1 decimal place and return
+    }
 ?>
 <style>
     .price-section {
@@ -9,6 +20,8 @@ $category_ids = isset($_GET['cids']) ? $_GET['cids'] : 'all';
         border-radius: 5px;
         padding: 10px;
         background-color: #343a40;
+        height: 30px;
+        margin-top: 5px;
     }
 
     .currency-symbol {
@@ -50,7 +63,6 @@ $category_ids = isset($_GET['cids']) ? $_GET['cids'] : 'all';
                     </div>
                 </div>
             </div>
-            
         </div>
         <div class="col-md-8">
             <div class="card card-outline card-primary shadow rounded-0">
@@ -77,10 +89,15 @@ $category_ids = isset($_GET['cids']) ? $_GET['cids'] : 'all';
                             if(isset($_GET['search']) && !empty($_GET['search'])){
                                 $swhere .= " and (p.name LIKE '%{$_GET['search']}%' or p.description LIKE '%{$_GET['search']}%' or c.name LIKE '%{$_GET['search']}%' or v.shop_name LIKE '%{$_GET['search']}%') ";
                             }
-
                             $products = $conn->query("SELECT p.*, v.shop_name as vendor, c.name as `category` FROM `product_list` p inner join vendor_list v on p.vendor_id = v.id inner join category_list c on p.category_id = c.id where p.delete_flag = 0 and p.`status` =1 {$swhere} order by RAND()");
                             while($row = $products->fetch_assoc()):
+
+
+                            // Inside your loop for displaying products
+                            $averageRating = get_average_rating($row['id'], $conn);
                             ?>
+
+
                             <div class="col-lg-4 col-md-6 col-sm-12 product-item">
                                 <a href="./?page=products/view_product&id=<?= $row['id'] ?>" class="card shadow rounded-0 text-reset text-decoration-none">
                                 <!-- <div class="product-img-holders position-relatives">
@@ -91,14 +108,27 @@ $category_ids = isset($_GET['cids']) ? $_GET['cids'] : 'all';
                                 </div>
                                     <div class="card-body border-top border-gray">
                                         <h5 class="card-title text-truncate w-100"><?= $row['name'] ?></h5>
+                                        <div class="product-rating">
+                                            <?php
+                                            for ($i = 1; $i <= 5; $i++) {
+                                                if ($i <= $averageRating) {
+                                                    echo '<span style="color: gold;">&#9733;</span>'; // Filled star
+                                                } else {
+                                                    echo '<span>&#9733;</span>'; // Empty star
+                                                }
+                                            }
+                                            ?>
+                                            <span>(<?= $averageRating ?>)</span> <!-- Optionally display the numeric rating -->
+                                        </div>
                                         <div class="d-flex w-100">
-                                            <div class="col-auto px-0"><small class="text-muted"></small></div>
+                                            <div class="col-auto px-0"><small class="text-muted">Resort:&nbsp;</small></div>
                                             <div class="col-auto px-0 flex-shrink-1 flex-grow-1"><p class="text-truncate m-0"><small class="text-muted"><?= $row['vendor'] ?></small></p></div>
                                         </div>
                                         <div class="d-flex">
-                                            <div class="col-auto px-0"><small class="text-muted"></small></div>
+                                            <div class="col-auto px-0"><small class="text-muted">Category:&nbsp;</small></div>
                                             <div class="col-auto px-0 flex-shrink-1 flex-grow-1"><p class="text-truncate m-0"><small class="text-muted"><?= $row['category'] ?></small></p></div>
                                         </div>
+                                        
                                         <!-- Price Section -->
                                         <div class="price-section">
                                             <div class="currency-symbol">₱</div>
