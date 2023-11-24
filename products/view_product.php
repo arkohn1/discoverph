@@ -19,6 +19,13 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
         $availableRooms = $roomData['available_rooms'];
         $takenRooms = $roomData['taken_rooms'];
 
+
+        // After fetching the product details
+        $averageRatingQuery = $conn->query("SELECT AVG(rating) as average_rating FROM ratings_reviews WHERE product_id = '{$id}' AND status = 'approved'");
+        $averageRatingRow = $averageRatingQuery->fetch_assoc();
+        $averageRating = round($averageRatingRow['average_rating'], 1);
+
+
     } else {
         echo "<script> alert('Unknown Product ID.'); location.replace('./?page=products') </script>";
         exit;
@@ -74,10 +81,12 @@ function get_product_reviews($product_id) {
 
     #prod-img {
         object-fit: cover;
-        height: 250px;
+        height: 215px;
         width: calc(100%);
+        border: 2px BLACK;
         transition: transform .3s ease-in;
-        background-color: #343a40;
+        background-color: #212529;
+        padding: 0rem;
     }
     #prod-img-holders:hover #prod-img{
         transform:scale(1.2);
@@ -448,7 +457,7 @@ function get_product_reviews($product_id) {
                             <img src="<?= validate_image(isset($image_path) ? $image_path : "") ?>" alt="<?= $name ?>" id="prod-img" class="img-thumbnail">
                         </div>
                         <div class="information-container">
-                            <div class="price" style="background-color: #f4f4f4; border-radius: 5px; padding: 5px;">
+                        <div class="price" style="background-color: #212529; color: white; border-radius: 0px; padding: 5px;">
                             ₱ <?= format_num($price) ?> per room/day
                             </div>
                         </div>
@@ -493,13 +502,16 @@ function get_product_reviews($product_id) {
                         </div>
                         <br>
                     </div>
+
+
+                    <!-- RESORT NAME AND INQUIRE BUTTON -->
                     <div class="col-lg-8 col-md-7 col-sm-12">
                         <div class="d-flex align-items-center mb-3">
                             <h3><b><?= $name ?></b></h3>
                             <div class="ml-3">
-                            <button class="btn btn-primary btn-sm" id="inquireBtn" data-toggle="modal" data-target="#inquireModal">
-                                <i class="fas fa-question-circle mr-1"></i> Inquire
-                            </button>
+                                <button class="btn btn-primary btn-sm" id="inquireBtn" data-toggle="modal" data-target="#inquireModal">
+                                    <i class="fas fa-question-circle mr-1"></i> Inquire
+                                </button>
                             </div>
                             <!-- Modal for Inquire -->
                             <div class="modal fade" id="inquireModal" tabindex="-1" role="dialog" aria-labelledby="inquireModalLabel" aria-hidden="true">
@@ -543,9 +555,20 @@ function get_product_reviews($product_id) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                        
                         </div>
-                        
+                        <div class="product-rating" style="margin-top: -20px;">
+                            <?php
+                            for ($i = 1; $i <= 5; $i++) {
+                                if ($i <= $averageRating) {
+                                    echo '<span style="color: gold;">&#9733;</span>'; // Filled star
+                                } else {
+                                    echo '<span>&#9733;</span>'; // Empty star
+                                }
+                            }
+                            ?>
+                            <span>(<?= $averageRating ?>)</span>
+                        </div> 
 
                         <div class="information-container">
                             <div class="info-group">
@@ -628,82 +651,79 @@ function get_product_reviews($product_id) {
 
             
 
-<!-- Reviews Section -->
-<div id="reviewsSection" style="border: 1px solid #ccc; padding: 10px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+            <!-- Reviews Section -->
+            <div id="reviewsSection" style="border: 1px solid #ccc; padding: 10px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
 
-    <!-- Heading showing the number of reviews -->
-    <h5 id="reviewsHeading" style="text-align: center; margin-bottom: 10px;"></h5>
-    <hr style="width: 600px; border-width: 3px; height: 5px; border-color: #007bff; margin-bottom: 20px;">
+                <!-- Heading showing the number of reviews -->
+                <h5 id="reviewsHeading" style="text-align: center; margin-bottom: 10px;"></h5>
+                <hr style="width: 600px; border-width: 3px; height: 5px; border-color: #007bff; margin-bottom: 20px;">
 
-<!-- Display existing reviews if any -->
-<div id="existingReviewsContainer" style="width: 640px; height: 300px; overflow-y: auto; word-wrap: break-word; float: left; margin-right: 20px;">
-    <div id="existingReviews" style="flex: 1;">
-        <?php
-        // Assuming you have a function to fetch reviews for a product
-        $reviews = get_product_reviews($id); // Replace with your actual function
-        if ($reviews) {
-            foreach ($reviews as $review) {
-                echo '<div class="review-container" style="background-color: #;">';
-                echo '<div class="review-header">';
-                echo '<img src="' . validate_image($review['avatar']) . '" class="img-avatar-small img-thumbnail p-0 border-2" alt="client_avatar">';
-                echo '<h5>' . $review['client_name'] . '</h5>';
-                echo '<p>Date: ' . date('F j, Y', strtotime($review['date_created'])) . '</p>';
-                echo '</div>';
-                
-                // Display stars based on the rating
-                echo '<p>Rating: ';
-                for ($i = 1; $i <= 5; $i++) {
-                    if ($i <= $review['rating']) {
-                        // Output a colored star for each filled star
-                        echo '<span style="color: gold;">&#9733;</span>';
-                    } else {
-                        // Output an empty star for each unfilled star
-                        echo '<span>&#9733;</span>';
+            <!-- Display existing reviews if any -->
+            <div id="existingReviewsContainer" style="width: 640px; height: 300px; overflow-y: auto; word-wrap: break-word; float: left; margin-right: 20px;">
+                <div id="existingReviews" style="flex: 1;">
+                    <?php
+                    // Assuming you have a function to fetch reviews for a product
+                    $reviews = get_product_reviews($id); // Replace with your actual function
+                    if ($reviews) {
+                        foreach ($reviews as $review) {
+                            echo '<div class="review-container" style="background-color: #;">';
+                            echo '<div class="review-header">';
+                            echo '<img src="' . validate_image($review['avatar']) . '" class="img-avatar-small img-thumbnail p-0 border-2" alt="client_avatar">';
+                            echo '<h5>' . $review['client_name'] . '</h5>';
+                            echo '<p>Date: ' . date('F j, Y', strtotime($review['date_created'])) . '</p>';
+                            echo '</div>';
+                            
+                            // Display stars based on the rating
+                            echo '<p>Rating: ';
+                            for ($i = 1; $i <= 5; $i++) {
+                                if ($i <= $review['rating']) {
+                                    // Output a colored star for each filled star
+                                    echo '<span style="color: gold;">&#9733;</span>';
+                                } else {
+                                    // Output an empty star for each unfilled star
+                                    echo '<span>&#9733;</span>';
+                                }
+                            }
+                            echo '</p>';
+                            
+                            echo '<div class="review-content">';
+                            echo '<p>' . $review['review'] . '</p>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
                     }
-                }
-                echo '</p>';
-                
-                echo '<div class="review-content">';
-                echo '<p>' . $review['review'] . '</p>';
-                echo '</div>';
-                echo '</div>';
-            }
-        }
-        ?>
-    </div>
-</div>
-
-    <!-- Form for submitting reviews on the right side -->
-    <div id="newReviewForm" style="width: 40%; float: left;">
-        <form id="reviewForm">
-            <!-- Add this hidden input field for product_id -->
-            <input type="hidden" id="product_id_review" name="product_id_review" value="<?= $id ?>">
-
-            <!-- Rating Stars -->
-            <div class="form-group">
-                <label for="rating">Rating:</label>
-                <div class="rating">
-                    <span class="star" data-rating="1">&#9733;</span>
-                    <span class="star" data-rating="2">&#9733;</span>
-                    <span class="star" data-rating="3">&#9733;</span>
-                    <span class="star" data-rating="4">&#9733;</span>
-                    <span class="star" data-rating="5">&#9733;</span>
+                    ?>
                 </div>
-                <input type="hidden" name="rating" id="rating" value="0" required>
             </div>
+                <!-- Form for submitting reviews on the right side -->
+                <div id="newReviewForm" style="width: 40%; float: left;">
+                    <form id="reviewForm">
+                        <!-- Add this hidden input field for product_id -->
+                        <input type="hidden" id="product_id_review" name="product_id_review" value="<?= $id ?>">
 
-            <div class="form-group">
-                <label for="review">Write a Review:</label>
-                <textarea class="form-control" id="review" name="review" rows="4" required></textarea>
+                        <!-- Rating Stars -->
+                        <div class="form-group">
+                            <label for="rating">Rate Package:</label>
+                            <div class="rating">
+                                <span class="star" data-rating="1">&#9733;</span>
+                                <span class="star" data-rating="2">&#9733;</span>
+                                <span class="star" data-rating="3">&#9733;</span>
+                                <span class="star" data-rating="4">&#9733;</span>
+                                <span class="star" data-rating="5">&#9733;</span>
+                            </div>
+                            <input type="hidden" name="rating" id="rating" value="0" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="review">Write a Review:</label>
+                            <textarea class="form-control" id="review" name="review" rows="4" required></textarea>
+                        </div>
+
+                        <button type="button" class="btn btn-primary" id="submitReviewBtn">Submit Review </button>
+                    </form>
+                </div>
+                <div style="clear: both;"></div> <!-- Clear the float to prevent layout issues -->
             </div>
-
-            <button type="button" class="btn btn-primary" id="submitReviewBtn">Submit Review </button>
-        </form>
-    </div>
-
-    <div style="clear: both;"></div> <!-- Clear the float to prevent layout issues -->
-
-</div>
 
 
 

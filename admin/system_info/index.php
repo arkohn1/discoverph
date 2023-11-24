@@ -38,8 +38,8 @@
 					<input type="text" class="form-control form-control-sm" name="short_name" id="short_name" value="<?php echo  $_settings->info('short_name') ?>">
 				</div>
 			<div class="form-group">
-				<label for="" class="control-label">Welcome</label>
-	             <textarea name="content[welcome]" id="" cols="30" rows="2" class="form-control summernote"><?php echo  is_file(base_app.'welcome.html') ? file_get_contents(base_app.'welcome.html') : "" ?></textarea>
+				<label for="" class="control-label">Subtitle</label>
+	             <textarea name="content[subtitle]" id="" cols="30" rows="2" class="form-control summernote"><?php echo  is_file(base_app.'subtitle.html') ? file_get_contents(base_app.'subtitle.html') : "" ?></textarea>
 			</div>
 			<div class="form-group">
 				<label for="" class="control-label">About Us</label>

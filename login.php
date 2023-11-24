@@ -13,6 +13,8 @@
           background-image:url('<?= validate_image($_settings->info('cover')) ?>');
           background-repeat: no-repeat;
           background-size:cover;
+          backdrop-filter: blur(3px); /* Adjust the blur amount as needed */
+
       }
       #logo-img{
           width:15em;
@@ -22,7 +24,7 @@
       }
       #system_name{
         color:#fff;
-        text-shadow: 3px 3px 3px #000;
+        /*text-shadow: 3px 3px 3px #000;*/
       }
   </style>
    <?php if($_settings->chk_flashdata('success')): ?>
