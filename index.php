@@ -27,14 +27,14 @@
   }
 
   #top-Nav a.nav-link.active {
-      color: #343a40;
-      font-weight: 900;
+      color: ;
+      font-weight: 0;
       position: relative;
   }
   #top-Nav a.nav-link.active:before {
     content: "";
     position: absolute;
-    border-bottom: 2px solid #343a40;
+    border-bottom: 0px solid #343a40;
     width: 33.33%;
     left: 33.33%;
     bottom: 0;
@@ -103,7 +103,7 @@
                   <h5 class="subtitle-content">
                       <?php include("subtitle.html") ?>
                   </h5>
-                  <a href="#resort-packages" class="btn btn-primary rounded-pill mt-3" id="scrollToResortPackages"><b>EXPLORE PACKAGES</b></a>
+                  <a href="#resort-packages" class="btn btn-primary rounded-pill mt-3" id="scrollToResortPackages">View Resorts</a>
               </div>
           </div>
       <?php endif; ?>
@@ -186,15 +186,18 @@
 
 <!-- Add this script to your index.php file -->
 <script>
-$(document).ready(function () {
-    // Smooth scrolling animation when the button is clicked
-    $("#scrollToResortPackages").on("click", function () {
-        $("html, body").animate(
-            {
-                scrollTop: $("#resort-packages").offset().top,
-            },
-            1000 // Adjust the animation duration (in milliseconds) as needed
-        );
-    });
-});
+  $(document).ready(function () {
+      // Set your desired offset value
+      var scrollOffset = 80; // Change this value as needed
+
+      // Smooth scrolling animation when the button is clicked
+      $("#scrollToResortPackages").on("click", function () {
+          $("html, body").animate(
+              {
+                  scrollTop: $("#resort-packages").offset().top - scrollOffset,
+              },
+              1000 // Adjust the animation duration (in milliseconds) as needed
+          );
+      });
+  });
 </script>

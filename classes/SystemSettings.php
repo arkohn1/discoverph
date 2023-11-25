@@ -81,6 +81,48 @@ class SystemSettings extends DBConnection{
 				unset($uploaded_img);
 			}
 		}
+		// Avatar upload logic
+		if(isset($_FILES['user_avatar']) && $_FILES['user_avatar']['tmp_name'] != ''){
+			$fname = 'uploads/avatar-'.time().'.png';
+			$dir_path = base_app . $fname;
+			$upload = $_FILES['user_avatar']['tmp_name'];
+			$type = mime_content_type($upload);
+			$allowed = array('image/png', 'image/jpeg');
+	
+			if (!in_array($type, $allowed)) {
+				$resp['msg'] .= " But Image failed to upload due to an invalid file type.";
+			} else {
+				$new_height = 200;
+				$new_width = 200;
+	
+				list($width, $height) = getimagesize($upload);
+				$t_image = imagecreatetruecolor($new_width, $new_height);
+				imagealphablending($t_image, false);
+				imagesavealpha($t_image, true);
+				$gdImg = ($type == 'image/png') ? imagecreatefrompng($upload) : imagecreatefromjpeg($upload);
+				imagecopyresampled($t_image, $gdImg, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+	
+				if ($gdImg) {
+					if (is_file($dir_path))
+						unlink($dir_path);
+					$uploaded_img = imagepng($t_image, $dir_path);
+					imagedestroy($gdImg);
+					imagedestroy($t_image);
+				} else {
+					$resp['msg'] .= " But Image failed to upload due to an unknown reason.";
+				}
+			}
+	
+			if (isset($uploaded_img) && $uploaded_img == true) {
+				if (isset($_SESSION['system_info']['user_avatar'])) {
+					$qry = $this->conn->query("UPDATE system_info SET meta_value = '{$fname}' WHERE meta_field = 'user_avatar' ");
+					if (is_file(base_app . $_SESSION['system_info']['user_avatar'])) unlink(base_app . $_SESSION['system_info']['user_avatar']);
+				} else {
+					$qry = $this->conn->query("INSERT INTO system_info SET meta_value = '{$fname}', meta_field = 'user_avatar' ");
+				}
+				unset($uploaded_img);
+			}
+		}
 		if(isset($_FILES['cover']) && $_FILES['cover']['tmp_name'] != ''){
 			$fname = 'uploads/cover-'.time().'.png';
 			$dir_path =base_app. $fname;

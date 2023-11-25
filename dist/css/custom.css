@@ -235,10 +235,11 @@ h1.w-100.text-center.site-title.px-5 {
 }
 
 img#client-img-avatar {
-    width: 1.7rem;
-    height: 1.7rem;
-    border-width: 1px !important;
-    padding: 1px;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-width: 2px !important;
+    padding: 2px;
+    border-color: gray;
 }
 
 .form-control.form-control-border:focus {

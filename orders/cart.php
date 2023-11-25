@@ -10,6 +10,10 @@
         object-position: center center;
         background: #343a40; /* Use your specific color values */
     }
+
+    body {
+    overflow-y: scroll;
+}
 </style>
 
 

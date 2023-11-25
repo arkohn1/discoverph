@@ -384,7 +384,7 @@ function get_product_reviews($product_id) {
     }
 
     #newReviewForm {
-        max-width: 400px; /* Adjust the width as needed */
+        max-width: 375px; /* Adjust the width as needed */
     }
     
     /* Style for existing reviews scrollbar */
@@ -419,7 +419,7 @@ function get_product_reviews($product_id) {
         }
 
         #newReviewForm {
-            width: 40%;
+            width: 100%;
         }
     }
 
@@ -696,7 +696,7 @@ function get_product_reviews($product_id) {
                 </div>
             </div>
                 <!-- Form for submitting reviews on the right side -->
-                <div id="newReviewForm" style="width: 40%; float: left;">
+                <div id="newReviewForm" style="width: 100%; float: left;">
                     <form id="reviewForm">
                         <!-- Add this hidden input field for product_id -->
                         <input type="hidden" id="product_id_review" name="product_id_review" value="<?= $id ?>">

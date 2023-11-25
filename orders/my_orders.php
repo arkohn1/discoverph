@@ -1,3 +1,9 @@
+<style>
+    body {
+    overflow-y: scroll;
+    }
+</style>
+
 <div class="content py-3">
     <div class="card card-outline card-primary rounded-0 shadow">
         <div class="card-header">

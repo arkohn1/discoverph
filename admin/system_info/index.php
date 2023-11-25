@@ -17,6 +17,12 @@
 		object-fit: contain;
 		/* border-radius: 100% 100%; */
 	}
+	img#cimg3{
+		height: 15vh;
+		width: 15vh;
+		object-fit: cover;
+		border-radius: 100% 100%;
+	}
 </style>
 <div class="col-lg-12">
 	<div class="card card-outline card-primary">
@@ -72,6 +78,20 @@
 			<div class="form-group d-flex justify-content-center">
 				<img src="<?php echo validate_image($_settings->info('logo')) ?>" alt="" id="cimg" class="img-fluid img-thumbnail">
 			</div>
+
+
+			<div class="form-group">
+				<label for="" class="control-label">System Avatar</label>
+				<div class="custom-file">
+	              <input type="file" class="custom-file-input rounded-circle" id="customAvatar" name="user_avatar" onchange="displayImg3(this,$(this))">
+	              <label class="custom-file-label" for="customFile">Choose file</label>
+	            </div>
+			</div>
+			<div class="form-group d-flex justify-content-center">
+				<img src="<?php echo validate_image($_settings->info('user_avatar')) ?>" alt="" id="cimg3" class="img-fluid img-thumbnail">
+			</div>
+
+
 			<!--added "C" at customFile to fix bug with changing cover photo-->
 			<div class="form-group">
 				<label for="" class="control-label">Website Cover</label>

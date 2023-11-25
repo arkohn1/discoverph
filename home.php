@@ -41,39 +41,108 @@
     h3.text-center b {
         color: #212529;
     }
+
+
+
+    /* ABOUT SECTION STYLING */
+    #about .card {
+        box-shadow: none;
+        border: none;
+        width: 100%;
+        max-width: none;
+    }
+
+    #about .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #about .about-content {
+        text-align: center;
+    }
+
+    #about .image-section {
+        margin-top: 0px; /* Add margin at the top for separation */
+    }
+
+    #about #system-logo {
+        max-width: 100%;
+        width: 1100px; /* Set the desired width for the system logo */
+        height: auto;
+        border: none;
+        background-color: transparent; /* Set background to transparent */
+        margin-top: -100px; /* Add margin at the top for separation */
+    }
+
+    #about #user-avatar {
+        max-width: 100%;
+        width: 1100px; /* Set the desired width for the user avatar */
+        height: auto;
+        border: none;
+        background-color: transparent; /* Set background to transparent */
+        margin-top: -500px; /* Add margin at the top for separation */
+
+
+    }
+
+    #about h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    #about hr {
+        margin: 0 auto 20px;
+    }
+
+    /* Optional: Responsive styling for smaller screens */
+    @media (max-width: 768px) {
+        #about .card-body {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #about .image-section {
+            margin-top: 20px;
+        }
+    }
+
+
+
+
+
+
+
+
+
+    
 </style>
 <div class="col-lg-12 py-5">
     <div class="contain-fluid">
-        <!--<div class="card card-outline card-dark shadow rounded-0">
-            <div class="card-body rounded-0">
-                <div class="container-fluid">
-                    <h3 class="text-center">Welcome</h3>
-                    <hr>
-                    <div class="subtitle-content">
-                        <?php include("subtitle.html") ?>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="clear-fix mb-3"></div>
+        
+        <!-- Resort Packages Section -->
         <div id="resort-packages" class="col-lg-12 py-5">
-            <h3 class="text-center"><b>Resort Packages</b></h3>
+            <h3 class="text-center">Resort Packages</h3>
             <center><hr class="w-25"></center>
+            
             <div class="row" id="product_list">
                 <?php 
                 $products = $conn->query("SELECT p.*, v.shop_name as vendor, c.name as `category` FROM `product_list` p inner join vendor_list v on p.vendor_id = v.id inner join category_list c on p.category_id = c.id where p.delete_flag = 0 and p.`status` =1 order by RAND() limit 4");
+                
                 while($row = $products->fetch_assoc()):
-
-                // Inside your loop for displaying products
-                $averageRating = get_average_rating($row['id'], $conn);
+                    $averageRating = get_average_rating($row['id'], $conn);
                 ?>
+                
                 <div class="col-lg-3 col-md-6 col-sm-12 product-item">
                     <a href="./?page=products/view_product&id=<?= $row['id'] ?>" class="card shadow rounded-0 text-reset text-decoration-none">
-                    <div class="product-img-holder position-relative">
-                        <img src="<?= validate_image($row['image_path']) ?>" alt="Product-image" class="img-top product-img bg-gradient-gray">
-                    </div>
+                        <div class="product-img-holder position-relative">
+                            <img src="<?= validate_image($row['image_path']) ?>" alt="Product-image" class="img-top product-img bg-gradient-gray">
+                        </div>
+                        
                         <div class="card-body border-top border-gray">
                             <h5 class="card-title text-truncate w-100"><?= $row['name'] ?></h5>
+                            
                             <div class="product-rating">
                                 <?php
                                 for ($i = 1; $i <= 5; $i++) {
@@ -86,74 +155,104 @@
                                 ?>
                                 <span>(<?= $averageRating ?>)</span> <!-- Optionally display the numeric rating -->
                             </div>
+                            
                             <div class="d-flex w-100">
                                 <div class="col-auto px-0"><small class="text-muted">Resort:&nbsp;</small></div>
                                 <div class="col-auto px-0 flex-shrink-1 flex-grow-1"><p class="text-truncate m-0"><small class="text-muted"><?= $row['vendor'] ?></small></p></div>
                             </div>
+                            
                             <div class="d-flex">
                                 <div class="col-auto px-0"><small class="text-muted">Category:&nbsp;</small></div>
                                 <div class="col-auto px-0 flex-shrink-1 flex-grow-1"><p class="text-truncate m-0"><small class="text-muted"><?= $row['category'] ?></small></p></div>
                             </div>
+                            
                             <!-- Price Section -->
                             <div class="price-section">
                                 <div class="currency-symbol">₱</div>
                                 <div class="price"><?= format_num($row['price']) ?></div>
                             </div>
+                            
                             <p class="card-text truncate-3 w-100"><?= strip_tags(html_entity_decode($row['description'])) ?></p>
                         </div>
                     </a>
                 </div>
+                
                 <?php endwhile; ?>
             </div>
-            <!--<div class="clear-fix mb-2"></div> -->
+            
             <br>
-            <br>
+            
             <div class="text-center">
                 <a href="./?page=products" class="btn btn-large btn-primary rounded-pill col-lg-3 col-md-5 col-sm-12">Explore More Packages</a>
-            </div>
-        </div>   
-
-        
-        <br>
-        <br>
-        
-        
-        
-        <!-- ABOUT US -->
-        <div id="about" class="content py-3">
-            <div class="card rounded-0 card-outline card-navy shadow">
-                <div class="card-body rounded-0">
-                    <h2 class="text-center">About</h2>
-                    <center><hr class="bg-navy border-navy w-25 border-2"></center>
-                    <div>
-                        <?= file_get_contents("about.html") ?>
-                    </div>
-                </div>
             </div>
         </div>
 
         <br>
         <br>
+
+
+
+
+
+        <!-- ABOUT US Section -->
+        <div class="wrapper">
+            <div id="about" class="content py-3">
+                <h2 class="mb-4">About Us</h2>                        
+                <center><hr class="w-25"></center>
+                <div class="container-fluid">
+                    <div class="card rounded-0 card-outline card-navy">
+                        <div class="card-body rounded-0 d-flex flex-column flex-md-row align-items-center">
+                            <div class="about-content mb-4 text-md-left text-center">
+                                <?= file_get_contents("about.html") ?>
+                            </div>
+
+                            <div class="image-section ml-md-4 d-flex flex-column justify-content-center">
+                                <!-- System Logo -->
+                                <img src="<?php echo validate_image($_settings->info('logo')) ?>" alt="System Logo" class="img-fluid img-thumbnail mb-3" id="system-logo">
+
+                                <!-- User Avatar -->
+                                <img src="<?php echo validate_image($_settings->info('user_avatar')) ?>" alt="User Avatar" class="img-fluid img-thumbnail" id="user-avatar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
         <br>
-        <!-- CONTACT US -->
+        <br>
+        <br>
+
+        <!-- CONTACT US Section -->
         <div id="contact" class="col-12">
-            <div class="row my-5 ">
+            <div class="row my-5">
                 <div class="col-md-5">
                     <div class="card card-outline card-navy rounded-0 shadow">
                         <div class="card-header">
                             <h4 class="card-title">Contact Information</h4>
                         </div>
+                        
                         <div class="card-body rounded-0">
                             <dl>
                                 <dt class="text-muted"><i class="fa fa-envelope"></i> Email</dt>
                                 <dd class="pl-4"><?= $_settings->info('email') ?></dd>
+                                
                                 <dt class="text-muted"><i class="fa fa-phone"></i> Call Us</dt>
                                 <dd class="pl-4"><?= $_settings->info('contact') ?></dd>
+                                
                                 <dt class="text-muted"><i class="fa fa-map-marked-alt"></i> Location</dt>
                                 <dd class="pl-4"><?= $_settings->info('address') ?></dd>
                             </dl>
                         </div>
                     </div>
+
                     <!-- Google Map Embed -->
                     <div class="mb-4 rounded-lg overflow-hidden border" style="border-radius: 15px; box-shadow: 0 15px 15px rgba(0, 0, 0, 0.1);">
                         <iframe
@@ -167,11 +266,13 @@
                         ></iframe>
                     </div>
                 </div>
+
                 <div class="col-md-7">
-                    <div class="card rounded-0 card-outline card-navy shadow" >
+                    <div class="card rounded-0 card-outline card-navy shadow">
                         <div class="card-body rounded-0">
                             <h2 class="text-center">Message Us</h2>
                             <center><hr class="bg-navy border-navy w-25 border-2"></center>
+
                             <?php if($_settings->chk_flashdata('pop_msg')): ?>
                                 <div class="alert alert-success">
                                     <i class="fa fa-check mr-2"></i> <?= $_settings->flashdata('pop_msg') ?>
@@ -182,8 +283,10 @@
                                     })
                                 </script>
                             <?php endif; ?>
+
                             <form action="" id="message-form">
                                 <input type="hidden" name="id">
+                                
                                 <div class="form-group">
                                     <label for="fullname">Full Name</label>
                                     <input type="text" class="form-control form-control-sm rounded-0" id="fullname" name="fullname" required placeholder="First Name, Middle Name, Last Name">
@@ -208,12 +311,14 @@
                                     <button class="btn btn-primary rounded-pill col-5">Send Message</button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
 
 
 
@@ -321,7 +426,7 @@
         }
     }
 
-    // Scroll to the top when clicking the "Home" button
+   /*// Scroll to the top when clicking the "Home" button
     $("a.nav-link.home").on("click", function (event) {
         event.preventDefault();
         $("html, body").animate(
@@ -330,7 +435,7 @@
             },
             1000 // Adjust the animation duration (in milliseconds) as needed
         );
-    });
+    });*/
 
 
 </script>
