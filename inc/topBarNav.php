@@ -48,7 +48,7 @@
       border-radius: 20px; /* Adjust the border-radius as needed */
       margin: 20px auto; /* Add margin to create a box-like appearance and set auto for left and right margins */
       width: calc(100% - 40px); /* Adjust the width by changing margin values */
-      max-width: 1100px; /* Set a maximum width for the navbar */
+      max-width: 1150px; /* Set a maximum width for the navbar */
       left: 0; /* Reset left to 0 to center the navbar */
       right: 0; /* Reset right to 0 to center the navbar */
   }

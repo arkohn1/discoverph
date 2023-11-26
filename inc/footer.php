@@ -58,19 +58,166 @@
     }
   })
 </script>
-<footer class="main-footer text-sm">
+
+
+
+
+
+<style>
+  /* Adjust the spacing within the footer */
+  footer.main-footer {
+    margin-top: 0; /* Adjust the margin as needed */
+    padding: 20px; /* Adjust the padding as needed */
+  }
+
+  /* Add this style to adjust the spacing of the contact details */
+  footer.main-footer ul.list-unstyled {
+    margin-bottom: -25px; /* Remove any bottom margin */
+  }
+
+  /* Adjust the spacing of the social media icons */
+  footer.main-footer .social-media-icons {
+    margin-top: 10px;
+  }
+
+  #small-logo,
+  #small-user-avatar {
+    max-width: 50px;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: none;
+    margin-right: 10px; /* Optional: Add spacing between the images */
+  }
+
+  .contact-details {
+    list-style: none;
+    padding: 0;
+  }
+
+  .contact-details li {
+    margin-bottom: 10px; /* Optional: Add spacing between the contact details */
+  }
+
+  /* Make social media icons circular */
+  footer.main-footer .social-media-icons a.btn {
+    border-radius: 50%;
+  }
+
+  /* Change color of the links */
+  footer.main-footer .nav-link,
+  footer.main-footer .nav-item a.btn,
+  footer.main-footer .text-muted a {
+    color: #6c757d; /* Use the desired gray color */
+  }
+
+  /* Adjust the size and shape of social media icons */
+  .btn-social {
+    width: 40px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    border-radius: 50%; /* Makes the button circular */
+  }
+</style>
+
+
+
+
+<footer class="main-footer">
   <div class="container">
-    <strong>Copyright &copy; <?php echo $_settings->info('short_name') ?> <?php echo date('Y') ?>. 
-    </strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>
-        <a class="link-dark text-decoration-none me-3" href="javascript:void(0)" id="p_use">Privacy Policy</a>
-        <span class="ml-3"><a href="https://beta.tourism.gov.ph/" target="_blank">Department of Tourism</a></span>
-      </b>
+    <div class="row">
+      <!-- Column 1: Images and Contact Details -->
+      <div class="col-lg-4 mb-4">
+        <div class="d-flex flex-column align-items-center">
+          <!-- Contact Information -->
+          <ul class="list-unstyled text-muted contact-details">
+            <li><i class="fa fa-envelope"></i> <?= $_settings->info('email') ?></li>
+            <li><i class="fa fa-phone"></i> <?= $_settings->info('contact') ?></li>
+            <li><i class="fa fa-map-marked-alt"></i> <?= $_settings->info('address') ?></li>
+            <!-- Small Logo -->
+            <img src="<?php echo validate_image($_settings->info('logo')) ?>" alt="System Logo" class="img-fluid mb-3" id="small-logo">
+            <!-- Small User Avatar -->
+            <img src="<?php echo validate_image($_settings->info('user_avatar')) ?>" alt="User Avatar" class="img-fluid mb-3" id="small-user-avatar">
+          </ul>
+        </div>
+      </div>
+
+      <!-- Column 2: Social Media Icons, Privacy Policy, DOT, and Copyright -->
+      <div class="col-lg-4 mb-4">
+        <div class="d-flex flex-column align-items-center">
+          <!-- Social Media Icons -->
+          <div class="social-media-icons">
+            <a class="btn btn-dark btn-social mx-2" href="https://philippines.travel/" target="_blank"><i class="fas fa-globe"></i></a>
+            <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/dotcalabarzon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/tourism_phl" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+          <!-- Privacy Policy and DOT -->
+          <div class="text-muted mt-3">
+            <a class="link-dark text-decoration-none me-3" href="javascript:void(0)" id="p_use">Privacy Policy</a>
+            <span class="ml-3"><a href="https://beta.tourism.gov.ph/" target="_blank">Department of Tourism</a></span>
+          </div>
+          <!-- Copyright -->
+          <div class="text-muted mt-3">&copy; <?php echo $_settings->info('short_name') ?> <?php echo date('Y') ?>. All rights reserved.</div>
+        </div>
+      </div>
+
+      <!-- Column 3: Navigation Buttons -->
+      <div class="col-lg-4 mb-4">
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a href="./" class="nav-link home <?= isset($page) && $page == 'home' ? "active" : "" ?>">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="./?page=products" class="nav-link <?= isset($page) && $page == 'products' ? "active" : "" ?>">Resorts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?= isset($page) && $page == 'about' ? "active" : "" ?>" data-target-section="about"
+              href="<?= isset($page) && $page != 'home' ? './#about' : 'javascript:void(0)' ?>">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?= isset($page) && $page == 'contact' ? "active" : "" ?>" data-target-section="contact"
+              href="<?= isset($page) && $page != 'home' ? './#contact' : 'javascript:void(0)' ?>">Contact</a>
+          </li>
+          <?php if ($_settings->userdata('id') > 0 && $_settings->userdata('login_type') == 3) : ?>
+            <li class="nav-item">
+              <?php
+              $cart_count = $conn->query("SELECT sum(quantity) FROM `cart_list` where client_id = '{$_settings->userdata('id')}'")->fetch_array()[0];
+              $cart_count = $cart_count > 0 ? $cart_count : 0;
+              ?>
+              <a href="./?page=orders/cart" class="nav-link <?= isset($page) && $page == 'orders/cart' ? "active" : "" ?>"><span
+                  class="badge badge-secondary rounded-circle"><!--<?= format_num($cart_count) ?>--></span> Checkout</a>
+            </li>
+            <li class="nav-item">
+              <a href="./?page=orders/my_orders"
+                class="nav-link <?= isset($page) && $page == 'orders/my_orders' ? "active" : "" ?>"> Bookings</a>
+            </li>
+          <?php endif; ?>
+          <?php if (!($_settings->userdata('id') > 0 && $_settings->userdata('login_type') == 3)) : ?>
+            <!-- Modal Trigger Button for users who are not logged in -->
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="modal" data-target="#loginModal" href="javascript:void(0)">Sign In</a>
+            </li>
+          <?php endif; ?>
+        </ul>
+        
+      </div>
     </div>
   </div>
 </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
