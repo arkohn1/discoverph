@@ -1,67 +1,91 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
 <!-- jQuery and Popper.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <style>
-  .user-img {
-    position: absolute;
-    height: 27px;
-    width: 27px;
-    object-fit: cover;
-    left: -90%;
-    top: -12%;
+  .layout-top-nav .wrapper .main-header .brand-image {
+      margin-top: -0.5px;
+      margin-right: 0.2rem;
+      height: 40px;
   }
+    .user-img {
+      position: absolute;
+      height: 27px;
+      width: 27px;
+      object-fit: cover;
+      left: -90%;
+      top: -12%;
+    }
 
-  .btn-rounded {
-    border-radius: 50px;
-  }
+    .btn-rounded {
+      border-radius: 50px;
+    }
 
-  .navbar-nav .nav-item .nav-link {
-    transition: color 0.3s ease-in-out; /* Add transition for color change */
-  }
+    .navbar-nav .nav-item .nav-link {
+      transition: color 0.3s ease-in-out; /* Add transition for color change */
+    }
 
-  .navbar-nav .nav-item .nav-link:hover {
-    color: #007bff; /* Change color on hover */
-  }
+    .navbar-nav .nav-item .nav-link:hover {
+      color: #007bff; /* Change color on hover */
+    }
 
-
-
-  .navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
-    color: rgba(0, 0, 0, 0.5);
-`}
+    .navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
+      color: rgba(0, 0, 0, 0.5);
+  `}
 </style>
 
 <!-- Navbar -->
 <style>
+  /* Custom Style for Top Navigation Bar */
   #top-Nav {
-    position: fixed;
-    top: 0;
-    z-index: 1000; /* Adjust the z-index as needed */
-    background-color: rgba(255, 255, 255, 0.8);
-    width: 100%; /* Ensure full width */
-    height: 85px; /* Adjust the height as needed */
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px; /* Adjust the border-radius as needed */
+      margin: 20px auto; /* Add margin to create a box-like appearance and set auto for left and right margins */
+      width: calc(100% - 40px); /* Adjust the width by changing margin values */
+      max-width: 1100px; /* Set a maximum width for the navbar */
+      left: 0; /* Reset left to 0 to center the navbar */
+      right: 0; /* Reset right to 0 to center the navbar */
   }
+
 
   .navbar-brand img {
-    max-height: 60px; /* Adjust the max-height of the logo */
+      max-height: 60px;
   }
 
-  .text-sm .layout-navbar-fixed .wrapper .main-header ~ .content-wrapper,
-  .layout-navbar-fixed .wrapper .main-header.text-sm ~ .content-wrapper {
-    margin-top: calc(3.6) !important;
-    padding-top: calc(3.2em) !important;
+  /* Customize the active link style */
+  #top-Nav a.nav-link.active {
+      color: #007bff; /* Change color for active link */
   }
 
-  .layout-top-nav .wrapper .main-header .brand-image {
-    margin-top: -0.5rem;
-    margin-right: 0.2rem;
-    height: 50px;
-}
+  #top-Nav a.nav-link.active:before {
+      content: "";
+      position: absolute;
+      border-bottom: 2px solid #007bff; /* Highlight active link with a border */
+      width: 33.33%;
+      left: 33.33%;
+      bottom: 0;
+  }
+
+  /* Adjust spacing between links */
+  #top-Nav a.nav-link {
+      margin-right: 20px; /* Adjust the spacing between links */
+  }
+
+  /* Optional: Style for the dropdown menu */
+  #top-Nav .dropdown-menu {
+      border-radius: 10px; /* Adjust the border-radius for dropdown menu */
+  }
+
+  /* Adjust the button placement */
+  #scrollToResortPackages {
+      margin-top: 10px; /* Adjust the margin-top value to move the button down */
+  }
 </style>
 
 <nav class="main-header navbar navbar-expand-md navbar-light border-0 text-sm bg-gradient-light shadow fixed-top" id='top-Nav'>
@@ -101,7 +125,7 @@
           </li>
           <li class="nav-item">
             <a href="./?page=orders/my_orders"
-              class="nav-link <?= isset($page) && $page == 'orders/my_orders' ? "active" : "" ?>">My Bookings</a>
+              class="nav-link <?= isset($page) && $page == 'orders/my_orders' ? "active" : "" ?>"> Bookings</a>
           </li>
         <?php endif; ?>
 
@@ -152,29 +176,51 @@
     </button>
   </div>
 </nav>
+<style>
+  .modal-body a.btn {
+    transition: transform 0.3s ease-in-out; /* Add transition for the scaling effect */
+  }
 
+  .modal-body a.btn:hover {
+    transform: scale(1.1); /* Increase the scale on hover */
+  }
+
+  /* Customize the shadow for modal buttons */
+.modal-body a.btn {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Add transition for both scaling and shadow effect */
+}
+
+.modal-body a.btn:hover {
+    transform: scale(1.2); /* Increase the scale on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjust the shadow values on hover */
+}
+
+</style>
 <!-- Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">Sign In</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content border-0 bg-transparent shadow-none">
       <div class="modal-body">
-        <!-- Your login forms go here -->
-        <p><a href="./login.php" class="text-dark text-decoration-none">Customer Login</a></p>
-        <p><a href="./vendor" class="text-dark text-decoration-none">Resort Admin Login</a></p>
-        <p><a href="./admin" class="text-dark text-decoration-none">Superadmin Login</a></p>
+        <div class="row">
+          <div class="col-12 text-center mb-3">
+            <p class="mb-0"><a href="./login.php" class="btn btn-primary rounded-pill px-5 py-3 shadow-sm">Customer</a></p>
+          </div>
+          <div class="col-12 text-center mb-3">
+            <p class="mb-0"><a href="./vendor" class="btn btn-success rounded-pill px-5 py-3 shadow-sm">Resort Admin</a></p>
+          </div>
+          <div class="col-12 text-center">
+          <p class="mb-0"><a href="./admin" class="btn btn-danger rounded-pill px-5 py-3 shadow-sm">Superadmin</a></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+
 <!-- /.navbar -->
+
 <script>
   $(function () {
 

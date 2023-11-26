@@ -3,20 +3,20 @@
 <html lang="en" class="" style="height: auto;">
 <style>
   #header{
-    height:90vh;
+    height:100vh;
     width:calc(100%);
     position:relative;
-    top:-1em;
-
+    top:-6em;
+    overflow: hidden; /* Ensure the cover image covers the top part */
   }
-  #header:before{
-    content:"";
-    position:absolute;
-    height:calc(100%);
-    width:calc(100%);
-    background-image:url(<?= validate_image($_settings->info("cover")) ?>);
-    background-size:cover;
-    background-repeat:no-repeat;
+  #header:before {
+    content: "";
+    position: absolute;
+    height: calc(100%);
+    width: calc(100%);
+    background-image: url(<?= validate_image($_settings->info("cover")) ?>);
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center center;
   }
   #header>div{
@@ -26,60 +26,39 @@
     z-index:2;
   }
 
-  #top-Nav a.nav-link.active {
-      color: ;
-      font-weight: 0;
-      position: relative;
-  }
-  #top-Nav a.nav-link.active:before {
-    content: "";
-    position: absolute;
-    border-bottom: 0px solid #343a40;
-    width: 33.33%;
-    left: 33.33%;
-    bottom: 0;
-  }
-  @media (max-width:760px){
-    #top-Nav a.nav-link.active {
-      background: #343a40db;
-      color: #fff;
-    }
-    #top-Nav a.nav-link.active:before {
-      content: "";
-      position: absolute;
-      border-bottom: 2px solid #343a40;
-      width: 100%;
-      left: 0;
-      bottom: 0;
-    }
-    h1.w-100.text-center.site-title.px-5{
-      font-size:2.5em !important;
-    }
-  }
-
   /* Style for the Explore Packages button */
   #scrollToResortPackages {
       display: inline-block;
       padding: 20px 30px;
       background-color: #007bff; /* Button background color */
       color: #fff; /* Text color */
+      height: auto;
       font-size: 18px; /* Font size */
       text-align: center;
       text-decoration: none;
       border-radius: 50px; /* Border radius to make it rounded */
       transition: background-color 0.3s ease; /* Smooth transition for background color */
+      margin-top: 80px; /* You can adjust the value as needed */
+      position: relative;
+      top: 40px; /* Adjust the value as needed to move the button down */
   }
-
   /* Hover effect: Change background color on hover */
   #scrollToResortPackages:hover {
       background-color: #0056b3; /* New background color on hover */
   }
-
   .subtitle-content {
     max-width: 1300px;
     color: white;
     text-align: center;
     margin-top: 50px;
+  }
+  #header .subtitle-content {
+    position: relative;
+    top: 30px; /* Adjust the value as needed to move the subtitle down */
+  }
+  #header .site-title {
+    position: relative;
+    top: 40px; /* Adjust the value as needed to move the site title down */
   }
 </style>
 <?php require_once('inc/header.php') ?>
@@ -109,7 +88,7 @@
       <?php endif; ?>
 
         <!-- Main content -->
-        <section class="content">
+        <section class="content" style="background-color: ;">
           <div class="container">
             <?php 
               if(!file_exists($page.".php") && !is_dir($page)){
@@ -188,7 +167,7 @@
 <script>
   $(document).ready(function () {
       // Set your desired offset value
-      var scrollOffset = 80; // Change this value as needed
+      var scrollOffset = 70; // Change this value as needed
 
       // Smooth scrolling animation when the button is clicked
       $("#scrollToResortPackages").on("click", function () {

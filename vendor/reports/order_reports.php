@@ -67,15 +67,9 @@
                                                     echo '<span class="badge badge-primary bg-gradient-primary px-3 rounded-pill">Confirmed</span>';
                                                     break;
                                                 case 2:
-                                                    echo '<span class="badge badge-info bg-gradient-info px-3 rounded-pill">Packed</span>';
+                                                    echo '<span class="badge badge-success bg-gradient-success px-3 rounded-pill">Done</span>';
                                                     break;
                                                 case 3:
-                                                    echo '<span class="badge badge-warning bg-gradient-warning px-3 rounded-pill">Out for Delivery</span>';
-                                                    break;
-                                                case 4:
-                                                    echo '<span class="badge badge-success bg-gradient-success px-3 rounded-pill">Delivered</span>';
-                                                    break;
-                                                case 5:
                                                     echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Cancelled</span>';
                                                     break;
                                                 default:

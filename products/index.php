@@ -13,6 +13,13 @@
     }
 ?>
 <style>
+    #header{
+    height:100vh;
+    width:calc(100%);
+    position:relative;
+    top:-6em;
+    overflow: hidden; /* Ensure the cover image covers the top part */
+    }
     .price-section {
         display: flex;
         align-items: center;

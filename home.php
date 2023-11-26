@@ -45,11 +45,19 @@
 
 
     /* ABOUT SECTION STYLING */
+
+    #about .mb-4 {
+        top: 200px;
+
+    }
+
     #about .card {
         box-shadow: none;
         border: none;
         width: 100%;
         max-width: none;
+        background-color: transparent; /* Set the background to transparent */
+
     }
 
     #about .card-body {
@@ -68,22 +76,20 @@
 
     #about #system-logo {
         max-width: 100%;
-        width: 1100px; /* Set the desired width for the system logo */
+        width: 1400px; /* Set the desired width for the system logo */
         height: auto;
         border: none;
         background-color: transparent; /* Set background to transparent */
-        margin-top: -100px; /* Add margin at the top for separation */
+        margin-top: -60px; /* Add margin at the top for separation */
     }
 
     #about #user-avatar {
         max-width: 100%;
-        width: 1100px; /* Set the desired width for the user avatar */
+        width: 1400px; /* Set the desired width for the user avatar */
         height: auto;
         border: none;
         background-color: transparent; /* Set background to transparent */
-        margin-top: -500px; /* Add margin at the top for separation */
-
-
+        margin-top: 120px; /* Add margin at the top for separation */
     }
 
     #about h2 {
@@ -115,7 +121,107 @@
 
 
 
+    /* Contact Section Styling */
+    .text-center {
+    text-align: center;
+    }
+
+    .contact-heading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #user-avatar {
+        width: 50px; /* Adjust the width as needed */
+        height: auto; /* Maintain aspect ratio */
+        margin-left: 10px; /* Add some space between the image and text */
+    }
+    .img-thumbnail {
+    padding: 0.25rem;
+    background-color: none;
+    border: 0px solid #dee2e6;
+    border-radius: none;
+    max-width: 100%;
+    height: auto;
+    box-shadow: none;
+    }
+
+
+
+
+
+    #contact {
+        margin-top: 50px;
+    }
+
+    .card.card-navy {
+        background-color: #fff; /* Dark background for the header */
+        color: #333; /* Dark text color */
+        border: 0px solid #ddd; /* Light border */
+        border-radius: 90px; /* Rounded corners */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    }
+
+    .card.card-navy .card-header {
+        background-color: #343a40; /* Dark background for the header */
+        color: #fff; /* Light text color for the header */
+        border-bottom: 1px solid #ddd; /* Light border at the bottom of the header */
+        padding: 30px;
+        hei
+    }
+
+    .card.card-navy .card-title {
+        margin-bottom: 0; /* Remove default margin-bottom for the title */
+        position: absolute; /* Set absolute positioning */
+        top: 50%; /* Align to the middle of the header */
+        left: 50%; /* Align to the center of the header */
+        transform: translate(-50%, -50%); /* Center the title */
+    }
     
+    .card.card-navy .card-body {
+        padding: 20px;
+    }
+
+    .card.card-navy dl {
+        margin-bottom: 20px;
+    }
+
+    .card.card-navy dt {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .card.card-navy dd {
+        margin-bottom: 10px;
+    }
+
+    /* Style for the form */
+    #message-form {
+        max-width: 500px; /* Adjust the maximum width of the form */
+        margin: 0 auto; /* Center the form horizontally */
+    }
+
+    #message-form label {
+        font-weight: bold;
+    }
+
+    #message-form .form-group {
+        margin-bottom: 20px;
+    }
+
+    #message-form textarea {
+        resize: none; /* Disable textarea resizing */
+    }
+
+    #message-form button {
+        width: 100%; /* Make the button full width */
+    }
+
+
+
+
+  
 </style>
 <div class="col-lg-12 py-5">
     <div class="contain-fluid">
@@ -124,9 +230,10 @@
         <!-- Resort Packages Section -->
         <div id="resort-packages" class="col-lg-12 py-5">
             <h3 class="text-center">Resort Packages</h3>
-            <center><hr class="w-25"></center>
+            <center><hr class="bg-navy border-navy w-25 border-2"></center>
+            <br>
             
-            <div class="row" id="product_list">
+            <div class="row" id="product_list" style="margin-top: -20px;">
                 <?php 
                 $products = $conn->query("SELECT p.*, v.shop_name as vendor, c.name as `category` FROM `product_list` p inner join vendor_list v on p.vendor_id = v.id inner join category_list c on p.category_id = c.id where p.delete_flag = 0 and p.`status` =1 order by RAND() limit 4");
                 
@@ -179,14 +286,15 @@
                 
                 <?php endwhile; ?>
             </div>
-            
             <br>
+            
             
             <div class="text-center">
                 <a href="./?page=products" class="btn btn-large btn-primary rounded-pill col-lg-3 col-md-5 col-sm-12">Explore More Packages</a>
             </div>
         </div>
 
+        <br>
         <br>
         <br>
 
@@ -198,14 +306,14 @@
         <div class="wrapper">
             <div id="about" class="content py-3">
                 <h2 class="mb-4">About Us</h2>                        
-                <center><hr class="w-25"></center>
+                <center><hr class="bg-navy border-navy w-25 border-2" style="width: 300px;"></center>
                 <div class="container-fluid">
                     <div class="card rounded-0 card-outline card-navy">
                         <div class="card-body rounded-0 d-flex flex-column flex-md-row align-items-center">
                             <div class="about-content mb-4 text-md-left text-center">
                                 <?= file_get_contents("about.html") ?>
                             </div>
-
+                            <br>
                             <div class="image-section ml-md-4 d-flex flex-column justify-content-center">
                                 <!-- System Logo -->
                                 <img src="<?php echo validate_image($_settings->info('logo')) ?>" alt="System Logo" class="img-fluid img-thumbnail mb-3" id="system-logo">
@@ -254,7 +362,7 @@
                     </div>
 
                     <!-- Google Map Embed -->
-                    <div class="mb-4 rounded-lg overflow-hidden border" style="border-radius: 15px; box-shadow: 0 15px 15px rgba(0, 0, 0, 0.1);">
+                    <div class="mb-4 rounded-lg overflow-hidden border" style="border: 2px; border-radius: 15px; box-shadow: 0 15px 15px rgba(0, 0, 0, 0.1); height: 237px;">
                         <iframe
                             width="100%"
                             height="235"
@@ -270,8 +378,15 @@
                 <div class="col-md-7">
                     <div class="card rounded-0 card-outline card-navy shadow">
                         <div class="card-body rounded-0">
-                            <h2 class="text-center">Message Us</h2>
-                            <center><hr class="bg-navy border-navy w-25 border-2"></center>
+                        <div class="text-center">
+                            <h2 class="contact-heading">
+                                Contact DOT 4A
+                                <img src="<?php echo validate_image($_settings->info('user_avatar')) ?>" alt="User Avatar" class="img-fluid img-thumbnail" id="user-avatar">
+                            </h2>
+                        </div>
+
+
+                            <center><hr class="bg-navy border-navy w-25 border-2" style="width: 45%!important;"></center>
 
                             <?php if($_settings->chk_flashdata('pop_msg')): ?>
                                 <div class="alert alert-success">
@@ -294,7 +409,7 @@
 
                                 <div class="form-group">
                                     <label for="contact">Contact Number</label>
-                                    <input type="text" class="form-control form-control-sm rounded-0" id="contact" name="contact" required placeholder="09XX-XXX-XXXX">
+                                    <input type="contact" class="form-control form-control-sm rounded-0" id="contactno" name="contact" required placeholder="09XX-XXX-XXXX">
                                 </div>
 
                                 <div class="form-group">
@@ -316,6 +431,10 @@
                 </div>
             </div>
         </div>
+
+
+
+
     </div>
 </div>
 
@@ -349,7 +468,8 @@
 				},
                 success:function(resp){
                     if(resp.status == 'success'){
-                        location.reload();
+                        location.reload(true);
+                        location.hash = '#contact';
                     }else if(!!resp.msg){
                         el.addClass("alert-danger")
                         el.text(resp.msg)
@@ -366,7 +486,6 @@
             })
         })
     })
-
 
     $(document).ready(function () {
         // Function to handle smooth scrolling to a target section with an offset
@@ -436,6 +555,4 @@
             1000 // Adjust the animation duration (in milliseconds) as needed
         );
     });*/
-
-
 </script>
