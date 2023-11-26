@@ -12,121 +12,163 @@
     }
 
     body {
-    overflow-y: scroll;
-}
+        overflow-y: scroll;
+    }
+
+    .card-outline {
+        border: 1px solid #dee2e6;
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .vendor-header {
+        background-color: #343a40;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .product-item {
+        border: 1px solid #343a40;
+        margin-bottom: 10px;
+        padding: 15px;
+    }
+
+    .total-section {
+        margin-top: 20px;
+    }
+
+    .checkout-btn {
+        text-align: right;
+        margin-top: 20px; /* Adjust margin as needed */
+    }
+
+    .checkout-btn a {
+        background-color: #007bff;
+        border: 2px solid #007bff;
+        width: 200px;
+        height: 40px;
+        border-radius: 30px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        text-decoration: none;
+        box-sizing: border-box; /* Include border and padding in total width and height */
+        margin-left: auto; /* Align to the right */
+    }
+    
+    
 </style>
 
-
 <div class="content py-3">
-    <div class="card card-outline card-primary rounded-0 shadow-0">
+    <div class="card card-primary rounded-0 shadow-0">
         <div class="card-header">
             <h5 class="card-title">Confirm Booking Details</h5>
         </div>
         <div class="card-body">
             <div id="cart-list">
-                <div class="row">
-                <?php 
+                <?php
                 $gtotal = 0;
                 $vendors = $conn->query("SELECT * FROM `vendor_list` where id in (SELECT vendor_id from product_list where id in (SELECT product_id FROM `cart_list` where client_id ='{$_settings->userdata('id')}')) order by `shop_name` asc");
-                while($vrow=$vendors->fetch_assoc()):                
+                while ($vrow = $vendors->fetch_assoc()) :
                 ?>
-                    <div class="col-12 border" style="background-color: #343a40;">
-                        <span style="color: white;"><b><?= $vrow['code']. " - " . $vrow['shop_name'] ?></b></span>
-                    </div>
-                    <div class="col-12 border p-0">
-                        <?php 
-                        $vtotal = 0;
-                        $products = $conn->query("SELECT c.*, p.name as `name`, p.price,p.image_path FROM `cart_list` c inner join product_list p on c.product_id = p.id where c.client_id = '{$_settings->userdata('id')}' and p.vendor_id = '{$vrow['id']}' order by p.name asc");
-                        while($prow = $products->fetch_assoc()):
-                            $total = $prow['price'] * $prow['quantity'] * $prow['days']; // Modify the calculation
-                            $gtotal += $total;
-                            $vtotal += $total;
-                        ?>
-                        <div class="d-flex align-items-center border p-2">
-                    
-                            <div class="col-auto flex-shrink-1 flex-grow-1">
-                            
-                                <h4><b><?= $prow['name'] ?></b></h4>
-                                <div class="col-2 text-center">
-                                    <a href="./?page=products/view_product&id=<?= $prow['product_id'] ?>"><img src="<?= validate_image($prow['image_path']) ?>" alt="" class="img-center prod-img border bg-gradient-black"></a>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="col-auto px-0"><small class="text-muted">Price per room/day: </small></div>
-                                    <div class="col-auto px-0 flex-shrink-1 flex-grow-1"><p class="m-0 pl-3"><small class="text-primary"><?= format_num($prow['price']) ?></small></p></div>
-                                </div>
-                                
-                                
-                                <div class="d-flex mb-3">
-                                    <!-- Number of Rooms -->
-                                    <div class="col-auto text-center">
-                                        <small class="text-muted">Number of Rooms</small>
-                                        <div class="input-group input-group-sm">
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-primary min-qty" data-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-minus"></i></button>
-                                            </div>
-                                            <input type="text" value="<?= $prow['quantity'] ?>" class="form-control text-center" readonly="readonly">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary plus-qty" data-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-plus"></i></button>
-                                            </div>
+                    <?php
+                    $vtotal = 0;
+                    $products = $conn->query("SELECT c.*, p.name as `name`, p.price,p.image_path FROM `cart_list` c inner join product_list p on c.product_id = p.id where c.client_id = '{$_settings->userdata('id')}' and p.vendor_id = '{$vrow['id']}' order by p.name asc");
+                    while ($prow = $products->fetch_assoc()) :
+                        $total = $prow['price'] * $prow['quantity'] * $prow['days'];
+                        $gtotal += $total;
+                        $vtotal += $total;
+                    ?>
+                        <div class="product-item">
+                            <!-- Product details -->
+                            <h4><b><?= $prow['name'] ?> | <?= $vrow['code'] . " - " . $vrow['shop_name'] ?></b></h4>
+                            <div class="col-2 text-center">
+                                <a href="./?page=products/view_product&id=<?= $prow['product_id'] ?>"><img src="<?= validate_image($prow['image_path']) ?>" alt="" class="img-center prod-img border bg-gradient-black"></a>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-auto px-0"><small class="text-muted">Price per room/day: </small></div>
+                                <div class="col-auto px-0 flex-shrink-1 flex-grow-1"><p class="m-0 pl-3"><small class="text-primary"><?= format_num($prow['price']) ?></small></p></div>
+                            </div>
+                            <!-- Quantity and Confirm Total Days -->
+                            <div class="d-flex mb-3">
+                                <!-- Number of Rooms -->
+                                <div class="col-auto text-center">
+                                    <small class="text-muted">Number of Rooms</small>
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-primary min-qty" data-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-minus"></i></button>
                                         </div>
-                                    </div>
-                                     <!-- Check in and Check out -->
-                                    <div class="col-auto text-center">
-                                        <small class="text-muted">Confirm Total Days</small>
-                                        <div class="input-group input-group-sm">
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-primary min-confirm-days" data-prod-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-minus"></i></button>
-                                            </div>
-                                            <input type="number" value="<?= $prow['days'] ?>" class="form-control text-center confirm-total-days" readonly="readonly">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary plus-confirm-days" data-prod-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-plus"></i></button>
-                                            </div>
+                                        <input type="text" value="<?= $prow['quantity'] ?>" class="form-control text-center" readonly="readonly">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary plus-qty" data-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label class="text-muted">Check-in Date</label>
-                                        <div class="input-group input-group-sm">
-                                            <input type="date" class="form-control form-control-sm form-control-border check-in-date" data-prod-id="<?= $prow['id'] ?>" required>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
-                                            </div>
+                                <!-- Confirm Total Days -->
+                                <div class="col-auto text-center">
+                                    <small class="text-muted">Confirm Total Days</small>
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-primary min-confirm-days" data-prod-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-minus"></i></button>
                                         </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label class="text-muted">Check-out Date</label>
-                                        <div class="input-group input-group-sm">
-                                            <input type="date" class="form-control form-control-sm form-control-border check-out-date" data-prod-id="<?= $prow['id'] ?>" required>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="basic-addon2"><i class="fas fa-calendar-alt"></i></span>
-                                            </div>
+                                        <input type="number" value="<?= $prow['days'] ?>" class="form-control text-center confirm-total-days" readonly="readonly">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary plus-confirm-days" data-prod-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-                                <!-- Select Mode of Payment -->
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label class="text-muted">Payment Method</label>
-                                        <div class="input-group input-group-sm">
-                                            <select class="form-control form-control-sm form-control-border payment-method" data-prod-id="<?= $prow['id'] ?>" required>
-                                                <option value="" selected disabled>Select Payment Method</option>
-                                                <?php
-                                                // Fetch payment methods from the payments table
-                                                $paymentMethods = $conn->query("SELECT * FROM payments WHERE vendor_id = '{$vrow['id']}' AND status = 1"); // Modify this query according to your database schema
-                                                while ($paymentMethod = $paymentMethods->fetch_assoc()) {
-                                                    echo "<option value='{$paymentMethod['id']}'>{$paymentMethod['name']}</option>";
-                                                }
-                                                ?>
-                                            </select>
+                            </div>
+                            <!-- Check-in and Check-out Dates -->
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-muted">Check-in Date</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="date" class="form-control form-control-sm form-control-border check-in-date" data-prod-id="<?= $prow['id'] ?>" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="text-muted">Check-out Date</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="date" class="form-control form-control-sm form-control-border check-out-date" data-prod-id="<?= $prow['id'] ?>" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon2"><i class="fas fa-calendar-alt"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Payment Method -->
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-muted">Payment Method</label>
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control form-control-sm form-control-border payment-method" data-prod-id="<?= $prow['id'] ?>" required>
+                                            <option value="" selected disabled>Select Payment Method</option>
+                                            <?php
+                                            // Fetch payment methods from the payments table
+                                            $paymentMethods = $conn->query("SELECT * FROM payments WHERE vendor_id = '{$vrow['id']}' AND status = 1");
+                                            while ($paymentMethod = $paymentMethods->fetch_assoc()) {
+                                                echo "<option value='{$paymentMethod['id']}'>{$paymentMethod['name']}</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="position-relative">
+                                        <!-- Payment Details Container -->
                                         <div id="paymentDetailsContainer" class="position-relative">
                                             <?php
                                             // Retrieve stored payment method for the current product
@@ -143,39 +185,34 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-                                
-
-                                <div class="d-flex">
-                                    <!-- Buttons -->
-                                    <div class="col-auto">
-                                        <button class="btn btn-flat btn-outline-danger btn-sm rem_item" data-id="<?= $prow['id'] ?>">
-                                            <i class="fa fa-times"></i> Remove
-                                        </button>
-                                    </div>
+                            </div>
+                            <!-- Remove Button -->
+                            <div class="d-flex">
+                                <div class="col-auto">
+                                    <button class="btn btn-flat btn-outline-danger btn-sm rem_item" data-id="<?= $prow['id'] ?>">
+                                        <i class="fa fa-times"></i> Remove
+                                    </button>
                                 </div>
                             </div>
-                            <!-- <div class="col-3 text-right"><?= format_num($total) ?></div>-->
                         </div>
-                        <?php endwhile; ?>
-                    </div>
+                    <?php endwhile; ?>
                 <?php endwhile; ?>
-                    <div class="col-12 border">
-                        <div class="d-flex">
-                            <div class="col-9 h4 font-weight-bold text-right text-muted">Total</div>
-                            <div class="col-3 h4 font-weight-bold text-right"><?= format_num($gtotal) ?></div>
-                        </div>
+                <!-- Total Section -->
+                <div class="total-section">
+                    <div class="d-flex">
+                        <div class="col-9 h4 font-weight-bold text-right text-muted">Total</div>
+                        <div class="col-3 h4 font-weight-bold text-right"><?= format_num($gtotal) ?></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="clear-fix mb-2"></div>
-    <div class="text-right">
-        <a href="./?page=orders/checkout" class="btn btn-flat btn-primary btn-sm"><i class="fa fa-money-bill-wave"></i> Checkout</a>
+    <!-- Checkout Button -->
+    <div class="checkout-btn">
+        <a href="./?page=orders/checkout" class="btn btn-flat btn-primary btn-sm">Checkout</a>
     </div>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -11,15 +11,126 @@ foreach($user->fetch_array() as $k =>$v){
 <?php endif;?>
 
 <style>
-	#cimg{
-          width:200px;
-          height:200px;
-          object-fit:scale-down;
-          object-position:center center
-      }
+	.content {
+        margin: -20px;
+    }
+    #cimg {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        object-position: center center;
+        border-radius: 50%;
+    }
+
+    .card-primary {
+        border: 1px solid #007bff;
+    }
+
+    .card-primary .card-header {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .form-control-border {
+        border-radius: 5px;
+        border-color: #ced4da;
+    }
+
+    .rounded-0 {
+        border-radius: 0;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .input-group-text {
+        background-color: transparent;
+        border: 1px solid #ced4da;
+        border-radius: 0;
+    }
+
+    .input-group-text a {
+        color: #6c757d;
+        text-decoration: none;
+    }
+
+    .input-group-text a:hover {
+        color: #495057;
+    }
+
+    .err-msg {
+        margin-top: 10px;
+    }
+
+    .custom-file {
+        position: relative;
+        display: inline-block;
+    }
+
+    .custom-file-input {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: calc(1.5em + .75rem + 2px);
+        margin: 0;
+        opacity: 0;
+    }
+
+    .custom-file-label {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1;
+        height: calc(1.5em + .75rem + 2px);
+        padding: .375rem .75rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+    }
+
+	    /* Updated styles for the file input */
+		.custom-file-input {
+        display: none;
+    }
+
+    .custom-file-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        padding: 6px 12px;
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .custom-file-label::after {
+        content: 'Choose file';
+        color: #fff;
+    }
+
+    .custom-file-input:focus ~ .custom-file-label {
+        border-color: #0056b3;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .form-control-border {
+        border-radius: 5px;
+    }
 </style>
 <div class="content py-3"></div>
-	<div class="card card-outline rounded-0 card-primary shadow">
+	<div class="card rounded-0 card-primary shadow">
 		<div class="card-body">
 			<div class="container-fluid">
 				<div id="msg"></div>

@@ -1,13 +1,66 @@
 <style>
     body {
-    overflow-y: scroll;
+        overflow-y: scroll;
+    }
+
+    .content {
+        margin: 0px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .card-title {
+        margin-bottom: 0;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        background-color: transparent;
+    }
+
+    .table th,
+    .table td {
+        padding: 12px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table thead th {
+        vertical-align: middle;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .table tbody+tbody {
+        border-top: 2px solid #dee2e6;
+    }
+
+    .badge {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.375rem;
+    }
+
+    .btn-action {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.9rem;
     }
 </style>
 
 <div class="content py-3">
-    <div class="card card-outline card-primary rounded-0 shadow">
+    <div class="card card-primary rounded-0 shadow">
         <div class="card-header">
-            <h5 class="card-title"><b>My Orders</b></h5>
+            <h5 class="card-title">My Orders</h5>
         </div>
         <div class="card-body">
             <div class="w-100 overflow-auto">
@@ -16,10 +69,10 @@
                     <col width="5%">
                     <col width="15%">
                     <col width="20%">
-                    <col width="8%">
-                    <col width="20%">
-                    <col width="20%">
-                    <col width="20%">
+                    <col width="10%">
+                    <col width="15%">
+                    <col width="15%">
+                    <col width="15%">
                 </colgroup>
                 <thead>
                     <tr>
