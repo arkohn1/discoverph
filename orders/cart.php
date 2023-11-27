@@ -70,7 +70,7 @@
 </style>
 
 <div class="content py-3">
-    <div class="card card-primary rounded-0 shadow-0">
+    <div class="card card-primary shadow rounded-0">
         <div class="card-header">
             <h5 class="card-title">Confirm Booking Details</h5>
         </div>
@@ -214,8 +214,6 @@
     </div>
 
 </div>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script>
     $(function(){

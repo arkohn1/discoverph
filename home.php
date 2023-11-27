@@ -230,7 +230,7 @@
         <!-- Resort Packages Section -->
         <div id="resort-packages" class="col-lg-12 py-5">
             <h3 class="text-center">Resort Packages</h3>
-            <center><hr class="bg-navy border-navy w-25 border-2"></center>
+            <center><hr class="bg w-25 border-2"></center>
             <br>
             
             <div class="row" id="product_list" style="margin-top: -20px;">
@@ -306,7 +306,7 @@
         <div class="wrapper">
             <div id="about" class="content py-3">
                 <h2 class="mb-4">About Us</h2>                        
-                <center><hr class="bg-navy border-navy w-25 border-2" style="width: 300px;"></center>
+                <center><hr class="bg w-25 border-2"></center>
                 <div class="container-fluid">
                     <div class="card rounded-0 card-outline card-navy">
                         <div class="card-body rounded-0 d-flex flex-column flex-md-row align-items-center">
@@ -386,7 +386,7 @@
                         </div>
 
 
-                            <center><hr class="bg-navy border-navy w-25 border-2" style="width: 45%!important;"></center>
+                        <center><hr class="bg w-50 border-2"></center>
 
                             <?php if($_settings->chk_flashdata('pop_msg')): ?>
                                 <div class="alert alert-success">

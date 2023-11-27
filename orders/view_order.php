@@ -23,27 +23,77 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 }
 ?>
 <style>
-	#uni_modal .modal-footer{
-		display:none
-	}
-    .prod-img{
-        width:calc(100%);
-        height:auto;
-        max-height: 10em;
-        object-fit:scale-down;
-        object-position:center center
+    #uni_modal .modal-footer {
+        display: none;
+    }
+
+    .order-details .row {
+        margin-bottom: 1em;
+    }
+
+    .order-details .col {
+        padding: 1em;
+    }
+
+    .order-details .col-3 {
+        background-color: #007bff;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .order-details .col-9 span {
+        font-weight: bold;
+    }
+
+    .order-details .col-9 .btn {
+        height: auto;
+    }
+
+    .receipt-image {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+    }
+
+    .spacer {
+        margin-bottom: 0em;
+    }
+
+    .cancel-btn {
+        background-color: #dc3545;
+        color: #fff;
+        border: 1px solid #dc3545;
+    }
+
+    .close-btn {
+        background-color: #6c757d;
+        color: #fff;
+        border: 1px solid #6c757d;
+    }
+
+    /* Resort Image Adjustments */
+    .image-frame {
+        max-width: 100%; /* Ensure the frame doesn't exceed the container width */
+    }
+
+    .image-frame img {
+        width: 300%; /* Make the image fill the frame */
+        height: auto; /* Maintain the aspect ratio */
+        border-radius: 4px; /* Optional: Add border-radius for rounded corners */
+        display: block; /* Remove any extra spacing below the image */
+        margin-left: -150px; /* Center the image within the frame */
+
     }
 </style>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-3 border bg-gradient-primary"><span class="">Reference Code</span></div>
-            <div class="col-9 border"><span class="font-weight-bolder"><?= isset($code) ? $code : '' ?></span></div>
-            <div class="col-3 border bg-gradient-primary"><span class="">Resort</span></div>
-            <div class="col-9 border"><span class="font-weight-bolder"><?= isset($shop_name) ? $vcode.' - '.$shop_name : '' ?></span></div>
-            <div class="col-3 border bg-gradient-primary"><span class="">Notes</span></div>
-            <div class="col-9 border"><span class="font-weight-bolder"><?= isset($notes) ? $notes : '' ?></span></div>
-            <div class="col-3 border bg-gradient-primary"><span class="">Booking Status</span></div>
-            <div class="col-9 border"><span class="font-weight-bolder">
+        <div class="row spacer">
+            <div class="col-3 bg-primary"><span class="">Reference Code</span></div>
+            <div class="col-9"><span class="font-weight-bolder"><?= isset($code) ? $code : '' ?></span></div>
+            <div class="col-3 bg-primary"><span class="">Resort</span></div>
+            <div class="col-9"><span class="font-weight-bolder"><?= isset($shop_name) ? $shop_name : '' ?></span></div>
+            <div class="col-3 bg-primary"><span class="">Notes</span></div>
+            <div class="col-9"><span class="font-weight-bolder"><?= isset($notes) ? $notes : '' ?></span></div>
+            <div class="col-3 bg-primary"><span class="">Booking Status</span></div>
+            <div class="col-9"><span class="font-weight-bolder">
                 <?php 
                 $status = isset($status) ? $status : '';
                     switch($status){
@@ -65,8 +115,8 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                     }
                 ?>
             </div>
-            <div class="col-3 border bg-gradient-primary"><span class="">Payment Status</span></div>
-            <div class="col-9 border"><span class="font-weight-bolder">
+            <div class="col-3 bg-primary"><span class="">Payment Status</span></div>
+            <div class="col-9"><span class="font-weight-bolder">
                 <?php 
                 $paymentStatus = isset($payment_status) ? $payment_status : '';
                     switch($paymentStatus){
@@ -83,8 +133,8 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                 ?>
             </div>
     
-            <div class="col-3 border bg-gradient-primary"><span class="">Receipt</span></div>
-            <div class="col-9 border">
+            <div class="col-3 bg-primary"><span class="">Receipt</span></div>
+            <div class="col-9">
                  <!-- New button for uploading receipt -->
                  <button class="btn btn-outline-success btn-sm mt-2" style="height: auto;" id="uploadReceiptBtn">
                     <i class="fas fa-upload"></i> Upload Receipt
@@ -134,7 +184,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         </div>
     </div>
     <div class="clear-fix mb-2"></div>
-    <div id="order-list" class="row">
+    <div id="order-list" class="row spacer">
         <?php 
             $gtotal = 0;
             $products = $conn->query("SELECT o.*, p.name as `name`, p.price, p.image_path, 
@@ -153,58 +203,59 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                 $gtotal += $total;
                 ?>
 
-    <div class="col-12 border">
-        <div class="d-flex align-items-center p-2">
-            <div class="col-2 text-center">
-                <a href="./?page=products/view_product&id=<?= $prow['product_id'] ?>">
-                    <img src="<?= validate_image($prow['image_path']) ?>" alt="" class="img-center prod-img border bg-gradient-gray">
-                </a>
+            <div class="col-12 border">
+                <div class="d-flex align-items-center p-2">
+                    <div class="col-auto flex-shrink-1 flex-grow-1">
+                        <h4><b><?= $prow['name'] ?></b></h4>
+                        <!-- Additional details -->
+                        <div class="d-flex">
+                            <div class="col-auto px-0"><small class="text-muted">Price: </small></div>
+                            <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
+                                <p class="m-0 pl-3"><small class="text-primary"><?= format_num($prow['price']) ?></small></p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="col-auto px-0"><small class="text-muted">Number of Rooms: </small></div>
+                            <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
+                                <p class="m-0 pl-3"><small class="text-primary"><?= $prow['quantity'] ?></small></p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="col-auto px-0"><small class="text-muted">Number of Days: </small></div>
+                            <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
+                                <p class="m-0 pl-3"><small class="text-primary"><?= $prow['days'] ?></small></p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="col-auto px-0"><small class="text-muted">Check-in Date: </small></div>
+                            <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
+                                <p class="m-0 pl-3"><small class="text-primary"><?= $prow['check_in'] ?></small></p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="col-auto px-0"><small class="text-muted">Check-out Date: </small></div>
+                            <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
+                                <p class="m-0 pl-3"><small class="text-primary"><?= $prow['check_out'] ?></small></p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="col-auto px-0"><small class="text-muted">Payment Method: </small></div>
+                            <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
+                                <p class="m-0 pl-3"><small class="text-primary"><?= $prow['payment_method'] ?></small></p>
+                            </div>
+                        </div>
+                        <!-- End additional details -->
+                    </div>
+                    <div class="col-2 text-center image-frame">
+                        <a href="./?page=products/view_product&id=<?= $prow['product_id'] ?>">
+                            <img src="<?= validate_image($prow['image_path']) ?>" alt="" class="img-center prod-img border bg-gradient-gray">
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="col-auto flex-shrink-1 flex-grow-1">
-                <h4><b><?= $prow['name'] ?></b></h4>
-                <div class="d-flex">
-                    <div class="col-auto px-0"><small class="text-muted">Price: </small></div>
-                    <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                        <p class="m-0 pl-3"><small class="text-primary"><?= format_num($prow['price']) ?></small></p>
-                    </div>
-                </div>
-                <!-- Additional details -->
-                <div class="d-flex">
-                    <div class="col-auto px-0"><small class="text-muted">Number of Rooms: </small></div>
-                    <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                        <p class="m-0 pl-3"><small class="text-primary"><?= $prow['quantity'] ?></small></p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="col-auto px-0"><small class="text-muted">Number of Days: </small></div>
-                    <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                        <p class="m-0 pl-3"><small class="text-primary"><?= $prow['days'] ?></small></p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="col-auto px-0"><small class="text-muted">Check-in Date: </small></div>
-                    <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                        <p class="m-0 pl-3"><small class="text-primary"><?= $prow['check_in'] ?></small></p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="col-auto px-0"><small class="text-muted">Check-out Date: </small></div>
-                    <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                        <p class="m-0 pl-3"><small class="text-primary"><?= $prow['check_out'] ?></small></p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="col-auto px-0"><small class="text-muted">Payment Method: </small></div>
-                    <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                        <p class="m-0 pl-3"><small class="text-primary"><?= $prow['payment_method'] ?></small></p>
-                    </div>  
-                </div>
-                <!-- End additional details -->
-            </div>
-        </div>
-    </div>
+
     
-    <?php endwhile; ?>
+            <?php endwhile; ?>
             <div class="col-12 border">
                 <div class="d-flex">
                     <div class="col-9 h4 font-weight-bold text-right text-muted">Total</div>
@@ -215,16 +266,16 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         <div class="clear-fix mb-3"></div>
         <div class="text-right">
             <?php if(isset($status) && $status == 0): ?>
-                <button class="btn btn-default bg-gradient-danger text-light btn-sm btn-flat" type="button" id="cancel_order">Cancel Booking</button>
+                <button class="btn cancel-btn" type="button" id="cancel_order">Cancel Booking</button>
             <?php endif; ?>
-            <button class="btn btn-default bg-gradient-dark text-light btn-sm btn-flat" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                <button class="btn close-btn" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
         </div>
     </div>
 
 <script>
-    $(function(){
-        $('#cancel_order').click(function(){
-            _conf("Are you sure to cancel this order?","cancel_order",['<?= isset($id) ? $id : '' ?>'])
+    $(function () {
+        $('#cancel_order').click(function () {
+            _conf("Are you sure to cancel this order?", "cancel_order", ['<?= isset($id) ? $id : '' ?>'])
         })
     })
     function cancel_order($id){
