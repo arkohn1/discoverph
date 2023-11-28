@@ -658,43 +658,43 @@ function get_product_reviews($product_id) {
                 <h5 id="reviewsHeading" style="text-align: center; margin-bottom: 10px;"></h5>
                 <hr style="width: 600px; border-width: 3px; height: 5px; border-color: #007bff; margin-bottom: 20px;">
 
-            <!-- Display existing reviews if any -->
-            <div id="existingReviewsContainer" style="width: 640px; height: 300px; overflow-y: auto; word-wrap: break-word; float: left; margin-right: 20px;">
-                <div id="existingReviews" style="flex: 1;">
-                    <?php
-                    // Assuming you have a function to fetch reviews for a product
-                    $reviews = get_product_reviews($id); // Replace with your actual function
-                    if ($reviews) {
-                        foreach ($reviews as $review) {
-                            echo '<div class="review-container" style="background-color: #;">';
-                            echo '<div class="review-header">';
-                            echo '<img src="' . validate_image($review['avatar']) . '" class="img-avatar-small img-thumbnail p-0 border-2" alt="client_avatar">';
-                            echo '<h5>' . $review['client_name'] . '</h5>';
-                            echo '<p>Date: ' . date('F j, Y', strtotime($review['date_created'])) . '</p>';
-                            echo '</div>';
-                            
-                            // Display stars based on the rating
-                            echo '<p>Rating: ';
-                            for ($i = 1; $i <= 5; $i++) {
-                                if ($i <= $review['rating']) {
-                                    // Output a colored star for each filled star
-                                    echo '<span style="color: gold;">&#9733;</span>';
-                                } else {
-                                    // Output an empty star for each unfilled star
-                                    echo '<span>&#9733;</span>';
+                <!-- Display existing reviews if any -->
+                <div id="existingReviewsContainer" style="width: 640px; height: 300px; overflow-y: auto; word-wrap: break-word; float: left; margin-right: 20px;">
+                    <div id="existingReviews" style="flex: 1;">
+                        <?php
+                        // Assuming you have a function to fetch reviews for a product
+                        $reviews = get_product_reviews($id); // Replace with your actual function
+                        if ($reviews) {
+                            foreach ($reviews as $review) {
+                                echo '<div class="review-container" style="background-color: #;">';
+                                echo '<div class="review-header">';
+                                echo '<img src="' . validate_image($review['avatar']) . '" class="img-avatar-small img-thumbnail p-0 border-2" alt="client_avatar">';
+                                echo '<h5 style="margin: 0; padding: 0; margin-left: -100px;">' . $review['client_name'] . '</h5>';
+                                echo '<p>Date: ' . date('F j, Y', strtotime($review['date_created'])) . '</p>';
+                                echo '</div>';
+                                
+                                // Display stars based on the rating
+                                echo '<p>Rating: ';
+                                for ($i = 1; $i <= 5; $i++) {
+                                    if ($i <= $review['rating']) {
+                                        // Output a colored star for each filled star
+                                        echo '<span style="color: gold;">&#9733;</span>';
+                                    } else {
+                                        // Output an empty star for each unfilled star
+                                        echo '<span>&#9733;</span>';
+                                    }
                                 }
+                                echo '</p>';
+                                
+                                echo '<div class="review-content">';
+                                echo '<p>' . $review['review'] . '</p>';
+                                echo '</div>';
+                                echo '</div>';
                             }
-                            echo '</p>';
-                            
-                            echo '<div class="review-content">';
-                            echo '<p>' . $review['review'] . '</p>';
-                            echo '</div>';
-                            echo '</div>';
                         }
-                    }
-                    ?>
+                        ?>
+                    </div>
                 </div>
-            </div>
                 <!-- Form for submitting reviews on the right side -->
                 <div id="newReviewForm" style="width: 100%; float: left;">
                     <form id="reviewForm">
