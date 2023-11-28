@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2023 at 01:00 AM
+-- Generation Time: Nov 20, 2023 at 10:15 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `discoverph_db`
+-- Database: `mvogms_db`
 --
 
 -- --------------------------------------------------------
@@ -96,7 +96,7 @@ CREATE TABLE `client_list` (
 
 INSERT INTO `client_list` (`id`, `code`, `firstname`, `middlename`, `lastname`, `gender`, `contact`, `address`, `email`, `password`, `avatar`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
 (1, '202202-00001', 'John', 'F.', 'Kennedy', 'Male', '09123456789', 'sample address', 'jfk@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/clients/1.png?v=1644386016', 1, 1, '2022-02-09 13:53:36', '2023-11-14 03:49:46'),
-(3, '202311-00001', 'Arkohn', 'Jose', 'Rizal', 'Male', '09278709744', 'San Pedro, Laguna, 4023', 'arkohn@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/clients/3.png?v=1701060767', 1, 0, '2023-11-12 22:05:00', '2023-11-28 04:39:58');
+(3, '202311-00001', 'Arkohn', 'Mamamo', 'Mamanaten', 'Male', '123456', 'sample address', 'arkohn@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/clients/3.png?v=1699797900', 1, 0, '2023-11-12 22:05:00', '2023-11-16 02:12:09');
 
 -- --------------------------------------------------------
 
@@ -160,20 +160,7 @@ INSERT INTO `message_list` (`id`, `fullname`, `contact`, `email`, `message`, `st
 (19, 'dasda', '213', '123@1313', 'asdadwasdasd', 1, '2023-11-17 02:48:48'),
 (20, '123123', '1243123', '123@dda', 'aasdadasda', 1, '2023-11-17 02:48:55'),
 (21, 'sdasda', '2313', '213@wdzc', 'zxczxczcx', 1, '2023-11-17 02:49:07'),
-(22, 'Jose Rizal', '09123456789', 'joserizal@gmail.com', 'Gusto ko sana magreklamo about sa Basta Resort...', 0, '2023-11-20 04:14:25'),
-(23, 'Dorothy Grace Dauan', '090123456789', 'dorothy@gmail.com', 'sample inquiry', 1, '2023-11-24 06:52:04'),
-(24, '1223', '123', '123@123', '123', 0, '2023-11-26 21:55:46'),
-(25, '123', '123', '123@122', '122', 0, '2023-11-26 21:56:12'),
-(26, '111', '111', '111@111', '111', 0, '2023-11-27 00:23:42'),
-(27, '222', '222', '222@222', '222', 1, '2023-11-27 00:29:11'),
-(28, 'Arkohn Mamamo Mamako', '09278709744', 'arkohgn@gmail.com', 'gusto ko sana ireklamo si hannah', 1, '2023-11-27 01:20:19'),
-(29, '112', '112', '112@112', '112', 0, '2023-11-27 01:25:32'),
-(30, '222', '222', '222@222', '222', 0, '2023-11-27 01:26:14'),
-(31, 'mark', '123', 'mark@123', 'mark123', 1, '2023-11-27 01:29:52'),
-(32, '555', '555', '555@555', '555', 0, '2023-11-27 01:30:46'),
-(33, '1221', '2123121', '22@12312', '21312312312312', 0, '2023-11-27 01:32:33'),
-(34, '321312', '213231', '223@231231', '231231', 0, '2023-11-27 01:32:58'),
-(35, 'mark', 'mark', 'mark@mark', 'markmark', 0, '2023-11-27 06:15:02');
+(22, 'Jose Rizal', '09123456789', 'joserizal@gmail.com', 'Gusto ko sana magreklamo about sa Basta Resort...', 0, '2023-11-20 04:14:25');
 
 -- --------------------------------------------------------
 
@@ -202,13 +189,7 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `days`, `
 (29, 34, 9, 1, 1, 850, '2023-11-01', '2023-11-01', 2, '2023-11-20 00:47:07'),
 (30, 35, 9, 2, 1, 850, '2023-11-01', '2023-11-01', 2, '2023-11-20 01:04:04'),
 (31, 36, 11, 3, 2, 3200, '2023-11-03', '2023-11-04', 1, '2023-11-20 04:30:22'),
-(32, 37, 14, 2, 3, 123, '2023-11-01', '2023-11-03', 9, '2023-11-20 04:36:12'),
-(33, 38, 9, 1, 1, 850, '2023-11-01', '2023-11-01', 2, '2023-11-24 05:30:45'),
-(34, 39, 9, 2, 3, 850, '2023-11-01', '2023-11-03', 2, '2023-11-27 02:08:08'),
-(35, 40, 9, 2, 2, 850, '2023-11-01', '2023-11-03', 2, '2023-11-27 05:19:15'),
-(36, 41, 9, 1, 1, 850, '2023-11-01', '2023-11-01', 2, '2023-11-27 05:22:30'),
-(37, 42, 9, 3, 3, 850, '2023-11-03', '2023-11-05', 2, '2023-11-27 05:52:14'),
-(38, 43, 9, 2, 3, 850, '2023-11-01', '2023-11-03', 2, '2023-11-27 20:49:53');
+(32, 37, 14, 2, 3, 123, '2023-11-01', '2023-11-03', 9, '2023-11-20 04:36:12');
 
 -- --------------------------------------------------------
 
@@ -238,13 +219,7 @@ INSERT INTO `order_list` (`id`, `code`, `client_id`, `vendor_id`, `total_amount`
 (34, '202311-00007', 3, 4, 850, 'uploads/receipt/34_655b1231a2cd0_AAA.jpg', 'bdo 850 1 day gcash', 1, 1, '2023-11-20 00:47:07', '2023-11-20 17:04:33'),
 (35, '202311-00008', 3, 4, 1700, 'uploads/receipt/35_655b0ed211f39_AAA.jpg', 'gcash 1700', 0, 0, '2023-11-20 01:04:04', '2023-11-20 17:00:26'),
 (36, '202311-00001', 3, 4, 19200, 'uploads/receipt/36_655b19a01a938_AAA.jpg', 'cash 3 rooms 2 days', 0, 1, '2023-11-20 04:30:22', '2023-11-20 17:03:16'),
-(37, '202311-00002', 3, 5, 738, 'uploads/receipt/37_656135f53296d_Arkohn try.jpg', '2312', 0, 0, '2023-11-20 04:36:12', '2023-11-25 07:47:01'),
-(38, '202311-00003', 3, 4, 850, 'uploads/receipt/38_656135d6029df_Arkohn try.jpg', '1 night', 3, 0, '2023-11-24 05:30:45', '2023-11-26 09:02:17'),
-(39, '202311-00004', 3, 4, 5100, 'uploads/receipt/39_656389b776bfd_AAA.jpg', '123', 0, 0, '2023-11-27 02:08:08', '2023-11-27 02:08:55'),
-(40, '202311-00005', 3, 4, 3400, 'uploads/receipt/3_6563b65303f4a_AAA.jpg', 'testing001', 3, 1, '2023-11-27 05:19:15', '2023-11-28 07:26:04'),
-(41, '202311-00006', 3, 4, 850, 'uploads/receipt/3_6563b716c034b_rc.jpg', 'checkout all 1', 0, 0, '2023-11-27 05:22:30', '2023-11-27 05:22:30'),
-(42, '202311-00009', 3, 4, 7650, 'uploads/receipt/3_6563be0e96023_AAA.jpg', '3 days 3 rooms testing', 3, 1, '2023-11-27 05:52:14', '2023-11-27 06:26:17'),
-(43, '202311-00010', 3, 4, 5100, 'uploads/receipt/3_6564907200d23_376357602_831507191701156_1441885424189076074_n.jpg', '2 rooms 3 days gcash 5100', 3, 0, '2023-11-27 20:49:53', '2023-11-28 07:26:31');
+(37, '202311-00002', 3, 5, 738, 'uploads/receipt/37_655b1200d48d2_AAA.jpg', '2312', 0, 0, '2023-11-20 04:36:12', '2023-11-20 16:31:17');
 
 -- --------------------------------------------------------
 
@@ -305,10 +280,10 @@ CREATE TABLE `product_list` (
 --
 
 INSERT INTO `product_list` (`id`, `vendor_id`, `category_id`, `room_id`, `name`, `address`, `map`, `description`, `gallery_path`, `price`, `image_path`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(9, 4, 10, NULL, 'Basta Resort (Regular)', 'Pansol, Calamba, Laguna', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30945.865595277177!2d121.1876487!3d14.1811152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd61e359982a35%3A0x1924c55513a3e849!2sMakiling%20Spring%20Resorts!5e0!3m2!1sen!2sph!4v1699900463925!5m2!1sen!2sph', '&lt;p&gt;Welcome to &lt;b&gt;Basta Resort&lt;/b&gt;, where tranquility meets luxury in a picturesque setting. Nestled amidst lush greenery and surrounded by breathtaking views, Basta Resort is your escape to a world of comfort and relaxation.&lt;/p&gt;&lt;p&gt;Our regular rooms are designed with your utmost comfort in mind, offering a perfect blend of modern amenities and charming decor. Each room is thoughtfully appointed to ensure a serene and enjoyable stay. Sink into plush beds with crisp linens, unwind in the cozy seating area, and take in the stunning vistas from your private balcony.&lt;/p&gt;&lt;p&gt;At Basta Resort, we understand the importance of creating a home away from home. Our regular rooms are equipped with all the essentials for a seamless stay, including air conditioning, flat-screen TVs, complimentary Wi-Fi, and well-appointed bathrooms with indulgent toiletries.&lt;/p&gt;&lt;p&gt;As our guest, you\'ll have access to the resort\'s world-class facilities and services. Lounge by the sparkling pool, rejuvenate your senses at the spa, or savor delectable cuisine at our onsite restaurant. Whether you\'re seeking a romantic getaway, a family retreat, or a solo adventure, Basta Resort provides the perfect backdrop for your dream vacation.&lt;/p&gt;&lt;p&gt;Come experience the beauty of Basta Resort, where every moment is an opportunity to unwind and create lasting memories. Book your stay today and embark on a journey of relaxation and indulgence.&lt;/p&gt;', 'uploads/products/9_gallery_0.png,uploads/products/9_gallery_1.png,uploads/products/9_gallery_2.png,uploads/products/9_gallery_3.png,uploads/products/9_gallery_4.png,uploads/products/9_gallery_5.png,uploads/products/9_gallery_6.png', 850, 'uploads/products/9.png', 1, 0, '2023-11-13 04:34:11', '2023-11-26 09:12:07'),
+(9, 4, 10, NULL, 'Basta Resort (Regular)', 'Pansol, Calamba, Laguna', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30945.865595277177!2d121.1876487!3d14.1811152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd61e359982a35%3A0x1924c55513a3e849!2sMakiling%20Spring%20Resorts!5e0!3m2!1sen!2sph!4v1699900463925!5m2!1sen!2sph', '&lt;p&gt;Welcome to Basta Resort, where tranquility meets luxury in a picturesque setting. Nestled amidst lush greenery and surrounded by breathtaking views, Basta Resort is your escape to a world of comfort and relaxation.&lt;/p&gt;&lt;p&gt;Our regular rooms are designed with your utmost comfort in mind, offering a perfect blend of modern amenities and charming decor. Each room is thoughtfully appointed to ensure a serene and enjoyable stay. Sink into plush beds with crisp linens, unwind in the cozy seating area, and take in the stunning vistas from your private balcony.&lt;/p&gt;&lt;p&gt;At Basta Resort, we understand the importance of creating a home away from home. Our regular rooms are equipped with all the essentials for a seamless stay, including air conditioning, flat-screen TVs, complimentary Wi-Fi, and well-appointed bathrooms with indulgent toiletries.&lt;/p&gt;&lt;p&gt;As our guest, you\'ll have access to the resort\'s world-class facilities and services. Lounge by the sparkling pool, rejuvenate your senses at the spa, or savor delectable cuisine at our onsite restaurant. Whether you\'re seeking a romantic getaway, a family retreat, or a solo adventure, Basta Resort provides the perfect backdrop for your dream vacation.&lt;/p&gt;&lt;p&gt;Come experience the beauty of Basta Resort, where every moment is an opportunity to unwind and create lasting memories. Book your stay today and embark on a journey of relaxation and indulgence.&lt;/p&gt;', 'uploads/products/9_gallery_0.png,uploads/products/9_gallery_1.png,uploads/products/9_gallery_2.png,uploads/products/9_gallery_3.png,uploads/products/9_gallery_4.png,uploads/products/9_gallery_5.png,uploads/products/9_gallery_6.png', 850, 'uploads/products/9.png', 1, 0, '2023-11-13 04:34:11', '2023-11-15 06:16:20'),
 (10, 4, 11, NULL, 'Basta Resort (Premium)', 'Pansol, Calamba, Laguna ', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30945.865595277177!2d121.1876487!3d14.1811152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd61e359982a35%3A0x1924c55513a3e849!2sMakiling%20Spring%20Resorts!5e0!3m2!1sen!2sph!4v1699900463925!5m2!1sen!2sph', '&lt;p&gt;Indulge in the epitome of luxury with our Premium Rooms at Basta Resort, where opulence and sophistication seamlessly blend to create an unparalleled retreat. Designed to exceed your expectations, our Premium Rooms offer an elevated experience, ensuring a stay that is both lavish and memorable.&lt;/p&gt;&lt;p&gt;Step into a world of refined comfort as you enter your spacious Premium Room. Immerse yourself in the plush surroundings, where premium furnishings and stylish decor create an ambiance of elegance. The room is thoughtfully curated with high-end amenities to cater to your every need, ensuring a stay that is both indulgent and relaxing.&lt;/p&gt;&lt;p&gt;Relish the exclusive perks that come with our Premium Rooms, including breathtaking panoramic views from your private balcony, personalized concierge services, and access to a dedicated lounge where you can unwind in an intimate setting. Enjoy a restful night\'s sleep on a luxurious king-size bed with premium linens, and wake up to the gentle sounds of nature just beyond your window.&lt;/p&gt;&lt;p&gt;At Basta Resort, we believe in offering an experience that goes beyond the ordinary. Our Premium Rooms boast additional amenities such as in-room coffee makers, deluxe toiletries, and spacious work areas for those who need to stay connected. Whether you\'re celebrating a special occasion or simply seeking a heightened level of comfort, our Premium Rooms are designed to exceed your expectations.&lt;/p&gt;&lt;p&gt;As a guest in our Premium accommodations, you\'ll also enjoy priority access to our resort\'s exclusive facilities, including a private pool and a fitness center. Elevate your stay at Basta Resort with our Premium Rooms, where luxury meets tranquility for an unforgettable escape. Book your indulgent retreat today and let us pamper you in style.&lt;/p&gt;', '', 2500, 'uploads/products/10.png?v=1699903935', 1, 0, '2023-11-14 03:32:13', '2023-11-14 03:42:58'),
 (11, 4, 12, NULL, 'Basta Resort (Deluxe)', 'Pansol, Calamba, Laguna', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30945.865595277177!2d121.1876487!3d14.1811152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd61e359982a35%3A0x1924c55513a3e849!2sMakiling%20Spring%20Resorts!5e0!3m2!1sen!2sph!4v1699900463925!5m2!1sen!2sph', '&lt;p&gt;Experience a heightened sense of luxury in our Deluxe Rooms at Basta Resort, where sophistication meets comfort in an environment designed to exceed expectations. Our Deluxe Rooms are thoughtfully crafted to provide a refined retreat, ensuring an indulgent stay that caters to your every desire.&lt;/p&gt;&lt;p&gt;Step into an oasis of serenity as you enter your Deluxe Room, adorned with tasteful decor and premium furnishings. The spacious layout creates a sense of openness, allowing you to unwind in style. Sink into the comfort of a sumptuous bed with high-quality linens, and take in the tranquil ambiance that surrounds you.&lt;/p&gt;&lt;p&gt;Our Deluxe Rooms are equipped with a range of amenities to enhance your stay, including a well-appointed en-suite bathroom with deluxe toiletries, a flat-screen TV for entertainment, and complimentary high-speed Wi-Fi for seamless connectivity. Enjoy the convenience of a designated work area, perfect for business travelers or those who need a quiet space to catch up on tasks.&lt;/p&gt;&lt;p&gt;Indulge in the luxury of your private balcony, where you can soak in breathtaking views or enjoy a quiet moment with a refreshing beverage. The attention to detail in our Deluxe Rooms extends to every corner, ensuring that your stay is as comfortable as it is memorable.&lt;/p&gt;&lt;p&gt;As a guest in our Deluxe accommodations, you\'ll have access to all the resort\'s amenities, from the inviting pool area to the delectable offerings at our onsite restaurant. Whether you\'re traveling for business or leisure, our Deluxe Rooms provide a haven of relaxation and sophistication.&lt;/p&gt;&lt;p&gt;Book your stay at Basta Resort and discover the perfect blend of luxury and tranquility in our Deluxe Rooms. Immerse yourself in an experience designed to elevate your journey and create lasting memories.&lt;/p&gt;', '', 3200, 'uploads/products/11.png?v=1699904675', 1, 0, '2023-11-14 03:44:33', '2023-11-14 03:44:35'),
-(14, 5, 16, NULL, 'Ibang Resort', '123', '123', '&lt;p style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;;&quot;&gt;Experience a heightened sense of luxury in our Deluxe Rooms at Basta Resort, where sophistication meets comfort in an environment designed to exceed expectations. Our Deluxe Rooms are thoughtfully crafted to provide a refined retreat, ensuring an indulgent stay that caters to your every desire.&lt;/p&gt;&lt;p style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;;&quot;&gt;Step into an oasis of serenity as you enter your Deluxe Room, adorned with tasteful decor and premium furnishings. The spacious layout creates a sense of openness, allowing you to unwind in style. Sink into the comfort of a sumptuous bed with high-quality linens, and take in the tranquil ambiance that surrounds you.&lt;/p&gt;&lt;p style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;;&quot;&gt;Our Deluxe Rooms are equipped with a range of amenities to enhance your stay, including a well-appointed en-suite bathroom with deluxe toiletries, a flat-screen TV for entertainment, and complimentary high-speed Wi-Fi for seamless connectivity. Enjoy the convenience of a designated work area, perfect for business travelers or those who need a quiet space to catch up on tasks.&lt;/p&gt;&lt;p style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;;&quot;&gt;Indulge in the luxury of your private balcony, where you can soak in breathtaking views or enjoy a quiet moment with a refreshing beverage. The attention to detail in our Deluxe Rooms extends to every corner, ensuring that your stay is as comfortable as it is memorable.&lt;/p&gt;&lt;p style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;;&quot;&gt;As a guest in our Deluxe accommodations, you\'ll have access to all the resort\'s amenities, from the inviting pool area to the delectable offerings at our onsite restaurant. Whether you\'re traveling for business or leisure, our Deluxe Rooms provide a haven of relaxation and sophistication.&lt;/p&gt;&lt;p style=&quot;font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;;&quot;&gt;Book your stay at Basta Resort and discover the perfect blend of luxury and tranquility in our Deluxe Rooms. Immerse yourself in an experience designed to elevate your journey and create lasting memories.&lt;/p&gt;', 'uploads/products/14_gallery_0.png,uploads/products/14_gallery_1.png,uploads/products/14_gallery_2.png', 123, 'uploads/products/14.png', 1, 0, '2023-11-20 04:34:09', '2023-11-25 22:42:32');
+(14, 5, 16, NULL, 'Ibang Resort', '123', '123', '&lt;p&gt;123&lt;/p&gt;', 'uploads/products/14_gallery_0.png,uploads/products/14_gallery_1.png,uploads/products/14_gallery_2.png', 123, 'uploads/products/14.png', 1, 0, '2023-11-20 04:34:09', '2023-11-20 04:34:10');
 
 -- --------------------------------------------------------
 
@@ -354,8 +329,7 @@ INSERT INTO `ratings_reviews` (`id`, `product_id`, `client_id`, `vendor_id`, `ra
 (62, 9, 3, 4, 0, 'dsad', 0, '2023-11-17 03:38:20'),
 (66, 10, 3, 4, 4, 'try', 1, '2023-11-17 03:52:36'),
 (69, 11, 3, 4, 5, 'okay naman maganda dito', 0, '2023-11-20 02:48:39'),
-(70, 14, 3, 5, 3, 'Ganda ng resort gaiss', 0, '2023-11-20 04:35:18'),
-(71, 9, 3, 4, 3, 'testing 123', 0, '2023-11-25 22:25:14');
+(70, 14, 3, 5, 3, 'Ganda ng resort gaiss', 0, '2023-11-20 04:35:18');
 
 -- --------------------------------------------------------
 
@@ -435,11 +409,11 @@ CREATE TABLE `system_info` (
 --
 
 INSERT INTO `system_info` (`id`, `meta_field`, `meta_value`) VALUES
-(1, 'name', 'Resorts Booking Management System Calamba Laguna'),
+(1, 'name', 'Resorts Booking Management System - Calamba, Laguna'),
 (6, 'short_name', 'RBMS'),
-(11, 'logo', 'uploads/logo-1701023529.png'),
-(13, 'user_avatar', 'uploads/avatar-1701023547.png'),
-(14, 'cover', 'uploads/cover-1700998310.png'),
+(11, 'logo', 'uploads/logo-1699796512.png'),
+(13, 'user_avatar', 'uploads/user_avatar.jpg'),
+(14, 'cover', 'uploads/cover-1699793791.png'),
 (15, 'email', 'dot4a@tourism.gov.ph'),
 (16, 'contact', '(049) 254 0265'),
 (17, 'address', 'Dencris Business Center, Manila S Rd, Calamba, 4027 Laguna');
@@ -627,7 +601,7 @@ ALTER TABLE `vendor_list`
 -- AUTO_INCREMENT for table `cart_list`
 --
 ALTER TABLE `cart_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT for table `category_list`
@@ -645,25 +619,25 @@ ALTER TABLE `client_list`
 -- AUTO_INCREMENT for table `inquiries`
 --
 ALTER TABLE `inquiries`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `message_list`
 --
 ALTER TABLE `message_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -681,7 +655,7 @@ ALTER TABLE `product_list`
 -- AUTO_INCREMENT for table `ratings_reviews`
 --
 ALTER TABLE `ratings_reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `rooms`
