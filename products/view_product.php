@@ -446,7 +446,7 @@ function get_product_reviews($product_id) {
 <div class="content py-3">
     <div class="card card-outline card-primary rounded-0 shadow">
         <div class="card-header">
-            <h5 class="card-title"><b>Resort Details</b></h5>
+            <h5 class="card-title"><b>Package Details</b></h5>
         </div>
         <div class="card-body">
             <div class="container-fluid">
@@ -458,53 +458,60 @@ function get_product_reviews($product_id) {
                         </div>
                         <div class="information-container">
                         <div class="price" style="background-color: #212529; color: white; border-radius: 0px; padding: 5px;">
-                            ₱ <?= format_num($price) ?> per room/day
+                            ₱ <?= format_num($price) ?>
                             </div>
                         </div>
                         <!-- Related Packages Link -->
                         <?php
-                        $otherResortsQry = $conn->query("SELECT * FROM `product_list` WHERE vendor_id = '{$vendor_id}' AND id != '{$_GET['id']}' AND delete_flag = 0 LIMIT 5");
-                        $otherResorts = $otherResortsQry->fetch_all(MYSQLI_ASSOC);
+                        $otherPackagesQry = $conn->query("SELECT * FROM `product_list` WHERE vendor_id = '{$vendor_id}' AND id != '{$_GET['id']}' AND delete_flag = 0 LIMIT 5");
+                        $otherPackages = $otherPackagesQry->fetch_all(MYSQLI_ASSOC);
                         ?>
-                        <!-- Display other resorts -->
+                        <!-- Display other packages -->
                         <div class="mt-5 other-packages-section">
                             <h5 class="section-title">Other Packages by <?= $vendor ?></h5>
                             <div class="other-card-container">
-                                <?php foreach ($otherResorts as $otherResort): ?>
+                                <?php foreach ($otherPackages as $otherPackage): ?>
                                     <div class="other-card">
-                                        <img src="<?= validate_image(isset($otherResort['image_path']) ? $otherResort['image_path'] : "") ?>" class="other-card-img" alt="<?= $otherResort['name'] ?>">
+                                        <img src="<?= validate_image(isset($otherPackage['image_path']) ? $otherPackage['image_path'] : "") ?>" class="other-card-img" alt="<?= $otherPackage['name'] ?>">
                                         <div class="other-card-body">
-                                            <h5 class="other-card-title"><?= $otherResort['name'] ?></h5>
-                                            <a href="./?page=products/view_product&id=<?= $otherResort['id'] ?>" class="view-details-btn">View Details</a>
+                                            <h5 class="other-card-title"><?= $otherPackage['name'] ?></h5>
+                                            <a href="./?page=products/view_product&id=<?= $otherPackage['id'] ?>" class="view-details-btn">View Details</a>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
                         </div>
                         <br>                
-                        <!-- Rooms Container -->
+                        <!-- Seats Container -->
                         <div class="rooms-container">
-                            <!-- Available Rooms Box -->
+                            <!-- Text for Joiner Travel Type -->
+                            <div class="joiner-travel-type-text" style="color: white;">
+                                <p><strong>For Joiners and Groups Travel Type</strong></p>
+                            </div>
+
+                            <!-- Available Seats Box -->
                             <div class="room-box available-rooms">
                                 <div style="display: flex;">
-                                    <div class="room-header"><small>Available Rooms:</small></div>
+                                    <div class="room-header"><small>Available Seat:</small></div>
                                     <div class="room-content"><p class="m-0"><?= $availableRooms ?></p></div>
                                 </div>
                             </div>
 
-                            <!-- Taken Rooms Box -->
+                            <!-- Taken Seats Box -->
                             <div class="room-box taken-rooms">
                                 <div style="display: flex;">
-                                    <div class="room-header"><small>Taken Rooms:</small></div>
+                                    <div class="room-header"><small>Taken Seat:</small></div>
                                     <div class="room-content"><p class="m-0"><?= $takenRooms ?></p></div>
                                 </div>
                             </div>
                         </div>
+
+
                         <br>
                     </div>
 
 
-                    <!-- RESORT NAME AND INQUIRE BUTTON -->
+                    <!-- TRAVEL AGENCY NAME AND INQUIRE BUTTON -->
                     <div class="col-lg-8 col-md-7 col-sm-12">
                         <div class="d-flex align-items-center mb-3">
                             <h3><b><?= $name ?></b></h3>
@@ -576,11 +583,11 @@ function get_product_reviews($product_id) {
                                 <div class="info-value"><?= $vendor ?></div>
                             </div>
                             <div class="info-group">
-                                <div class="info-label"><small class="text-muted">Room Category:</small></div>
+                                <div class="info-label"><small class="text-muted">Travel Category:</small></div>
                                 <div class="info-value"><?= $category ?></div>
                             </div>
                             <div class="info-group">
-                                <div class="info-label"><small class="text-muted">Address:</small></div>
+                                <div class="info-label"><small class="text-muted">Location:</small></div>
                                 <div class="info-value"><?= $address ?></div>
                             </div>
                         </div>                          

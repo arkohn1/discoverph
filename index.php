@@ -82,7 +82,7 @@
                   <h5 class="subtitle-content">
                       <?php include("subtitle.html") ?>
                   </h5>
-                  <a href="#resort-packages" class="btn btn-primary rounded-pill mt-3" id="scrollToResortPackages">View Resorts</a>
+                  <a href="#resort-packages" class="btn btn-primary rounded-pill mt-3" id="scrollToResortPackages">View Packages</a>
               </div>
           </div>
       <?php endif; ?>

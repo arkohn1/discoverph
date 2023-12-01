@@ -146,7 +146,7 @@
                             <textarea name="notes" id="notes" rows="4" class="form-control rounded-0" required></textarea>
                         </div>
                         <div class="checkout-btn text-right">
-                            <button class="btn btn-primary btn-sm">Book</button>
+                            <button class="btn btn-primary btn-sm">Confirm Booking</button>
                         </div>
                     </form>
                 </div>
@@ -172,8 +172,31 @@
 
                                 <?php
                                 // Fetch and display additional details for each product in the current vendor
-                                $productsDetails = $conn->query("SELECT c.*, p.name as `name`, p.price, p.image_path, p.vendor_id FROM `cart_list` c INNER JOIN product_list p ON c.product_id = p.id WHERE c.client_id = '{$_settings->userdata('id')}' AND p.vendor_id = '{$vrow['id']}'");
-                                
+                                $productsDetails = $conn->query("
+                                    SELECT 
+                                        c.*, 
+                                        p.name as `name`, 
+                                        p.price, 
+                                        p.image_path, 
+                                        p.vendor_id,
+                                        cat.name as `category`,
+                                        tt.travel_type_name,
+                                        pt.payment_type_name as payment_type_name
+                                    FROM 
+                                        `cart_list` c 
+                                    INNER JOIN 
+                                        product_list p ON c.product_id = p.id
+                                    INNER JOIN
+                                        category_list cat ON p.category_id = cat.id
+                                    INNER JOIN
+                                        travel_type tt ON c.travel_type_id = tt.id
+                                    LEFT JOIN
+                                        payment_type pt ON c.payment_type_id = pt.id
+                                    WHERE 
+                                        c.client_id = '{$_settings->userdata('id')}' AND 
+                                        p.vendor_id = '{$vrow['id']}'
+                                "); 
+
                                 while ($productDetails = $productsDetails->fetch_assoc()):
                                     $totalPerProduct = $productDetails['price'] * $productDetails['quantity'] * $productDetails['days'];
 
@@ -182,32 +205,38 @@
                                     <div class="row mt-2">
                                         <div class="col-12">
                                             <div class="d-flex justify-content-between">
-                                                <div><small class="text-muted">Product Name:</small></div>
+                                                <div><small class="text-muted">Package Name:</small></div>
                                                 <div><small><?= $productDetails['name'] ?></small></div>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="d-flex justify-content-between">
-                                                <div><small class="text-muted">Number of Rooms:</small></div>
+                                                <div><small class="text-muted">Package Category:</small></div>
+                                                <div><small><?= $productDetails['category'] ?></small></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between">
+                                                <div><small class="text-muted">Number of Travelers:</small></div>
                                                 <div><small><?= $productDetails['quantity'] ?></small></div>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="d-flex justify-content-between">
-                                                <div><small class="text-muted">Number of Days:</small></div>
-                                                <div><small><?= $productDetails['days'] ?></small></div>
+                                                <div><small class="text-muted">Travel Type:</small></div>
+                                                <div><small><?= $productDetails['travel_type_name'] ?></small></div>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="d-flex justify-content-between">
-                                                <div><small class="text-muted">Check-in Date:</small></div>
+                                                <div><small class="text-muted">Travel Date:</small></div>
                                                 <div><small><?= $productDetails['check_in'] ?></small></div>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="d-flex justify-content-between">
-                                                <div><small class="text-muted">Check-out Date:</small></div>
-                                                <div><small><?= $productDetails['check_out'] ?></small></div>
+                                                <div><small class="text-muted">Payment Type:</small></div>
+                                                <div><small><?= $productDetails['payment_type_name'] ?></small></div>
                                             </div>
                                         </div>
                                         <div class="col-12">

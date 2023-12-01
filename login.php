@@ -32,7 +32,7 @@
         alert_toast("<?php echo $_settings->flashdata('success') ?>",'success')
       </script>
     <?php endif;?>
-  <center><img src="<?= validate_image($_settings->info('logo')) ?>" alt="System Logo" class="img-thumbnail rounded-circle" id="logo-img"></center>
+  <center><img src="<?= validate_image($_settings->info('logo')) ?>" alt="System Logo" class="<!--img-thumbnail rounded-circle-->" id="logo-img"></center>
 <h1 class="text-center" id="system_name"><?= $_settings->info('name') ?></h1>
   <div class="clear-fix my-2"></div>
 <div class="login-box">

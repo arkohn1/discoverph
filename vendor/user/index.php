@@ -27,11 +27,11 @@ foreach($user->fetch_array() as $k =>$v){
 					<input type="hidden" name="id" value="<?php echo $_settings->userdata('id') ?>">
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label for="shop_name" class="control-label">Resort Name</label>
+							<label for="shop_name" class="control-label">Travel Agency Name</label>
 							<input type="text" id="shop_name" autofocus name="shop_name" class="form-control form-control-sm form-control-border" value="<?= isset($shop_name) ? $shop_name : "" ?>" required>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="shop_owner" class="control-label">Resort Owner Fullname</label>
+							<label for="shop_owner" class="control-label">Travel Agency Owner Fullname</label>
 							<input type="text" id="shop_owner" name="shop_owner" class="form-control form-control-sm form-control-border" value="<?= isset($shop_owner) ? $shop_owner : "" ?>" required>
 						</div>
 						<div class="form-group col-md-6">
@@ -39,7 +39,7 @@ foreach($user->fetch_array() as $k =>$v){
 							<input type="text" id="contact" name="contact" class="form-control form-control-sm form-control-border" value="<?= isset($contact) ? $contact : "" ?>" required>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="shop_type_id" class="control-label">Resort Type</label>
+							<label for="shop_type_id" class="control-label">Travel Agency Type</label>
 							<select type="text" id="shop_type_id" name="shop_type_id" class="form-control form-control-sm form-control-border select2" required>
 								<option value="" disabled selected></option>
 								<?php 

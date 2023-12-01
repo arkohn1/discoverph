@@ -70,7 +70,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         border: 1px solid #6c757d;
     }
 
-    /* Resort Image Adjustments */
+    /* Travel Agency Image Adjustments */
     .image-frame {
         max-width: 100%; /* Ensure the frame doesn't exceed the container width */
     }
@@ -88,7 +88,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         <div class="row spacer">
             <div class="col-3 bg-primary"><span class="">Reference Code</span></div>
             <div class="col-9"><span class="font-weight-bolder"><?= isset($code) ? $code : '' ?></span></div>
-            <div class="col-3 bg-primary"><span class="">Resort</span></div>
+            <div class="col-3 bg-primary"><span class="">Travel Agency</span></div>
             <div class="col-9"><span class="font-weight-bolder"><?= isset($shop_name) ? $shop_name : '' ?></span></div>
             <div class="col-3 bg-primary"><span class="">Notes</span></div>
             <div class="col-9"><span class="font-weight-bolder"><?= isset($notes) ? $notes : '' ?></span></div>

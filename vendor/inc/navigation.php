@@ -43,7 +43,7 @@
                       <a href="<?php echo base_url ?>vendor/?page=orders" class="nav-link nav-orders">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
-                          Bookings / Reservations
+                          Bookings
                         </p>
                       </a>
                     </li>
@@ -85,15 +85,15 @@
                       <a href="<?php echo base_url ?>vendor/?page=categories" class="nav-link nav-categories">
                         <i class="nav-icon fas fa-th-list"></i>
                         <p>
-                          Room Categories
+                          Travel Categories
                         </p>
                       </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>vendor/?page=rooms" class="nav-link nav-rooms">
-                        <i class="nav-icon fas fa-bed"></i>
+                      <a href="<?php echo base_url ?>vendor/?page=seats" class="nav-link nav-seats">
+                        <i class="nav-icon fas fa-shuttle-van"></i>
                         <p>
-                          Available Rooms
+                          Joiner Seat
                         </p>
                       </a>
                     </li>

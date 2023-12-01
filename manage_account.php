@@ -141,7 +141,7 @@ foreach($user->fetch_array() as $k =>$v){
                     <div class="form-group col-md-6 mx-auto">
                         <div class="custom-file ">
                             <input type="file" id="logo" name="img" class="custom-file-input form-control-border" onchange="displayImg(this,$(this))" accept="image/png, image/jpeg">
-                            <label class="custom-file-label" for="logo">Choose Image</label>
+                            <label class="custom-file-label left-align-label" for="logo">Choose Image</label>
                         </div>
                     </div>
                 </div>

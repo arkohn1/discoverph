@@ -227,9 +227,9 @@
     <div class="contain-fluid">
         <div class="clear-fix mb-3"></div>
         
-        <!-- Resort Packages Section -->
+        <!-- Traevl Packages Section -->
         <div id="resort-packages" class="col-lg-12 py-5">
-            <h3 class="text-center">Resort Packages</h3>
+            <h3 class="text-center">Joiner Travel Packages</h3>
             <center><hr class="bg w-25 border-2"></center>
             <br>
             
@@ -264,12 +264,12 @@
                             </div>
                             
                             <div class="d-flex w-100">
-                                <div class="col-auto px-0"><small class="text-muted">Resort:&nbsp;</small></div>
+                                <div class="col-auto px-0"><small class="text-muted">     &nbsp;</small></div>
                                 <div class="col-auto px-0 flex-shrink-1 flex-grow-1"><p class="text-truncate m-0"><small class="text-muted"><?= $row['vendor'] ?></small></p></div>
                             </div>
                             
                             <div class="d-flex">
-                                <div class="col-auto px-0"><small class="text-muted">Category:&nbsp;</small></div>
+                                <div class="col-auto px-0"><small class="text-muted">     &nbsp;</small></div>
                                 <div class="col-auto px-0 flex-shrink-1 flex-grow-1"><p class="text-truncate m-0"><small class="text-muted"><?= $row['category'] ?></small></p></div>
                             </div>
                             

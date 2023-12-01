@@ -60,7 +60,7 @@
 <div class="content py-3">
     <div class="card card-primary rounded-0 shadow">
         <div class="card-header">
-            <h5 class="card-title">My Orders</h5>
+            <h5 class="card-title">My Bookings</h5>
         </div>
         <div class="card-body">
             <div class="w-100 overflow-auto">

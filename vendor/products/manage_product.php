@@ -30,11 +30,11 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-grocr">
-					<label for="name" class="control-label">Name</label>
+					<label for="name" class="control-label">Package Name</label>
 					<input name="name" id="name" type="text"class="form-control form-control-sm form-control-border" value="<?php echo isset($name) ? $name : ''; ?>" required>
 				</div>
 				<div class="form-group">
-						<label for="category_id" class="control-label">Room Category</label>
+						<label for="category_id" class="control-label">Tour Category</label>
 						<select type="text" id="category_id" name="category_id" class="form-control form-control-sm form-control-border select2" required>
 							<option value="" disabled <?= !isset($category_id) ? 'selected' : "" ?>></option>
 							<?php 
@@ -46,7 +46,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 						</select>
 				</div>
 				<div class="form-group">
-					<label for="address" class="control-label">Address</label>
+					<label for="address" class="control-label">Location</label>
 					<input name="address" id="address" type="text"class="form-control form-control-sm form-control-border" value="<?php echo isset($address) ? $address : ''; ?>" required>
 				</div>
 				<div class="form-group">
@@ -70,7 +70,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 					<input name="price" id="price" type="number" step="any" class="form-control form-control-sm form-control-border" value="<?php echo isset($price) ? $price : ''; ?>" required>
 				</div>
 				<div class="form-group">
-					<label for="logo" class="control-label">Resort Image</label>
+					<label for="logo" class="control-label">Main Image</label>
 					<input type="file" id="logo" name="img" class="form-control form-control-sm form-control-border" onchange="displayImg(this,$(this))" accept="image/png, image/jpeg" <?= !isset($id) ? 'required' : '' ?>>
 				</div>
 				<div class="form-group col-md-6 text-center">

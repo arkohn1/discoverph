@@ -85,7 +85,7 @@
                     $vtotal = 0;
                     $products = $conn->query("SELECT c.*, p.name as `name`, p.price,p.image_path FROM `cart_list` c inner join product_list p on c.product_id = p.id where c.client_id = '{$_settings->userdata('id')}' and p.vendor_id = '{$vrow['id']}' order by p.name asc");
                     while ($prow = $products->fetch_assoc()) :
-                        $total = $prow['price'] * $prow['quantity'] * $prow['days'];
+                        $total = $prow['price'] * $prow['quantity'];
                         $gtotal += $total;
                         $vtotal += $total;
                     ?>
@@ -96,14 +96,14 @@
                                 <a href="./?page=products/view_product&id=<?= $prow['product_id'] ?>"><img src="<?= validate_image($prow['image_path']) ?>" alt="" class="img-center prod-img border bg-gradient-black"></a>
                             </div>
                             <div class="d-flex">
-                                <div class="col-auto px-0"><small class="text-muted">Price per room/day: </small></div>
+                                <div class="col-auto px-0"><small class="text-muted"></small></div>
                                 <div class="col-auto px-0 flex-shrink-1 flex-grow-1"><p class="m-0 pl-3"><small class="text-primary"><?= format_num($prow['price']) ?></small></p></div>
                             </div>
                             <!-- Quantity and Confirm Total Days -->
                             <div class="d-flex mb-3">
                                 <!-- Number of Rooms -->
                                 <div class="col-auto text-center">
-                                    <small class="text-muted">Number of Rooms</small>
+                                    <small class="text-muted">Number of Passengers</small>
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend">
                                             <button class="btn btn-primary min-qty" data-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-minus"></i></button>
@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
                                 <!-- Confirm Total Days -->
-                                <div class="col-auto text-center">
+                                <!--<div class="col-auto text-center">
                                     <small class="text-muted">Confirm Total Days</small>
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend">
@@ -126,12 +126,32 @@
                                             <button class="btn btn-primary plus-confirm-days" data-prod-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
+                                </div>-->
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-muted">Travel Type</label>
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control form-control-sm form-control-border travel-type" data-prod-id="<?= $prow['id'] ?>" required>
+                                            <option value="" selected disabled>Select Travel Type</option>
+                                            <?php
+                                            // Fetch all travel types from the travel_type table
+                                            $travelTypes = $conn->query("SELECT * FROM travel_type");
+                                            while ($travelType = $travelTypes->fetch_assoc()) {
+                                                echo "<option value='{$travelType['id']}'>{$travelType['travel_type_name']}</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
+
+
                             <!-- Check-in and Check-out Dates -->
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-muted">Check-in Date</label>
+                                    <label class="text-muted">Select Travel Date</label>
                                     <div class="input-group input-group-sm">
                                         <input type="date" class="form-control form-control-sm form-control-border check-in-date" data-prod-id="<?= $prow['id'] ?>" required>
                                         <div class="input-group-append">
@@ -139,7 +159,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <!--<div class="col-md-6">
                                     <label class="text-muted">Check-out Date</label>
                                     <div class="input-group input-group-sm">
                                         <input type="date" class="form-control form-control-sm form-control-border check-out-date" data-prod-id="<?= $prow['id'] ?>" required>
@@ -147,8 +167,26 @@
                                             <span class="input-group-text" id="basic-addon2"><i class="fas fa-calendar-alt"></i></span>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
+                            <!-- Payment Type -->
+                             <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-muted">Payment Type</label>
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control form-control-sm form-control-border payment-type" data-prod-id="<?= $prow['id'] ?>" required>
+                                            <option value="" selected disabled>Select Payment Type</option>
+                                            <?php
+                                            // Fetch payment types from the database
+                                            $paymentTypes = $conn->query("SELECT * FROM payment_type");
+                                            while ($paymentType = $paymentTypes->fetch_assoc()) {
+                                                echo "<option value='{$paymentType['id']}'>{$paymentType['payment_type_name']}</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>                           
                             <!-- Payment Method -->
                             <div class="row mb-3">
                                 <div class="col-md-6">
@@ -210,7 +248,7 @@
     <div class="clear-fix mb-2"></div>
     <!-- Checkout Button -->
     <div class="checkout-btn">
-        <a href="./?page=orders/checkout" class="btn btn-flat btn-primary btn-sm">Checkout</a>
+        <a href="./?page=orders/checkout" class="btn btn-flat btn-primary btn-sm">Proceed to Checkout</a>
     </div>
 
 </div>
@@ -326,22 +364,21 @@
 
     $(function(){
         // Function to handle date changes
-        $('.check-in-date, .check-out-date').change(function () {
+        $('.check-in-date').change(function () {
             var prodId = $(this).data('prod-id');
             var checkInDate = $('.check-in-date[data-prod-id="' + prodId + '"]').val();
-            var checkOutDate = $('.check-out-date[data-prod-id="' + prodId + '"]').val();
 
             // Call the function to update dates
-            updateCartDates(prodId, checkInDate, checkOutDate);
+            updateCartDates(prodId, checkInDate);
         });
 
         // Add change event listeners to the check-in and check-out date inputs
-        $('.check-in-date, .check-out-date').change(function () {
+        $('.check-in-date').change(function () {
             calculateAndSetTotalDays($(this).data('prod-id'));
         });
     });
 
-    function updateCartDates(prodId, checkInDate, checkOutDate) {
+    function updateCartDates(prodId, checkInDate) {
         start_loader();
         $.ajax({
             url: _base_url_ + 'classes/Master.php?f=update_cart_dates',
@@ -349,7 +386,6 @@
             data: {
                 cart_id: prodId,
                 check_in_date: checkInDate,
-                check_out_date: checkOutDate
             },
             dataType: 'json',
             error: function (xhr, status, error) {
@@ -372,18 +408,14 @@
 
     $(function () {
         // Add change event listeners to the check-in and check-out date inputs
-        $('.check-in-date, .check-out-date').change(function () {
-            calculateAndSetTotalDays($(this).data('prod-id'));
-        });
-            // Add an additional event listener for the check-out date to handle immediate updates
-        $('.check-out-date').on('input', function () {
+        $('.check-in-date').change(function () {
             calculateAndSetTotalDays($(this).data('prod-id'));
         });
     });
    
     // Fetch stored data from the server on page load
     $(document).ready(function () {
-        $('.check-in-date, .check-out-date, .payment-method').each(function () {
+        $('.check-in-date, .payment-method').each(function () {
             var prodId = $(this).data('prod-id');
             
             // Fetch check-in and check-out dates from the server
@@ -397,15 +429,10 @@
                 success: function (resp) {
                     if (resp.status == 'success') {
                         var checkInDate = resp.check_in_date;
-                        var checkOutDate = resp.check_out_date;
                         var paymentsId = resp.payments_id;
 
                         if (checkInDate) {
                             $('.check-in-date[data-prod-id="' + prodId + '"]').val(checkInDate);
-                        }
-
-                        if (checkOutDate) {
-                            $('.check-out-date[data-prod-id="' + prodId + '"]').val(checkOutDate);
                         }
 
                         if (paymentsId) {
@@ -413,7 +440,7 @@
                         }
 
                         // Trigger change event to recalculate total days
-                        $('.check-in-date, .check-out-date, .payment-method').change();
+                        $('.check-in-date, .payment-method').change();
                     } else {
                         console.error('Failed to fetch data from the server.');
                     }
@@ -427,7 +454,7 @@
     });
 
 
-    $(function () {
+    /*$(function () {
         $('.plus-confirm-days').click(function () {
             var group = $(this).closest('.input-group');
             var inputField = group.find('.confirm-total-days');
@@ -481,7 +508,7 @@
                 }
             });
         }
-    });
+    });*/
 
     // Add an event listener for the payment method dropdown change
     $('.payment-method').change(function () {
@@ -584,7 +611,108 @@
         });
     });
 
+    // FOR THE TRAVEL TYPE SELECTION
+    function updateTravelTypeInDatabase(prodId, travelTypeId) {
+        start_loader();
+        $.ajax({
+            url: _base_url_ + 'classes/Master.php?f=update_travel_type',
+            method: 'POST',
+            data: {
+                prod_id: prodId,
+                travel_type_id: travelTypeId
+            },
+            dataType: 'json',
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+                alert_toast('An error occurred: ' + error, 'error');
+                end_loader();
+            },
+            success: function (resp) {
+                if (resp.status == 'success') {
+                    // Handle success if needed
+                    console.log('Travel type updated successfully');
+                    // Save the selected value to local storage
+                    sessionStorage.setItem('selectedTravelType_' + prodId, travelTypeId);
+                } else if (!!resp.msg) {
+                    // Handle error message if needed
+                    console.error('Error updating travel type: ' + resp.msg);
+                } else {
+                    // Handle generic error if needed
+                    console.error('Unknown error occurred while updating travel type');
+                }
+                end_loader();
+            }
+        });
+    }
 
+    // On page load, retrieve the selected value from local storage and set it as the selected option
+    $(document).ready(function () {
+        $('.travel-type').each(function () {
+            var prodId = $(this).data('prod-id');
+            var storedTravelTypeId = sessionStorage.getItem('selectedTravelType_' + prodId);
+            if (storedTravelTypeId) {
+                $(this).val(storedTravelTypeId).change(); // Trigger change event to update the server if needed
+            }
+        });
+    });
 
+    // On change of travel type, save the selected value in local storage
+    $('.travel-type').change(function () {
+        var prodId = $(this).data('prod-id');
+        var selectedTravelTypeId = $(this).val();
+        updateTravelTypeInDatabase(prodId, selectedTravelTypeId);
+        sessionStorage.setItem('selectedTravelType_' + prodId, selectedTravelTypeId);
+    });
 
+    //FOR THE PAYMENT TYPE SELECTION
+    // On change of payment type, save the selected value in local storage
+    $('.payment-type').change(function () {
+        var prodId = $(this).data('prod-id');
+        var selectedPaymentTypeId = $(this).val();
+        updatePaymentTypeInDatabase(prodId, selectedPaymentTypeId);
+        sessionStorage.setItem('selectedPaymentType_' + prodId, selectedPaymentTypeId);
+    });
+
+    // On page load, retrieve the selected value from local storage and set it as the selected option
+    $(document).ready(function () {
+        $('.payment-type').each(function () {
+            var prodId = $(this).data('prod-id');
+            var storedPaymentTypeId = sessionStorage.getItem('selectedPaymentType_' + prodId);
+            if (storedPaymentTypeId) {
+                $(this).val(storedPaymentTypeId).change(); // Trigger change event to update the server if needed
+            }
+        });
+    });
+
+    // Function to update payment type in the database
+    function updatePaymentTypeInDatabase(prodId, paymentTypeId) {
+        start_loader();
+        $.ajax({
+            url: _base_url_ + 'classes/Master.php?f=update_payment_type',
+            method: 'POST',
+            data: {
+                prod_id: prodId,
+                payment_type_id: paymentTypeId
+            },
+            dataType: 'json',
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+                alert_toast('An error occurred: ' + error, 'error');
+                end_loader();
+            },
+            success: function (resp) {
+                if (resp.status == 'success') {
+                    // Handle success if needed
+                    console.log('Payment type updated successfully');
+                } else if (!!resp.msg) {
+                    // Handle error message if needed
+                    console.error('Error updating payment type: ' + resp.msg);
+                } else {
+                    // Handle generic error if needed
+                    console.error('Unknown error occurred while updating payment type');
+                }
+                end_loader();
+            }
+        });
+    }
 </script>

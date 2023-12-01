@@ -14,7 +14,7 @@
 </style>
 <div class="card card-outline card-primary">
 	<div class="card-header">
-		<h3 class="card-title">Resort Packages</h3>
+		<h3 class="card-title">Travel Packages</h3>
 		<div class="card-tools">
 			<a href="javascript:void(0)" class="btn btn-flat btn-primary" id="create_new"><span class="fas fa-plus"></span>  Create New</a>
 		</div>
@@ -38,9 +38,9 @@
 						<th>#</th>
 						<th>Date Created</th>
 						<th>Image</th>
-						<th>Name</th>
+						<th>Travel Agency Name</th>
 						<th>Cost</th>
-						<th>Room Type</th>
+						<th>Tour Category</th>
 						<th>Status</th>
 						<th>Action</th>
 					</tr>
@@ -62,7 +62,7 @@
 							<td class="text-center"><img src="<?= validate_image($row['image_path']) ?>" alt="Product Image" class="border border-gray img-thumbnail product-img"></td>
 							<td><?php echo $row['name'] ?></td>
 							<td class="text-right"><?php echo format_num($row['price']) ?></td>
-							<!-- Add the column for the resort type -->
+							<!-- Add the column for the package type -->
 							<td><?php echo $row['category_name'] ?></td>
 
 							<td class="text-center">

@@ -36,7 +36,7 @@
     <div class="info-box">
       <span class="info-box-icon bg-gradient-secondary elevation-1"><i class="fas fa-boxes"></i></span>
       <div class="info-box-content">
-        <span class="info-box-text">Resort Packages</span>
+        <span class="info-box-text">Travel Packages</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
             $total = $conn->query("SELECT count(id) as total FROM product_list where delete_flag = 0 ")->fetch_assoc()['total'];
@@ -54,7 +54,7 @@
       <span class="info-box-icon bg-gradient-light border elevation-1"><i class="fas fa-users"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">Registered Resorts</span>
+        <span class="info-box-text">Travel Agencies</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
             $total = $conn->query("SELECT count(id) as total FROM vendor_list where delete_flag = 0 ")->fetch_assoc()['total'];
@@ -89,7 +89,7 @@
       <span class="info-box-icon bg-gradient-warning elevation-1"><i class="fas fa-list"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">Pending Bookings / Reservations</span>
+        <span class="info-box-text">Pending Bookings</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
             $total = $conn->query("SELECT count(id) as total FROM order_list where `status` = 0 ")->fetch_assoc()['total'];

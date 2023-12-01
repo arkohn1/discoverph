@@ -83,7 +83,7 @@
   }
 
   /* Adjust the button placement */
-  #scrollToResortPackages {
+  #scrollToTravelPackages {
       margin-top: 10px; /* Adjust the margin-top value to move the button down */
   }
 </style>
@@ -92,7 +92,7 @@
 
   <div class="container">
     <a href="./" class="navbar-brand">
-      <img src="<?php echo validate_image($_settings->info('logo')) ?>" alt="Site Logo" class="brand-image img-circle elevation-3" style="opacity: .8; max-height: 200px;">
+      <img src="<?php echo validate_image($_settings->info('logo')) ?>" alt="Site Logo" class="brand-image <!--img-circle elevation-3-->" style="opacity: .8; max-height: 200px;">
       <span><?= $_settings->info('short_name') ?></span>
     </a>
 
@@ -103,7 +103,7 @@
           <a href="./" class="nav-link home <?= isset($page) && $page == 'home' ? "active" : "" ?>">Home</a>
         </li>
         <li class="nav-item">
-          <a href="./?page=products" class="nav-link <?= isset($page) && $page == 'products' ? "active" : "" ?>">Resorts</a>
+          <a href="./?page=products" class="nav-link <?= isset($page) && $page == 'products' ? "active" : "" ?>">Packages</a>
         </li>
         <li class="nav-item">
           <a class="nav-link <?= isset($page) && $page == 'about' ? "active" : "" ?>" data-target-section="about"
@@ -204,13 +204,13 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-12 text-center mb-3">
-            <p class="mb-0"><a href="./login.php" class="btn btn-primary rounded-pill px-5 py-3 shadow-sm">Customer</a></p>
+            <p class="mb-0"><a href="./login.php" class="btn btn-primary rounded-pill px-5 py-3 shadow-sm">Traveler</a></p>
           </div>
           <div class="col-12 text-center mb-3">
-            <p class="mb-0"><a href="./vendor" class="btn btn-success rounded-pill px-5 py-3 shadow-sm">Resort Admin</a></p>
+            <p class="mb-0"><a href="./vendor" class="btn btn-success rounded-pill px-5 py-3 shadow-sm">Travel Agency</a></p>
           </div>
           <div class="col-12 text-center">
-          <p class="mb-0"><a href="./admin" class="btn btn-danger rounded-pill px-5 py-3 shadow-sm">Superadmin</a></p>
+          <p class="mb-0"><a href="./admin" class="btn btn-danger rounded-pill px-5 py-3 shadow-sm">DOT IV-A</a></p>
           </div>
         </div>
       </div>

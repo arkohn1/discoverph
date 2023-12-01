@@ -3,65 +3,66 @@
 <html lang="en" class="" style="height: auto;">
  <?php require_once('inc/header.php') ?>
 <body class="hold-transition">
-  <script>
+<script>
     start_loader()
-  </script>
-  <style>
-      html,body{
-          height: calc(100%);
-          width: calc(100%);
-      }
-      body{
-          width:calc(100%);
-          height:calc(100%);
-          background-image:url('<?= validate_image($_settings->info('cover')) ?>');
-          background-repeat: no-repeat;
-          background-size:cover;
-          backdrop-filter: blur(3px); /* Adjust the blur amount as needed */
+</script>
+<style>
+    html, body {
+        height: 100%;
+        width: 100%;
+    }
 
-      }
-      #logo-img{
-          width:15em;
-          height:15em;
-          object-fit:scale-down;
-          object-position:center center;
-      }
-      #system_name{
-        color:#fff;
+    body {
+        width: 100%;
+        height: 100%;
+        background-image: url('<?= validate_image($_settings->info('cover')) ?>');
+        background-repeat: no-repeat;
+        background-size: cover;
+        backdrop-filter: blur(3px); /* Adjust the blur amount as needed */
+    }
+
+    #logo-img {
+        width: 15em;
+        height: 15em;
+        object-fit: scale-down;
+        object-position: center center;
+    }
+
+    #system_name {
+        color: #fff;
         /*text-shadow: 3px 3px 3px #000;*/
     }
-      #cimg{
-          width:200px;
-          height:200px;
-          object-fit:scale-down;
-          object-position:center center
-      }
-  </style>
+
+    #cimg {
+        width: 100px;
+        height: 100px;
+        object-fit: scale-down;
+        object-position: center center;
+    }
+</style>
   <script>
   </script>
   <div class="d-flex justify-content-center align-items-center flex-row h-100">
         <div class="col-5">
-            <center><img src="<?= validate_image($_settings->info('logo')) ?>" alt="System Logo" class="img-thumbnail rounded-circle" id="logo-img"></center>
+            <center><img src="<?= validate_image($_settings->info('logo')) ?>" alt="System Logo" class="<!--img-thumbnail rounded-circle-->" id="logo-img"></center>
             <h1 class="text-center" id="system_name"><?= $_settings->info('name') ?></h1>
         </div>
         <div class="col-7 h-100 bg-gradient-light px-4">
             <div class="d-flex justify-content-center align-items-center w-100 h-100">
-                <div class="card card-outline card-primary col-12 rounded-0 shadow">
+                <div class="card card-outline card-primary col-12 h-100 rounded-0 shadow">
                     <div class="card-header text-center">
-                    <a href="./register.php" class="h1"><b>Create an Account</b></a>
+                    <a href="./register.php" class="h3"><b>Create an Account</b></a>
                     </div>
                     <div class="card-body">
-                    <p class="login-box-msg">Sign in to start your session</p>
-
                     <form id="vregister-frm" action="" method="post">
                         <input type="hidden" name="id">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="shop_name" class="control-label">Resort Name</label>
+                                <label for="shop_name" class="control-label">Trave Agency Name</label>
                                 <input type="text" id="shop_name" autofocus name="shop_name" class="form-control form-control-sm form-control-border" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="shop_owner" class="control-label">Resort Owner Fullname</label>
+                                <label for="shop_owner" class="control-label">Travel Agency Owner Fullname</label>
                                 <input type="text" id="shop_owner" name="shop_owner" class="form-control form-control-sm form-control-border" required>
                             </div>
                             <div class="form-group col-md-6">
@@ -73,7 +74,7 @@
                                 <input type="text" id="email" name="email" class="form-control form-control-sm form-control-border" value="<?= isset($email) ? $email : "" ?>" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="shop_type_id" class="control-label">Resort Type</label>
+                                <label for="shop_type_id" class="control-label">Travel Agency Type</label>
                                 <select type="text" id="shop_type_id" name="shop_type_id" class="form-control form-control-sm form-control-border select2" required>
                                     <option value="" disabled selected></option>
                                     <?php 

@@ -314,7 +314,7 @@ Class Master extends DBConnection {
 			$this->settings->set_flashdata('success',$resp['msg']);
 		return json_encode($resp);
 	}
-	function delete_room(){
+	function delete_seat(){
 		extract($_POST);
 		$del = $this->conn->query("UPDATE `rooms` set delete_flag = 1 where id = '{$id}'");
 		if($del){
@@ -401,7 +401,7 @@ Class Master extends DBConnection {
 						$qry = $this->conn->query("UPDATE `product_list` SET gallery_path = '{$gallery_path}' WHERE id = '$pid'");
 					}
 				}
-				// Handle Resort Image Upload
+				// Handle Travel Agency Image Upload
 				if (isset($_FILES['img']) && $_FILES['img']['tmp_name'] != '') {
 					if (!is_dir(base_app . "uploads/products")) {
 						mkdir(base_app . "uploads/products");
@@ -413,7 +413,7 @@ Class Master extends DBConnection {
 					$allowed = array('image/png', 'image/jpeg');
 			
 					if (!in_array($type, $allowed)) {
-						$resp['msg'] .= " But Resort Image failed to upload due to an invalid file type.";
+						$resp['msg'] .= " Image failed to upload due to an invalid file type.";
 					} else {
 						list($width, $height) = getimagesize($upload);
 						$new_height = $height;
@@ -435,7 +435,7 @@ Class Master extends DBConnection {
 								$qry = $this->conn->query("UPDATE `product_list` set image_path = '{$fname}' where id = '$pid'");
 							}
 						} else {
-							$resp['msg'] .= " But Resort Image failed to upload due to an unknown reason.";
+							$resp['msg'] .= " Image failed to upload due to an unknown reason.";
 						}
 					}
 				}	
@@ -490,7 +490,7 @@ Class Master extends DBConnection {
 		if ($check > 0) {
 			// If the item already exists in the cart, do nothing (quantity remains unchanged)
 			$resp['status'] = 'success';
-			$resp['msg'] = " Number of Room(s) Confirmed.";
+			$resp['msg'] = " Number of Traveler(s) Confirmed.";
 		} else {
 			// If the item is not in the cart, insert it with quantity set to 1
 			$sql = "INSERT INTO cart_list SET {$data}, `payments_id` = NULL, `quantity` = 1";
@@ -498,7 +498,7 @@ Class Master extends DBConnection {
 	
 			if ($save) {
 				$resp['status'] = 'success';
-				$resp['msg'] = " Number of Room(s) Confirmed.";
+				$resp['msg'] = " Number of Traveler(s) Confirmed.";
 			} else {
 				$resp['status'] = 'failed';
 				$resp['msg'] = " The package has failed to add to the checkout.";
@@ -518,10 +518,10 @@ Class Master extends DBConnection {
 		$update_cart = $this->conn->query("UPDATE `cart_list` set `quantity` = '{$quantity}' where id = '{$cart_id}'");
 		if($update_cart){
 			$resp['status'] = 'success';
-			$resp['msg'] = ' Number(s) of Room Updated';
+			$resp['msg'] = ' Number of Traveler(s) Updated';
 		}else{
 			$resp['status'] = 'success';
-			$resp['msg'] = ' Number(s) of Room has failed to update';
+			$resp['msg'] = ' Number of Traveler(s) has failed to update';
 			$resp['error'] = $this->conn->error;
 		}
 		
@@ -533,14 +533,14 @@ Class Master extends DBConnection {
 	function update_cart_dates(){
 		extract($_POST);
 	
-		$update_dates = $this->conn->query("UPDATE `cart_list` SET `check_in` = '{$check_in_date}', `check_out` = '{$check_out_date}' WHERE id = '{$cart_id}'");
+		$update_dates = $this->conn->query("UPDATE `cart_list` SET `check_in` = '{$check_in_date}' WHERE id = '{$cart_id}'");
 	
 		if ($update_dates) {
 			$resp['status'] = 'success';
-			$resp['msg'] = 'Check-in and Check-out dates updated successfully';
+			$resp['msg'] = 'Travel date updated successfully';
 		} else {
 			$resp['status'] = 'failed';
-			$resp['msg'] = 'Failed to update Check-in and Check-out dates';
+			$resp['msg'] = 'Failed to update Travel date';
 			$resp['error'] = $this->conn->error;
 		}
 	
@@ -591,6 +591,50 @@ Class Master extends DBConnection {
 			$this->settings->set_flashdata('success', $resp['msg']);
 		}
 
+		return json_encode($resp);
+	}
+
+	function update_travel_type() {
+		extract($_POST);
+	
+		// Update the cart_list table with the selected travel type ID
+		$updateTravelType = $this->conn->query("UPDATE `cart_list` SET `travel_type_id` = '{$travel_type_id}' WHERE id = '{$prod_id}'");
+	
+		if ($updateTravelType) {
+			$resp['status'] = 'success';
+			$resp['msg'] = 'Travel type updated successfully';
+		} else {
+			$resp['status'] = 'failed';
+			$resp['msg'] = 'Failed to update travel type';
+			$resp['error'] = $this->conn->error;
+		}
+	
+		if ($resp['status'] == 'success') {
+			$this->settings->set_flashdata('success', $resp['msg']);
+		}
+	
+		return json_encode($resp);
+	}
+
+	function update_payment_type() {
+		extract($_POST);
+	
+		// Update the cart_list table with the selected payment type ID
+		$updatePaymentType = $this->conn->query("UPDATE `cart_list` SET `payment_type_id` = '{$payment_type_id}' WHERE id = '{$prod_id}'");
+	
+		if ($updatePaymentType) {
+			$resp['status'] = 'success';
+			$resp['msg'] = 'Payment type updated successfully';
+		} else {
+			$resp['status'] = 'failed';
+			$resp['msg'] = 'Failed to update payment type';
+			$resp['error'] = $this->conn->error;
+		}
+	
+		if ($resp['status'] == 'success') {
+			$this->settings->set_flashdata('success', $resp['msg']);
+		}
+	
 		return json_encode($resp);
 	}
 
@@ -944,6 +988,37 @@ Class Master extends DBConnection {
 	
 		return json_encode($resp);
 	}
+
+
+
+
+
+
+	function fetch_products_by_price_range() {
+		// Assuming you have a database connection instance $this->conn
+		$minPrice = isset($_GET['minPrice']) ? $this->conn->real_escape_string($_GET['minPrice']) : 0;
+		$maxPrice = isset($_GET['maxPrice']) ? $this->conn->real_escape_string($_GET['maxPrice']) : 50000;
+	
+		$query = "SELECT * FROM product_list WHERE price BETWEEN '{$minPrice}' AND '{$maxPrice}' AND delete_flag = 0 AND status = 1";
+		$result = $this->conn->query($query);
+	
+		$resp = array();
+		if ($result) {
+			$products = array();
+			while($row = $result->fetch_assoc()) {
+				$products[] = $row;
+			}
+	
+			$resp['status'] = 'success';
+			$resp['products'] = $products;
+		} else {
+			$resp['status'] = 'failed';
+			$resp['msg'] = 'Failed to fetch products';
+			$resp['error'] = $this->conn->error;
+		}
+	
+		return json_encode($resp);
+	}
 	
 	
 }
@@ -985,8 +1060,8 @@ switch ($action) {
 	case 'save_room':
 		echo $Master->save_room();
 	break;
-	case 'delete_room':
-		echo $Master->delete_room();
+	case 'delete_seat':
+		echo $Master->delete_seat();
 	break;
 	case 'save_product':
 		echo $Master->save_product();
@@ -1033,6 +1108,12 @@ switch ($action) {
 	case 'update_payment_method':
 		echo $Master->update_payment_method();
 	break;
+	case 'update_travel_type':
+		echo $Master->update_travel_type();
+	break;
+	case 'update_payment_type':
+		echo $Master->update_payment_type();
+	break;
 	case 'get_payment_details':
 		echo $Master->get_payment_details();
 	break;
@@ -1042,11 +1123,10 @@ switch ($action) {
 	case 'upload_receipt_image':
 		echo $Master->upload_receipt_image();
 	break;
+	case 'fetch_products_by_price_range':
+		echo $Master->fetch_products_by_price_range();
+	break;
 	default:
 		// echo $sysset->index();
 		break;
 }
-
-
-
-

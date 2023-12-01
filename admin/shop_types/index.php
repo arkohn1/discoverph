@@ -5,7 +5,7 @@
 <?php endif;?>
 <div class="card card-outline card-primary">
 	<div class="card-header">
-		<h3 class="card-title">List of Shop Types</h3>
+		<h3 class="card-title">List of Travel Agency Types</h3>
 		<div class="card-tools">
 			<a href="javascript:void(0)" class="btn btn-flat btn-primary" id="create_new"><span class="fas fa-plus"></span>  Create New</a>
 		</div>
@@ -25,7 +25,7 @@
 					<tr class="bg-gradient-secondary">
 						<th>#</th>
 						<th>Date Created</th>
-						<th>Resort Type</th>
+						<th>Travel Agency Type</th>
 						<th>Status</th>
 						<th>Action</th>
 					</tr>

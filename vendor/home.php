@@ -1,6 +1,6 @@
 <div style="width: 70%; margin: 20px auto; padding: 15px; background-color: #f0f0f0; border: 1px solid #ddd; border-radius: 10px;">
     <h1 style="font-family: 'Arial', sans-serif; color: #333; text-align: center; text-transform: uppercase; font-size: 1.5em; font-weight: bold;">
-        <?php echo $_settings->info('name') ?> (Resort Admin)
+        <?php echo $_settings->info('name') ?> (Travel Agency Admin)
 </div>
 <style>
   #cover-image{
@@ -53,7 +53,7 @@
       <span class="info-box-icon bg-gradient-secondary elevation-1"><i class="fas fa-boxes"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">Resort Packages</span>
+        <span class="info-box-text">Travel Packages</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
             $total = $conn->query("SELECT count(id) as total FROM product_list where delete_flag = 0 and  vendor_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];
@@ -71,7 +71,7 @@
       <span class="info-box-icon bg-gradient-warning elevation-1"><i class="fas fa-list"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">Pending Bookings / Reservations</span>
+        <span class="info-box-text">Pending Bookings</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
             $total = $conn->query("SELECT count(id) as total FROM order_list where `status` = 0 and  vendor_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];

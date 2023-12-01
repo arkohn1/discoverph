@@ -35,7 +35,7 @@
 						<th>#</th>
 						<th>Logo</th>
 						<th>Code</th>
-						<th>Resort Name</th>
+						<th>Agency</th>
 						<th>Owner</th>
 						<th>Status</th>
 						<th>Action</th>

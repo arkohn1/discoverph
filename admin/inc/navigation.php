@@ -35,7 +35,7 @@
                       <a href="<?php echo base_url ?>admin/?page=products" class="nav-link nav-products">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>
-                          Resort Packages
+                          Travel Packages
                         </p>
                       </a>
                     </li>
@@ -43,7 +43,7 @@
                       <a href="<?php echo base_url ?>admin/?page=orders" class="nav-link nav-orders">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
-                          Bookings / Reservations
+                          Bookings
                         </p>
                       </a>
                     </li>
@@ -51,7 +51,7 @@
                       <a href="<?php echo base_url ?>admin/?page=vendors" class="nav-link nav-vendors">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
-                          Registered Resorts
+                          Travel Agencies
                         </p>
                       </a>
                     </li>
@@ -86,7 +86,7 @@
                       <a href="<?php echo base_url ?>admin/?page=shop_types" class="nav-link nav-shop_types">
                         <i class="nav-icon fas fa-th-list"></i>
                         <p>
-                          Resort Types
+                          Travel Agency Types
                         </p>
                       </a>
                     </li>
