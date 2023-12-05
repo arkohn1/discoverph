@@ -241,6 +241,12 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="d-flex justify-content-between">
+                                                <div><small class="text-muted">Payment Amount:</small></div>
+                                                <div><small><?= $productDetails['payment_amount'] ?></small></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between">
                                                 <div><small class="text-muted">Payment Method:</small></div>
                                                 <div>
                                                     <?php

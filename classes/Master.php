@@ -638,6 +638,28 @@ Class Master extends DBConnection {
 		return json_encode($resp);
 	}
 
+	function update_payment_amount() {
+		extract($_POST);
+	
+		// Update the cart_list table with the entered payment amount
+		$updatePaymentAmount = $this->conn->query("UPDATE `cart_list` SET `payment_amount` = '{$payment_amount}' WHERE id = '{$prod_id}'");
+	
+		if ($updatePaymentAmount) {
+			$resp['status'] = 'success';
+			$resp['msg'] = 'Payment amount updated successfully';
+		} else {
+			$resp['status'] = 'failed';
+			$resp['msg'] = 'Failed to update payment amount';
+			$resp['error'] = $this->conn->error;
+		}
+	
+		if ($resp['status'] == 'success') {
+			$this->settings->set_flashdata('success', $resp['msg']);
+		}
+	
+		return json_encode($resp);
+	}
+
 	function get_cart_data() {
 		extract($_POST);
 	
@@ -1114,6 +1136,9 @@ switch ($action) {
 	case 'update_payment_type':
 		echo $Master->update_payment_type();
 	break;
+	case 'update_payment_amount':
+		echo $Master->update_payment_amount();
+	break;
 	case 'get_payment_details':
 		echo $Master->get_payment_details();
 	break;
@@ -1130,3 +1155,4 @@ switch ($action) {
 		// echo $sysset->index();
 		break;
 }
+

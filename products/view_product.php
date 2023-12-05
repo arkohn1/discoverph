@@ -410,8 +410,10 @@ function get_product_reviews($product_id) {
         height: 70px;
         object-fit: cover;
         object-position: center center;
-        border-radius: 20%;
-        margin-right: -50px; /* Add some margin for better spacing */
+        border: 1px solid #212529; /* Add a solid gray border */
+        border-radius: 50%;
+        margin-right: 0px; /* Adjust the margin for better spacing */
+        padding: 0px; /* Add padding to the image */
     }
     @media only screen and (min-width: 600px) {
         #existingReviewsContainer {
@@ -676,12 +678,12 @@ function get_product_reviews($product_id) {
                                 echo '<div class="review-container" style="background-color: #;">';
                                 echo '<div class="review-header">';
                                 echo '<img src="' . validate_image($review['avatar']) . '" class="img-avatar-small img-thumbnail p-0 border-2" alt="client_avatar">';
-                                echo '<h5 style="margin: 0; padding: 0; margin-left: -100px;">' . $review['client_name'] . '</h5>';
-                                echo '<p>Date: ' . date('F j, Y', strtotime($review['date_created'])) . '</p>';
+                                echo '<h5 style="margin: 0; padding: 0; margin-left: -220px;">' . $review['client_name'] . '</h5>';
+                                echo '<p> ' . date('F j, Y', strtotime($review['date_created'])) . '</p>';
                                 echo '</div>';
                                 
                                 // Display stars based on the rating
-                                echo '<p>Rating: ';
+                                echo '<p> ';
                                 for ($i = 1; $i <= 5; $i++) {
                                     if ($i <= $review['rating']) {
                                         // Output a colored star for each filled star

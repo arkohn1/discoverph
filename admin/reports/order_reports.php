@@ -41,7 +41,7 @@
                                 <th class="text-center align-middle py-1">Date Created</th>
                                 <th class="text-center align-middle py-1">Ref. Code</th>
                                 <th class="text-center align-middle py-1">Customer</th>
-                                <th class="text-center align-middle py-1">Resort</th>
+                                <th class="text-center align-middle py-1">Travel Agency</th>
                                 <th class="text-center align-middle py-1">Status</th>
                                 <th class="text-center align-middle py-1">Total Amount</th>
                             </tr>

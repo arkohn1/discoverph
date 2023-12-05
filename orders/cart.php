@@ -186,7 +186,16 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>                           
+                            </div> 
+                            <!-- Payment Amount -->
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-muted">Payment Amount</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="number" class="form-control form-control-sm form-control-border payment-amount" data-prod-id="<?= $prow['id'] ?>" placeholder="Enter Payment Amount" required>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Payment Method -->
                             <div class="row mb-3">
                                 <div class="col-md-6">
@@ -710,6 +719,58 @@
                 } else {
                     // Handle generic error if needed
                     console.error('Unknown error occurred while updating payment type');
+                }
+                end_loader();
+            }
+        });
+    }
+
+    //FOR THE PAYMENT AMOUNT INPUT
+    // On change of payment amount, save the entered value in local storage
+    $('.payment-amount').change(function () {
+        var prodId = $(this).data('prod-id');
+        var enteredPaymentAmount = $(this).val();
+        updatePaymentAmountInDatabase(prodId, enteredPaymentAmount);
+        sessionStorage.setItem('enteredPaymentAmount_' + prodId, enteredPaymentAmount);
+    });
+
+    // On page load, retrieve the entered value from local storage and set it as the entered value
+    $(document).ready(function () {
+        $('.payment-amount').each(function () {
+            var prodId = $(this).data('prod-id');
+            var storedPaymentAmount = sessionStorage.getItem('enteredPaymentAmount_' + prodId);
+            if (storedPaymentAmount) {
+                $(this).val(storedPaymentAmount).change(); // Trigger change event to update the server if needed
+            }
+        });
+    });
+
+    // Function to update payment amount in the database
+    function updatePaymentAmountInDatabase(prodId, paymentAmount) {
+        start_loader();
+        $.ajax({
+            url: _base_url_ + 'classes/Master.php?f=update_payment_amount',
+            method: 'POST',
+            data: {
+                prod_id: prodId,
+                payment_amount: paymentAmount
+            },
+            dataType: 'json',
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+                alert_toast('An error occurred: ' + error, 'error');
+                end_loader();
+            },
+            success: function (resp) {
+                if (resp.status == 'success') {
+                    // Handle success if needed
+                    console.log('Payment amount updated successfully');
+                } else if (!!resp.msg) {
+                    // Handle error message if needed
+                    console.error('Error updating payment amount: ' + resp.msg);
+                } else {
+                    // Handle generic error if needed
+                    console.error('Unknown error occurred while updating payment amount');
                 }
                 end_loader();
             }
