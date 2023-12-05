@@ -1,7 +1,7 @@
 <?php
 require_once('./../../config.php');
 if(isset($_GET['id']) && $_GET['id'] > 0){
-    $qry = $conn->query("SELECT o.*,c.code as ccode, CONCAT(c.lastname, ', ',c.firstname,' ',COALESCE(c.middlename,'')) as client from `order_list` o inner join client_list c on o.client_id = c.id where o.id = '{$_GET['id']}' ");
+    $qry = $conn->query("SELECT o.*,c.code as ccode, CONCAT(c.lastname, ', ',c.firstname,' ',COALESCE(c.middlename,'')) as client from `booked_packages_list` o inner join traveler_list c on o.traveler_id = c.id where o.id = '{$_GET['id']}' ");
     if($qry->num_rows > 0){
         foreach($qry->fetch_assoc() as $k => $v){
             $$k=$v;
@@ -133,25 +133,25 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         <?php 
             $gtotal = 0;
             $products = $conn->query("SELECT o.*, p.name as `name`, p.price, p.image_path, 
-            o.quantity as quantity, o.days as days, o.check_in as check_in, o.check_out as check_out,
+            o.number_of_traveler as number_of_traveler, o.days as days, o.check_in as check_in, o.check_out as check_out,
             pm.name as payment_method,
             ol.receipt as receipt
-            FROM `order_items` o 
-            INNER JOIN product_list p ON o.product_id = p.id 
+            FROM `booked_packages` o 
+            INNER JOIN package_list p ON o.package_id = p.id 
             LEFT JOIN payments pm ON o.payments_id = pm.id
-            LEFT JOIN order_list ol ON o.order_id = ol.id
-            WHERE o.order_id='{$id}' 
+            LEFT JOIN booked_packages_list ol ON o.booked_packages_id = ol.id
+            WHERE o.booked_packages_id='{$id}' 
             ORDER BY p.name ASC");
 
             while($prow = $products->fetch_assoc()):
-                $total = $prow['price'] * $prow['quantity'] * $prow['days']; // Modify the calculation
+                $total = $prow['price'] * $prow['number_of_traveler'] * $prow['days']; // Modify the calculation
                 $gtotal += $total;
                 ?>
 
     <div class="col-12 border">
         <div class="d-flex align-items-center p-2">
             <div class="col-2 text-center">
-                <a href="./?page=products/view_product&id=<?= $prow['product_id'] ?>">
+                <a href="./?page=products/view_product&id=<?= $prow['package_id'] ?>">
                     <img src="<?= validate_image($prow['image_path']) ?>" alt="" class="img-center prod-img border bg-gradient-gray">
                 </a>
             </div>
@@ -167,7 +167,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                 <div class="d-flex">
                     <div class="col-auto px-0"><small class="text-muted">Number of Rooms: </small></div>
                     <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                        <p class="m-0 pl-3"><small class="text-primary"><?= $prow['quantity'] ?></small></p>
+                        <p class="m-0 pl-3"><small class="text-primary"><?= $prow['number_of_traveler'] ?></small></p>
                     </div>
                 </div>
                 <div class="d-flex">

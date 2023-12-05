@@ -1,6 +1,6 @@
 <?php 
 if(isset($_GET['id'])){
-	$client = $conn->query("SELECT * FROM client_list where id ='".$_GET['id']."'");
+	$client = $conn->query("SELECT * FROM traveler_list where id ='".$_GET['id']."'");
 	if($client->num_rows > 0){
 		$res = $client->fetch_array();
 		foreach($res as $k =>$v){

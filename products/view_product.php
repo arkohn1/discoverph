@@ -1,6 +1,6 @@
 <?php
 if (isset($_GET['id']) && $_GET['id'] > 0) {
-    $productQry = $conn->query("SELECT p.*, v.shop_name as vendor, c.name as `category` FROM `product_list` p INNER JOIN vendor_list v ON p.vendor_id = v.id INNER JOIN category_list c ON p.category_id = c.id WHERE p.delete_flag = 0 AND p.id = '{$_GET['id']}'");
+    $productQry = $conn->query("SELECT p.*, v.shop_name as vendor, c.name as `category` FROM `package_list` p INNER JOIN agency_list v ON p.agency_id = v.id INNER JOIN category_list c ON p.category_id = c.id WHERE p.delete_flag = 0 AND p.id = '{$_GET['id']}'");
 
     if ($productQry->num_rows > 0) {
         foreach ($productQry->fetch_assoc() as $k => $v) {
@@ -13,7 +13,7 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
                                     SUM(CASE WHEN r.status = 0 THEN 1 ELSE 0 END) AS taken_rooms
                                 FROM `rooms` r
                                 WHERE r.delete_flag = 0 
-                                    AND r.vendor_id = '{$vendor_id}' 
+                                    AND r.agency_id = '{$agency_id}' 
                                     AND r.description = '{$category}'");
         $roomData = $roomQry->fetch_assoc();
         $availableRooms = $roomData['available_rooms'];
@@ -21,7 +21,7 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
 
 
         // After fetching the product details
-        $averageRatingQuery = $conn->query("SELECT AVG(rating) as average_rating FROM ratings_reviews WHERE product_id = '{$id}' AND status = 'approved'");
+        $averageRatingQuery = $conn->query("SELECT AVG(rating) as average_rating FROM ratings_reviews WHERE package_id = '{$id}' AND status = 'approved'");
         $averageRatingRow = $averageRatingQuery->fetch_assoc();
         $averageRating = round($averageRatingRow['average_rating'], 1);
 
@@ -36,15 +36,15 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
 }
 
 // Function to get product reviews with client details
-function get_product_reviews($product_id) {
+function get_product_reviews($package_id) {
     global $conn; // Assuming $conn is your database connection object
 
-    $product_id = $conn->real_escape_string($product_id);
+    $package_id = $conn->real_escape_string($package_id);
 
     $query = "SELECT rr.*, c.firstname, c.middlename, c.lastname, c.avatar
               FROM `ratings_reviews` rr
-              LEFT JOIN `client_list` c ON rr.client_id = c.id
-              WHERE rr.`product_id` = '$product_id'";
+              LEFT JOIN `traveler_list` c ON rr.traveler_id = c.id
+              WHERE rr.`package_id` = '$package_id'";
 
     $result = $conn->query($query);
 
@@ -465,7 +465,7 @@ function get_product_reviews($product_id) {
                         </div>
                         <!-- Related Packages Link -->
                         <?php
-                        $otherPackagesQry = $conn->query("SELECT * FROM `product_list` WHERE vendor_id = '{$vendor_id}' AND id != '{$_GET['id']}' AND delete_flag = 0 LIMIT 5");
+                        $otherPackagesQry = $conn->query("SELECT * FROM `package_list` WHERE agency_id = '{$agency_id}' AND id != '{$_GET['id']}' AND delete_flag = 0 LIMIT 5");
                         $otherPackages = $otherPackagesQry->fetch_all(MYSQLI_ASSOC);
                         ?>
                         <!-- Display other packages -->
@@ -545,9 +545,9 @@ function get_product_reviews($product_id) {
                                             <?php endif; ?>
                                             <!-- Add your form for Subject and Message here -->
                                             <form id="inquireForm">
-                                                <!-- Add this hidden input field for product_id -->
-                                                <input type="hidden" id="product_id" name="product_id" value="<?= $id ?>">
-                                                <input type="hidden" id="vendor_id" name="vendor_id" value="<?= $vendor_id ?>">
+                                                <!-- Add this hidden input field for package_id -->
+                                                <input type="hidden" id="package_id" name="package_id" value="<?= $id ?>">
+                                                <input type="hidden" id="agency_id" name="agency_id" value="<?= $agency_id ?>">
                                                 <div class="form-group">
                                                     <label for="inquireSubject">Subject:</label>
                                                     <input type="text" class="form-control" id="inquireSubject" required>
@@ -707,8 +707,8 @@ function get_product_reviews($product_id) {
                 <!-- Form for submitting reviews on the right side -->
                 <div id="newReviewForm" style="width: 100%; float: left;">
                     <form id="reviewForm">
-                        <!-- Add this hidden input field for product_id -->
-                        <input type="hidden" id="product_id_review" name="product_id_review" value="<?= $id ?>">
+                        <!-- Add this hidden input field for package_id -->
+                        <input type="hidden" id="package_id_review" name="package_id_review" value="<?= $id ?>">
 
                         <!-- Rating Stars -->
                         <div class="form-group">
@@ -770,7 +770,7 @@ function get_product_reviews($product_id) {
         $.ajax({
             url: _base_url_ + 'classes/Master.php?f=add_to_cart',
             method: 'POST',
-            data: { product_id: pid, quantity: qty },
+            data: { package_id: pid, number_of_traveler: qty },
             dataType: 'json',
             error: err => {
                 console.error(err)
@@ -851,8 +851,8 @@ function get_product_reviews($product_id) {
         });
         $('#sendInquiryBtn').click(function () {
             // Assuming you have the necessary data in the form
-            var product_id = '<?= isset($id) ? $id : '' ?>';
-            var vendor_id = '<?= isset($vendor_id) ? $vendor_id : '' ?>'; // Add this line
+            var package_id = '<?= isset($id) ? $id : '' ?>';
+            var agency_id = '<?= isset($agency_id) ? $agency_id : '' ?>'; // Add this line
             var inquireSubject = $('#inquireSubject').val();
             var inquireMessage = $('#inquireMessage').val();
 
@@ -864,8 +864,8 @@ function get_product_reviews($product_id) {
 
             // Prepare data for AJAX request
             var data = {
-                product_id: product_id,
-                vendor_id: vendor_id, // Add this line
+                package_id: package_id,
+                agency_id: agency_id, // Add this line
                 inquireSubject: inquireSubject,
                 inquireMessage: inquireMessage
             };
@@ -896,7 +896,7 @@ function get_product_reviews($product_id) {
 
         $('#submitReviewBtn').click(function () {
             // Validate the form fields here if needed
-            var product_id_review = '<?= isset($id) ? $id : '' ?>';
+            var package_id_review = '<?= isset($id) ? $id : '' ?>';
             var review = $('#review').val();
             var rating = $('#rating').val();
 
@@ -911,7 +911,7 @@ function get_product_reviews($product_id) {
                 url: 'classes/Master.php?f=save_reviews', // Update the path accordingly
                 method: 'POST',
                 data: {
-                    product_id_review: product_id_review,
+                    package_id_review: package_id_review,
                     review: review,
                     rating: rating
                 },

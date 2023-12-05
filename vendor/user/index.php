@@ -1,5 +1,5 @@
 <?php 
-$user = $conn->query("SELECT * FROM vendor_list where id ='".$_settings->userdata('id')."'");
+$user = $conn->query("SELECT * FROM agency_list where id ='".$_settings->userdata('id')."'");
 foreach($user->fetch_array() as $k =>$v){
 	$$k = $v;
 }
@@ -39,14 +39,14 @@ foreach($user->fetch_array() as $k =>$v){
 							<input type="text" id="contact" name="contact" class="form-control form-control-sm form-control-border" value="<?= isset($contact) ? $contact : "" ?>" required>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="shop_type_id" class="control-label">Travel Agency Type</label>
-							<select type="text" id="shop_type_id" name="shop_type_id" class="form-control form-control-sm form-control-border select2" required>
+							<label for="agency_type_id" class="control-label">Travel Agency Type</label>
+							<select type="text" id="agency_type_id" name="agency_type_id" class="form-control form-control-sm form-control-border select2" required>
 								<option value="" disabled selected></option>
 								<?php 
-								$types = $conn->query("SELECT * FROM `shop_type_list` where delete_flag = 0 and `status` = 1 ".(isset($shop_type_id) ? " or id = '{$shop_type_id}' " : "")." order by `name` asc ");
+								$types = $conn->query("SELECT * FROM `agency_type_list` where delete_flag = 0 and `status` = 1 ".(isset($agency_type_id) ? " or id = '{$agency_type_id}' " : "")." order by `name` asc ");
 								while($row = $types->fetch_assoc()):
 								?>
-								<option value="<?= $row['id'] ?>" <?= isset($shop_type_id) && $shop_type_id == $row['id'] ? 'selected' : '' ?>><?= $row['name'] ?></option>
+								<option value="<?= $row['id'] ?>" <?= isset($agency_type_id) && $agency_type_id == $row['id'] ? 'selected' : '' ?>><?= $row['name'] ?></option>
 								<?php endwhile; ?>
 							</select>
 						</div>

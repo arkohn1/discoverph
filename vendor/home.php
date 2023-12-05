@@ -20,7 +20,7 @@
         <span class="info-box-text">Room Categories</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
-            $total = $conn->query("SELECT count(id) as total FROM category_list where delete_flag = 0 and vendor_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];
+            $total = $conn->query("SELECT count(id) as total FROM category_list where delete_flag = 0 and agency_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];
             echo format_num($total);
           ?>
           <?php ?>
@@ -38,7 +38,7 @@
         <span class="info-box-text">Available Rooms</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
-            $total = $conn->query("SELECT count(id) as total FROM rooms where `status` = 1 and delete_flag = 0 and vendor_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];
+            $total = $conn->query("SELECT count(id) as total FROM rooms where `status` = 1 and delete_flag = 0 and agency_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];
             echo format_num($total);
           ?>
           <?php ?>
@@ -56,7 +56,7 @@
         <span class="info-box-text">Travel Packages</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
-            $total = $conn->query("SELECT count(id) as total FROM product_list where delete_flag = 0 and  vendor_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];
+            $total = $conn->query("SELECT count(id) as total FROM package_list where delete_flag = 0 and  agency_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];
             echo format_num($total);
           ?>
           <?php ?>
@@ -74,7 +74,7 @@
         <span class="info-box-text">Pending Bookings</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
-            $total = $conn->query("SELECT count(id) as total FROM order_list where `status` = 0 and  vendor_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];
+            $total = $conn->query("SELECT count(id) as total FROM booked_packages_list where `status` = 0 and  agency_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];
             echo format_num($total);
           ?>
           <?php ?>
@@ -92,7 +92,7 @@
         <span class="info-box-text">Pending Payments</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
-            $total = $conn->query("SELECT count(id) as total FROM order_list where `payment_status` = 0 and  vendor_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];
+            $total = $conn->query("SELECT count(id) as total FROM booked_packages_list where `payment_status` = 0 and  agency_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];
             echo format_num($total);
           ?>
           <?php ?>
@@ -110,7 +110,7 @@
         <span class="info-box-text">New Inquiries</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
-            $total = $conn->query("SELECT count(id) as total FROM inquiries where `status` = 0 and  vendor_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];
+            $total = $conn->query("SELECT count(id) as total FROM inquiries where `status` = 0 and  agency_id = '{$_settings->userdata('id')}' ")->fetch_assoc()['total'];
             echo format_num($total);
           ?>
           <?php ?>

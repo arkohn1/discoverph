@@ -117,7 +117,7 @@
         <?php if ($_settings->userdata('id') > 0 && $_settings->userdata('login_type') == 3) : ?>
           <li class="nav-item">
             <?php
-            $cart_count = $conn->query("SELECT sum(quantity) FROM `cart_list` where client_id = '{$_settings->userdata('id')}'")->fetch_array()[0];
+            $cart_count = $conn->query("SELECT sum(number_of_traveler) FROM `booking_list` where traveler_id = '{$_settings->userdata('id')}'")->fetch_array()[0];
             $cart_count = $cart_count > 0 ? $cart_count : 0;
             ?>
             <a href="./?page=orders/cart" class="nav-link <?= isset($page) && $page == 'orders/cart' ? "active" : "" ?>"><span

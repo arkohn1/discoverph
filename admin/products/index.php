@@ -43,7 +43,7 @@
 				<tbody>
 					<?php 
 					$i = 1;
-						$qry = $conn->query("SELECT p.*,v.code, v.shop_name as `vendor` from `product_list` p inner join vendor_list v on p.vendor_id = v.id where p.delete_flag = 0 order by p.`name` asc ");
+						$qry = $conn->query("SELECT p.*,v.code, v.shop_name as `vendor` from `package_list` p inner join agency_list v on p.agency_id = v.id where p.delete_flag = 0 order by p.`name` asc ");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>

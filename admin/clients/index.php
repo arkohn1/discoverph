@@ -44,7 +44,7 @@
 				<tbody>
 					<?php 
 					$i = 1;
-						$qry = $conn->query("SELECT *,CONCAT(lastname, ', ', firstname,' ', COALESCE(middlename)) as `name` from `client_list` where delete_flag = 0 order by CONCAT(lastname, ', ', firstname,' ', COALESCE(middlename)) asc ");
+						$qry = $conn->query("SELECT *,CONCAT(lastname, ', ', firstname,' ', COALESCE(middlename)) as `name` from `traveler_list` where delete_flag = 0 order by CONCAT(lastname, ', ', firstname,' ', COALESCE(middlename)) asc ");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>

@@ -49,9 +49,9 @@
 					<?php 
 					$i = 1;
 					$qry = $conn->query("SELECT p.*, c.name as category_name 
-										FROM `product_list` p 
+										FROM `package_list` p 
 										LEFT JOIN `category_list` c ON p.category_id = c.id
-										WHERE p.delete_flag = 0 AND p.`vendor_id` = '{$_settings->userdata('id')}' 
+										WHERE p.delete_flag = 0 AND p.`agency_id` = '{$_settings->userdata('id')}' 
 										ORDER BY p.`name` ASC");
 
 					while($row = $qry->fetch_assoc()):

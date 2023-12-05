@@ -27,8 +27,8 @@ if(isset($_GET['id'])){
     $qry = $conn->query("
         SELECT i.*, p.name AS product_name, c.firstname, c.middlename, c.lastname, c.email, c.contact
         FROM `inquiries` i
-        LEFT JOIN `product_list` p ON i.product_id = p.id
-        LEFT JOIN `client_list` c ON i.client_id = c.id
+        LEFT JOIN `package_list` p ON i.package_id = p.id
+        LEFT JOIN `traveler_list` c ON i.traveler_id = c.id
         WHERE i.id = '$id'
     ");
 

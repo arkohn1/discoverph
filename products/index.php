@@ -11,7 +11,7 @@
 
     function get_average_rating($productId, $conn) {
         // Prepare the SQL query to get the average rating
-        $query = "SELECT AVG(rating) as average_rating FROM ratings_reviews WHERE product_id = ? AND status = 'approved'";
+        $query = "SELECT AVG(rating) as average_rating FROM ratings_reviews WHERE package_id = ? AND status = 'approved'";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("i", $productId);
         $stmt->execute();
@@ -141,7 +141,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="row" id="product_list" style="display: flex; flex-wrap: wrap;">
+                        <div class="row" id="package_list" style="display: flex; flex-wrap: wrap;">
                             <?php 
                             $swhere = "";
                             if(!empty($category_ids)):
@@ -151,7 +151,7 @@
                             if(isset($_GET['search']) && !empty($_GET['search'])){
                                 $swhere .= " and (p.name LIKE '%{$_GET['search']}%' or p.description LIKE '%{$_GET['search']}%' or c.name LIKE '%{$_GET['search']}%' or v.shop_name LIKE '%{$_GET['search']}%') ";
                             }
-                            $products = $conn->query("SELECT p.*, v.shop_name as vendor, c.name as `category` FROM `product_list` p inner join vendor_list v on p.vendor_id = v.id inner join category_list c on p.category_id = c.id where p.delete_flag = 0 and p.`status` =1 {$swhere} order by RAND()");
+                            $products = $conn->query("SELECT p.*, v.shop_name as vendor, c.name as `category` FROM `package_list` p inner join agency_list v on p.agency_id = v.id inner join category_list c on p.category_id = c.id where p.delete_flag = 0 and p.`status` =1 {$swhere} order by RAND()");
                             
                             
                             while($row = $products->fetch_assoc()):
@@ -289,7 +289,7 @@
                             // Construct your product HTML here
                             productsHtml += '<div>' + product.name + '</div>'; // Example
                         });
-                        $('#product_list').html(productsHtml);
+                        $('#package_list').html(productsHtml);
                     } else {
                         alert(response.msg);
                     }

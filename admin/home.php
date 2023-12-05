@@ -39,7 +39,7 @@
         <span class="info-box-text">Travel Packages</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
-            $total = $conn->query("SELECT count(id) as total FROM product_list where delete_flag = 0 ")->fetch_assoc()['total'];
+            $total = $conn->query("SELECT count(id) as total FROM package_list where delete_flag = 0 ")->fetch_assoc()['total'];
             echo format_num($total);
           ?>
           <?php ?>
@@ -57,7 +57,7 @@
         <span class="info-box-text">Travel Agencies</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
-            $total = $conn->query("SELECT count(id) as total FROM vendor_list where delete_flag = 0 ")->fetch_assoc()['total'];
+            $total = $conn->query("SELECT count(id) as total FROM agency_list where delete_flag = 0 ")->fetch_assoc()['total'];
             echo format_num($total);
           ?>
           <?php ?>
@@ -74,7 +74,7 @@
         <span class="info-box-text">Customers</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
-            $total = $conn->query("SELECT count(id) as total FROM client_list where delete_flag = 0 ")->fetch_assoc()['total'];
+            $total = $conn->query("SELECT count(id) as total FROM traveler_list where delete_flag = 0 ")->fetch_assoc()['total'];
             echo format_num($total);
           ?>
           <?php ?>
@@ -92,7 +92,7 @@
         <span class="info-box-text">Pending Bookings</span>
         <span class="iinfo-box-number text-right h4">
           <?php 
-            $total = $conn->query("SELECT count(id) as total FROM order_list where `status` = 0 ")->fetch_assoc()['total'];
+            $total = $conn->query("SELECT count(id) as total FROM booked_packages_list where `status` = 0 ")->fetch_assoc()['total'];
             echo format_num($total);
           ?>
           <?php ?>

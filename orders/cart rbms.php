@@ -78,14 +78,14 @@
             <div id="cart-list">
                 <?php
                 $gtotal = 0;
-                $vendors = $conn->query("SELECT * FROM `vendor_list` where id in (SELECT vendor_id from product_list where id in (SELECT product_id FROM `cart_list` where client_id ='{$_settings->userdata('id')}')) order by `shop_name` asc");
+                $vendors = $conn->query("SELECT * FROM `agency_list` where id in (SELECT agency_id from package_list where id in (SELECT package_id FROM `booking_list` where traveler_id ='{$_settings->userdata('id')}')) order by `shop_name` asc");
                 while ($vrow = $vendors->fetch_assoc()) :
                 ?>
                     <?php
                     $vtotal = 0;
-                    $products = $conn->query("SELECT c.*, p.name as `name`, p.price,p.image_path FROM `cart_list` c inner join product_list p on c.product_id = p.id where c.client_id = '{$_settings->userdata('id')}' and p.vendor_id = '{$vrow['id']}' order by p.name asc");
+                    $products = $conn->query("SELECT c.*, p.name as `name`, p.price,p.image_path FROM `booking_list` c inner join package_list p on c.package_id = p.id where c.traveler_id = '{$_settings->userdata('id')}' and p.agency_id = '{$vrow['id']}' order by p.name asc");
                     while ($prow = $products->fetch_assoc()) :
-                        $total = $prow['price'] * $prow['quantity'] * $prow['days'];
+                        $total = $prow['price'] * $prow['number_of_traveler'] * $prow['days'];
                         $gtotal += $total;
                         $vtotal += $total;
                     ?>
@@ -93,13 +93,13 @@
                             <!-- Product details -->
                             <h4><b><?= $prow['name'] ?> | <?= $vrow['code'] . " - " . $vrow['shop_name'] ?></b></h4>
                             <div class="col-2 text-center">
-                                <a href="./?page=products/view_product&id=<?= $prow['product_id'] ?>"><img src="<?= validate_image($prow['image_path']) ?>" alt="" class="img-center prod-img border bg-gradient-black"></a>
+                                <a href="./?page=products/view_product&id=<?= $prow['package_id'] ?>"><img src="<?= validate_image($prow['image_path']) ?>" alt="" class="img-center prod-img border bg-gradient-black"></a>
                             </div>
                             <div class="d-flex">
                                 <div class="col-auto px-0"><small class="text-muted">Price per room/day: </small></div>
                                 <div class="col-auto px-0 flex-shrink-1 flex-grow-1"><p class="m-0 pl-3"><small class="text-primary"><?= format_num($prow['price']) ?></small></p></div>
                             </div>
-                            <!-- Quantity and Confirm Total Days -->
+                            <!-- number_of_traveler and Confirm Total Days -->
                             <div class="d-flex mb-3">
                                 <!-- Number of Rooms -->
                                 <div class="col-auto text-center">
@@ -108,7 +108,7 @@
                                         <div class="input-group-prepend">
                                             <button class="btn btn-primary min-qty" data-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-minus"></i></button>
                                         </div>
-                                        <input type="text" value="<?= $prow['quantity'] ?>" class="form-control text-center" readonly="readonly">
+                                        <input type="text" value="<?= $prow['number_of_traveler'] ?>" class="form-control text-center" readonly="readonly">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary plus-qty" data-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-plus"></i></button>
                                         </div>
@@ -158,7 +158,7 @@
                                             <option value="" selected disabled>Select Payment Method</option>
                                             <?php
                                             // Fetch payment methods from the payments table
-                                            $paymentMethods = $conn->query("SELECT * FROM payments WHERE vendor_id = '{$vrow['id']}' AND status = 1");
+                                            $paymentMethods = $conn->query("SELECT * FROM payments WHERE agency_id = '{$vrow['id']}' AND status = 1");
                                             while ($paymentMethod = $paymentMethods->fetch_assoc()) {
                                                 echo "<option value='{$paymentMethod['id']}'>{$paymentMethod['name']}</option>";
                                             }
@@ -176,7 +176,7 @@
 
                                             // Fetch and display payment details if a payment method is selected
                                             if ($storedPaymentMethod) {
-                                                $paymentDetails = $conn->query("SELECT * FROM payments WHERE id = '{$storedPaymentMethod}' AND vendor_id = '{$vrow['id']}' AND status = 1");
+                                                $paymentDetails = $conn->query("SELECT * FROM payments WHERE id = '{$storedPaymentMethod}' AND agency_id = '{$vrow['id']}' AND status = 1");
                                                 $paymentDetails = $paymentDetails->fetch_assoc();
                                                 echo "Selected Payment Method: " . $paymentDetails['name'];
                                                 // Display other payment details as needed
@@ -229,7 +229,7 @@
             $.ajax({
                 url:_base_url_+'classes/Master.php?f=update_cart_qty',
                 method:'POST',
-                data:{cart_id:cart_id,quantity:qty},
+                data:{cart_id:cart_id,number_of_traveler:qty},
                 dataType:'json',
                 error:err=>{
                     console.error(err)
@@ -270,7 +270,7 @@
             $.ajax({
                 url:_base_url_+'classes/Master.php?f=update_cart_qty',
                 method:'POST',
-                data:{cart_id:cart_id,quantity:qty},
+                data:{cart_id:cart_id,number_of_traveler:qty},
                 dataType:'json',
                 error:err=>{
                     console.error(err)

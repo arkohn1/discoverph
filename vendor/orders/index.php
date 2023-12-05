@@ -29,7 +29,7 @@
                 <tbody>
                     <?php 
                     $i = 1;
-                    $orders = $conn->query("SELECT * FROM `order_list` where vendor_id = '{$_settings->userdata('id')}' order by `status` asc,unix_timestamp(date_created) desc ");
+                    $orders = $conn->query("SELECT * FROM `booked_packages_list` where agency_id = '{$_settings->userdata('id')}' order by `status` asc,unix_timestamp(date_created) desc ");
                     while($row = $orders->fetch_assoc()):
                     ?>
                     <tr>

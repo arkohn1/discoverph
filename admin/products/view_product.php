@@ -1,7 +1,7 @@
 <?php
 require_once('./../../config.php');
 if(isset($_GET['id']) && $_GET['id'] > 0){
-    $qry = $conn->query("SELECT p.*, c.name as `category`,v.code, v.shop_name as `vendor` from `product_list` p inner join category_list c on p.category_id = c.id inner join vendor_list v on p.vendor_id = v.id where p.id = '{$_GET['id']}' and p.delete_flag = 0 ");
+    $qry = $conn->query("SELECT p.*, c.name as `category`,v.code, v.shop_name as `vendor` from `package_list` p inner join category_list c on p.category_id = c.id inner join agency_list v on p.agency_id = v.id where p.id = '{$_GET['id']}' and p.delete_flag = 0 ");
     if($qry->num_rows > 0){
         foreach($qry->fetch_assoc() as $k => $v){
             $$k=$v;

@@ -158,9 +158,9 @@
                         </div>
                         <?php
                         $gtotal = 0;
-                        $vendors = $conn->query("SELECT * FROM `vendor_list` where id in (SELECT vendor_id from product_list where id in (SELECT product_id FROM `cart_list` where client_id ='{$_settings->userdata('id')}')) order by `shop_name` asc");
+                        $vendors = $conn->query("SELECT * FROM `agency_list` where id in (SELECT agency_id from package_list where id in (SELECT package_id FROM `booking_list` where traveler_id ='{$_settings->userdata('id')}')) order by `shop_name` asc");
                         while ($vrow = $vendors->fetch_assoc()) :
-                            $vtotal = $conn->query("SELECT sum(c.quantity * p.price * c.days) FROM `cart_list` c inner join product_list p on c.product_id = p.id where c.client_id = '{$_settings->userdata('id')}' and p.vendor_id = '{$vrow['id']}'")->fetch_array()[0];
+                            $vtotal = $conn->query("SELECT sum(c.number_of_traveler * p.price * c.days) FROM `booking_list` c inner join package_list p on c.package_id = p.id where c.traveler_id = '{$_settings->userdata('id')}' and p.agency_id = '{$vrow['id']}'")->fetch_array()[0];
                             $vtotal = $vtotal > 0 ? $vtotal : 0;
                             $gtotal += $vtotal;
                             ?>
@@ -178,14 +178,14 @@
                                         p.name as `name`, 
                                         p.price, 
                                         p.image_path, 
-                                        p.vendor_id,
+                                        p.agency_id,
                                         cat.name as `category`,
                                         tt.travel_type_name,
                                         pt.payment_type_name as payment_type_name
                                     FROM 
-                                        `cart_list` c 
+                                        `booking_list` c 
                                     INNER JOIN 
-                                        product_list p ON c.product_id = p.id
+                                        package_list p ON c.package_id = p.id
                                     INNER JOIN
                                         category_list cat ON p.category_id = cat.id
                                     INNER JOIN
@@ -193,12 +193,12 @@
                                     LEFT JOIN
                                         payment_type pt ON c.payment_type_id = pt.id
                                     WHERE 
-                                        c.client_id = '{$_settings->userdata('id')}' AND 
-                                        p.vendor_id = '{$vrow['id']}'
+                                        c.traveler_id = '{$_settings->userdata('id')}' AND 
+                                        p.agency_id = '{$vrow['id']}'
                                 "); 
 
                                 while ($productDetails = $productsDetails->fetch_assoc()):
-                                    $totalPerProduct = $productDetails['price'] * $productDetails['quantity'] * $productDetails['days'];
+                                    $totalPerProduct = $productDetails['price'] * $productDetails['number_of_traveler'] * $productDetails['days'];
 
                                     // Output additional details
                                     ?>
@@ -218,7 +218,7 @@
                                         <div class="col-12">
                                             <div class="d-flex justify-content-between">
                                                 <div><small class="text-muted">Number of Travelers:</small></div>
-                                                <div><small><?= $productDetails['quantity'] ?></small></div>
+                                                <div><small><?= $productDetails['number_of_traveler'] ?></small></div>
                                             </div>
                                         </div>
                                         <div class="col-12">

@@ -50,7 +50,7 @@
                             <?php 
                             $i = 1;
                             $total = 0;
-                            $orders = $conn->query("SELECT o.*,c.code as ccode, CONCAT(c.lastname, ', ',c.firstname,' ',COALESCE(c.middlename,'')) as client,concat(v.code, '-',v.shop_name) as vendor from `order_list` o inner join client_list c on o.client_id = c.id inner join vendor_list v on o.vendor_id = v.id where date_format(o.date_created,'%Y-%m') = '{$month}' order by unix_timestamp(o.date_created) desc ");
+                            $orders = $conn->query("SELECT o.*,c.code as ccode, CONCAT(c.lastname, ', ',c.firstname,' ',COALESCE(c.middlename,'')) as client,concat(v.code, '-',v.shop_name) as vendor from `booked_packages_list` o inner join traveler_list c on o.traveler_id = c.id inner join agency_list v on o.agency_id = v.id where date_format(o.date_created,'%Y-%m') = '{$month}' order by unix_timestamp(o.date_created) desc ");
                             while($row = $orders->fetch_assoc()):
                                 $total += $row['total_amount'];
                             ?>

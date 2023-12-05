@@ -3,7 +3,7 @@
 
     function get_average_rating($productId, $conn) {
         // Prepare the SQL query to get the average rating
-        $query = "SELECT AVG(rating) as average_rating FROM ratings_reviews WHERE product_id = ? AND status = 'approved'";
+        $query = "SELECT AVG(rating) as average_rating FROM ratings_reviews WHERE package_id = ? AND status = 'approved'";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("i", $productId);
         $stmt->execute();
@@ -233,9 +233,9 @@
             <center><hr class="bg w-25 border-2"></center>
             <br>
             
-            <div class="row" id="product_list" style="margin-top: -20px;">
+            <div class="row" id="package_list" style="margin-top: -20px;">
                 <?php 
-                $products = $conn->query("SELECT p.*, v.shop_name as vendor, c.name as `category` FROM `product_list` p inner join vendor_list v on p.vendor_id = v.id inner join category_list c on p.category_id = c.id where p.delete_flag = 0 and p.`status` =1 order by RAND() limit 4");
+                $products = $conn->query("SELECT p.*, v.shop_name as vendor, c.name as `category` FROM `package_list` p inner join agency_list v on p.agency_id = v.id inner join category_list c on p.category_id = c.id where p.delete_flag = 0 and p.`status` =1 order by RAND() limit 4");
                 
                 while($row = $products->fetch_assoc()):
                     $averageRating = get_average_rating($row['id'], $conn);

@@ -1,5 +1,5 @@
 <?php 
-$user = $conn->query("SELECT * FROM client_list where id ='".$_settings->userdata('id')."'");
+$user = $conn->query("SELECT * FROM traveler_list where id ='".$_settings->userdata('id')."'");
 foreach($user->fetch_array() as $k =>$v){
     $$k = $v;
 }

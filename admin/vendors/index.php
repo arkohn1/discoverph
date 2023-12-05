@@ -44,7 +44,7 @@
 				<tbody>
 					<?php 
 					$i = 1;
-						$qry = $conn->query("SELECT * from `vendor_list` where delete_flag = 0 order by shop_name asc ");
+						$qry = $conn->query("SELECT * from `agency_list` where delete_flag = 0 order by shop_name asc ");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>

@@ -75,15 +75,15 @@ Class Master extends DBConnection {
 		extract($_POST);
 	
 		// Assuming you have these fields in your HTML form
-		$client_id = $this->settings->userdata('id');
-		$product_id = $this->conn->real_escape_string($product_id);
-		$vendor_id = ''; // Initialize vendor_id
+		$traveler_id = $this->settings->userdata('id');
+		$package_id = $this->conn->real_escape_string($package_id);
+		$agency_id = ''; // Initialize agency_id
 	
-		// Fetch vendor_id based on product_id
-		$vendorQry = $this->conn->query("SELECT vendor_id FROM product_list WHERE id = '$product_id' LIMIT 1");
+		// Fetch agency_id based on package_id
+		$vendorQry = $this->conn->query("SELECT agency_id FROM package_list WHERE id = '$package_id' LIMIT 1");
 		if ($vendorQry->num_rows > 0) {
 			$vendorData = $vendorQry->fetch_assoc();
-			$vendor_id = $vendorData['vendor_id'];
+			$agency_id = $vendorData['agency_id'];
 		}
 	
 		$subject = $this->conn->real_escape_string($inquireSubject);
@@ -91,8 +91,8 @@ Class Master extends DBConnection {
 		$status = 'Pending';
 		$date_created = date('Y-m-d H:i:s');
 	
-		$sql = "INSERT INTO `inquiries` (`client_id`, `vendor_id`, `product_id`, `subject`, `message`, `status`, `date_created`)
-				VALUES ('$client_id', '$vendor_id', '$product_id', '$subject', '$message', '$status', '$date_created')";
+		$sql = "INSERT INTO `inquiries` (`traveler_id`, `agency_id`, `package_id`, `subject`, `message`, `status`, `date_created`)
+				VALUES ('$traveler_id', '$agency_id', '$package_id', '$subject', '$message', '$status', '$date_created')";
 	
 		$save = $this->conn->query($sql);
 	
@@ -128,23 +128,23 @@ Class Master extends DBConnection {
 		extract($_POST);
 
 		// Assuming you have these fields in your HTML form
-		$client_id = $this->settings->userdata('id');
-		$product_id = $this->conn->real_escape_string($product_id_review);
-		$vendor_id = ''; // Initialize vendor_id
+		$traveler_id = $this->settings->userdata('id');
+		$package_id = $this->conn->real_escape_string($package_id_review);
+		$agency_id = ''; // Initialize agency_id
 
-		// Fetch vendor_id based on product_id
-		$vendorQry = $this->conn->query("SELECT vendor_id FROM product_list WHERE id = '$product_id' LIMIT 1");
+		// Fetch agency_id based on package_id
+		$vendorQry = $this->conn->query("SELECT agency_id FROM package_list WHERE id = '$package_id' LIMIT 1");
 		if ($vendorQry->num_rows > 0) {
 			$vendorData = $vendorQry->fetch_assoc();
-			$vendor_id = $vendorData['vendor_id'];
+			$agency_id = $vendorData['agency_id'];
 		}
 
 		$review = $this->conn->real_escape_string($review);
 		$rating = intval($rating); // Ensure rating is an integer
 		$date_created = date('Y-m-d H:i:s');
 
-		$sql = "INSERT INTO `ratings_reviews` (`client_id`, `vendor_id`, `product_id`, `rating`, `review`, `date_created`)
-				VALUES ('$client_id', '$vendor_id', '$product_id', '$rating', '$review', '$date_created')";
+		$sql = "INSERT INTO `ratings_reviews` (`traveler_id`, `agency_id`, `package_id`, `rating`, `review`, `date_created`)
+				VALUES ('$traveler_id', '$agency_id', '$package_id', '$rating', '$review', '$date_created')";
 
 		$save = $this->conn->query($sql);
 
@@ -185,7 +185,7 @@ Class Master extends DBConnection {
 			}
 		}
 		
-		$check = $this->conn->query("SELECT * FROM `shop_type_list` where `name` = '{$name}' and delete_flag = 0 ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
+		$check = $this->conn->query("SELECT * FROM `agency_type_list` where `name` = '{$name}' and delete_flag = 0 ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
 		if($this->capture_err())
 			return $this->capture_err();
 		if($check > 0){
@@ -193,9 +193,9 @@ Class Master extends DBConnection {
 			$resp['msg'] = "Shop Type already exists.";
 		}else{
 			if(empty($id)){
-				$sql = "INSERT INTO `shop_type_list` set {$data} ";
+				$sql = "INSERT INTO `agency_type_list` set {$data} ";
 			}else{
-				$sql = "UPDATE `shop_type_list` set {$data} where id = '{$id}' ";
+				$sql = "UPDATE `agency_type_list` set {$data} where id = '{$id}' ";
 			}
 			$save = $this->conn->query($sql);
 			if($save){
@@ -215,7 +215,7 @@ Class Master extends DBConnection {
 	}
 	function delete_shop_type(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `shop_type_list` set delete_flag = 1 where id = '{$id}'");
+		$del = $this->conn->query("UPDATE `agency_type_list` set delete_flag = 1 where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success'," Shop Type successfully deleted.");
@@ -236,7 +236,7 @@ Class Master extends DBConnection {
 			}
 		}
 		
-		$check = $this->conn->query("SELECT * FROM `category_list` where `name` = '{$name}' and vendor_id = '{$vendor_id}' and delete_flag = 0 ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
+		$check = $this->conn->query("SELECT * FROM `category_list` where `name` = '{$name}' and agency_id = '{$agency_id}' and delete_flag = 0 ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
 		if($this->capture_err())
 			return $this->capture_err();
 		if($check > 0){
@@ -286,7 +286,7 @@ Class Master extends DBConnection {
 			}
 		}
 		
-		$check = $this->conn->query("SELECT * FROM `rooms` where `name` = '{$name}' and vendor_id = '{$vendor_id}' and delete_flag = 0 ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
+		$check = $this->conn->query("SELECT * FROM `rooms` where `name` = '{$name}' and agency_id = '{$agency_id}' and delete_flag = 0 ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
 		if($this->capture_err())
 			return $this->capture_err();
 		if($check > 0){
@@ -337,15 +337,15 @@ Class Master extends DBConnection {
 				$data .= " `{$k}`='{$this->conn->real_escape_string($v)}' ";
 			}
 		}
-		$check = $this->conn->query("SELECT * FROM `product_list` where vendor_id = '{$vendor_id}' and `name` = '{$name}' and delete_flag = 0 ".(!empty($id) ? " and id != '{$id}'" : ""))->num_rows;
+		$check = $this->conn->query("SELECT * FROM `package_list` where agency_id = '{$agency_id}' and `name` = '{$name}' and delete_flag = 0 ".(!empty($id) ? " and id != '{$id}'" : ""))->num_rows;
 		if($check > 0){
 			$resp['status'] = 'failed';
 			$resp['msg'] = ' Package Name Already exists.';
 		}else{
 			if(empty($id)){
-				$sql = "INSERT INTO `product_list` set {$data} ";
+				$sql = "INSERT INTO `package_list` set {$data} ";
 			}else{
-				$sql = "UPDATE `product_list` set {$data} where id = '{$id}' ";
+				$sql = "UPDATE `package_list` set {$data} where id = '{$id}' ";
 			}
 			$save = $this->conn->query($sql);
 			if($save){
@@ -398,7 +398,7 @@ Class Master extends DBConnection {
 
 					if (!empty($gallery_images)) {
 						$gallery_path = implode(',', $gallery_images);
-						$qry = $this->conn->query("UPDATE `product_list` SET gallery_path = '{$gallery_path}' WHERE id = '$pid'");
+						$qry = $this->conn->query("UPDATE `package_list` SET gallery_path = '{$gallery_path}' WHERE id = '$pid'");
 					}
 				}
 				// Handle Travel Agency Image Upload
@@ -432,7 +432,7 @@ Class Master extends DBConnection {
 							imagedestroy($gdImg);
 							imagedestroy($t_image);
 							if (isset($uploaded_img) && $uploaded_img == true) {
-								$qry = $this->conn->query("UPDATE `product_list` set image_path = '{$fname}' where id = '$pid'");
+								$qry = $this->conn->query("UPDATE `package_list` set image_path = '{$fname}' where id = '$pid'");
 							}
 						} else {
 							$resp['msg'] .= " Image failed to upload due to an unknown reason.";
@@ -457,7 +457,7 @@ Class Master extends DBConnection {
 
 	function delete_product(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `product_list` set `delete_flag` = 1 where id = '{$id}'");
+		$del = $this->conn->query("UPDATE `package_list` set `delete_flag` = 1 where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success'," Package successfully deleted.");
@@ -473,27 +473,27 @@ Class Master extends DBConnection {
 		// Set the payments_id to a default value or retrieve it from some source
 		$payments_id = 'default_value'; // Adjust this line as needed
 	
-		$_POST['client_id'] = $this->settings->userdata('id');
+		$_POST['traveler_id'] = $this->settings->userdata('id');
 		extract($_POST);
 		$data = "";
 	
 		foreach ($_POST as $k => $v) {
-			// Exclude 'quantity' from being included in $data
-			if (!in_array($k, array('id', 'quantity'))) {
+			// Exclude 'number_of_traveler' from being included in $data
+			if (!in_array($k, array('id', 'number_of_traveler'))) {
 				if (!empty($data)) $data .= ",";
 				$data .= " `{$k}`='{$this->conn->real_escape_string($v)}' ";
 			}
 		}
 	
-		$check = $this->conn->query("SELECT * FROM cart_list where product_id = '{$product_id}' && client_id = '{$client_id}'")->num_rows;
+		$check = $this->conn->query("SELECT * FROM booking_list where package_id = '{$package_id}' && traveler_id = '{$traveler_id}'")->num_rows;
 	
 		if ($check > 0) {
-			// If the item already exists in the cart, do nothing (quantity remains unchanged)
+			// If the item already exists in the cart, do nothing (number_of_traveler remains unchanged)
 			$resp['status'] = 'success';
 			$resp['msg'] = " Number of Traveler(s) Confirmed.";
 		} else {
-			// If the item is not in the cart, insert it with quantity set to 1
-			$sql = "INSERT INTO cart_list SET {$data}, `payments_id` = NULL, `quantity` = 1";
+			// If the item is not in the cart, insert it with number_of_traveler set to 1
+			$sql = "INSERT INTO booking_list SET {$data}, `payments_id` = NULL, `number_of_traveler` = 1";
 			$save = $this->conn->query($sql);
 	
 			if ($save) {
@@ -515,7 +515,7 @@ Class Master extends DBConnection {
 
 	function update_cart_qty(){
 		extract($_POST);
-		$update_cart = $this->conn->query("UPDATE `cart_list` set `quantity` = '{$quantity}' where id = '{$cart_id}'");
+		$update_cart = $this->conn->query("UPDATE `booking_list` set `number_of_traveler` = '{$number_of_traveler}' where id = '{$cart_id}'");
 		if($update_cart){
 			$resp['status'] = 'success';
 			$resp['msg'] = ' Number of Traveler(s) Updated';
@@ -533,7 +533,7 @@ Class Master extends DBConnection {
 	function update_cart_dates(){
 		extract($_POST);
 	
-		$update_dates = $this->conn->query("UPDATE `cart_list` SET `check_in` = '{$check_in_date}' WHERE id = '{$cart_id}'");
+		$update_dates = $this->conn->query("UPDATE `booking_list` SET `check_in` = '{$check_in_date}' WHERE id = '{$cart_id}'");
 	
 		if ($update_dates) {
 			$resp['status'] = 'success';
@@ -555,7 +555,7 @@ Class Master extends DBConnection {
 		extract($_POST);
 		
 		// Use the correct variable names
-		$update_days = $this->conn->query("UPDATE `cart_list` SET `days` = '{$total_days}' WHERE id = '{$prod_id}'");
+		$update_days = $this->conn->query("UPDATE `booking_list` SET `days` = '{$total_days}' WHERE id = '{$prod_id}'");
 	
 		if ($update_days) {
 			$resp['status'] = 'success';
@@ -576,7 +576,7 @@ Class Master extends DBConnection {
 	function update_payment_method(){
 		extract($_POST);
 
-		$updateMethod = $this->conn->query("UPDATE `cart_list` SET `payments_id` = '{$payments_id}' WHERE id = '{$prod_id}'");
+		$updateMethod = $this->conn->query("UPDATE `booking_list` SET `payments_id` = '{$payments_id}' WHERE id = '{$prod_id}'");
 
 		if ($updateMethod) {
 			$resp['status'] = 'success';
@@ -597,8 +597,8 @@ Class Master extends DBConnection {
 	function update_travel_type() {
 		extract($_POST);
 	
-		// Update the cart_list table with the selected travel type ID
-		$updateTravelType = $this->conn->query("UPDATE `cart_list` SET `travel_type_id` = '{$travel_type_id}' WHERE id = '{$prod_id}'");
+		// Update the booking_list table with the selected travel type ID
+		$updateTravelType = $this->conn->query("UPDATE `booking_list` SET `travel_type_id` = '{$travel_type_id}' WHERE id = '{$prod_id}'");
 	
 		if ($updateTravelType) {
 			$resp['status'] = 'success';
@@ -619,8 +619,8 @@ Class Master extends DBConnection {
 	function update_payment_type() {
 		extract($_POST);
 	
-		// Update the cart_list table with the selected payment type ID
-		$updatePaymentType = $this->conn->query("UPDATE `cart_list` SET `payment_type_id` = '{$payment_type_id}' WHERE id = '{$prod_id}'");
+		// Update the booking_list table with the selected payment type ID
+		$updatePaymentType = $this->conn->query("UPDATE `booking_list` SET `payment_type_id` = '{$payment_type_id}' WHERE id = '{$prod_id}'");
 	
 		if ($updatePaymentType) {
 			$resp['status'] = 'success';
@@ -641,8 +641,8 @@ Class Master extends DBConnection {
 	function update_payment_amount() {
 		extract($_POST);
 	
-		// Update the cart_list table with the entered payment amount
-		$updatePaymentAmount = $this->conn->query("UPDATE `cart_list` SET `payment_amount` = '{$payment_amount}' WHERE id = '{$prod_id}'");
+		// Update the booking_list table with the entered payment amount
+		$updatePaymentAmount = $this->conn->query("UPDATE `booking_list` SET `payment_amount` = '{$payment_amount}' WHERE id = '{$prod_id}'");
 	
 		if ($updatePaymentAmount) {
 			$resp['status'] = 'success';
@@ -663,7 +663,7 @@ Class Master extends DBConnection {
 	function get_cart_data() {
 		extract($_POST);
 	
-		$query = $this->conn->query("SELECT check_in, check_out, payments_id FROM cart_list WHERE id = '{$prod_id}'");
+		$query = $this->conn->query("SELECT check_in, check_out, payments_id FROM booking_list WHERE id = '{$prod_id}'");
 	
 		if ($query) {
 			$result = $query->fetch_assoc();
@@ -699,7 +699,7 @@ Class Master extends DBConnection {
 	
 	function delete_cart(){
 		extract($_POST);
-		$del = $this->conn->query("DELETE FROM `cart_list` where id = '{$id}'");
+		$del = $this->conn->query("DELETE FROM `booking_list` where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$resp['msg'] = " Room has been deleted successfully.";
@@ -719,7 +719,7 @@ Class Master extends DBConnection {
 		$inserted=[];
 		$has_failed=false;
 		$gtotal = 0;
-		$vendors = $this->conn->query("SELECT * FROM `vendor_list` where id in (SELECT vendor_id from product_list where id in (SELECT product_id FROM `cart_list` where client_id ='{$this->settings->userdata('id')}')) order by `shop_name` asc");
+		$vendors = $this->conn->query("SELECT * FROM `agency_list` where id in (SELECT agency_id from package_list where id in (SELECT package_id FROM `booking_list` where traveler_id ='{$this->settings->userdata('id')}')) order by `shop_name` asc");
 		$prefix = date('Ym-');
 		$code = sprintf("%'.05d",1);
 		
@@ -727,7 +727,7 @@ Class Master extends DBConnection {
 			$data = "";
 			
 			while(true){
-				$check = $this->conn->query("SELECT * FROM order_list where code = '{$prefix}{$code}' ")->num_rows;
+				$check = $this->conn->query("SELECT * FROM booked_packages_list where code = '{$prefix}{$code}' ")->num_rows;
 				if($check > 0){
 					$code = sprintf("%'.05d",ceil($code) + 1);
 				}else{
@@ -737,7 +737,7 @@ Class Master extends DBConnection {
 			
 			$ref_code = $prefix.$code;
 			$data = "('{$ref_code}','{$this->settings->userdata('id')}','{$vrow['id']}','{$this->conn->real_escape_string($notes)}')";
-			$sql = "INSERT INTO `order_list` (`code`,`client_id`,`vendor_id`,`notes`) VALUES {$data}";
+			$sql = "INSERT INTO `booked_packages_list` (`code`,`traveler_id`,`agency_id`,`notes`) VALUES {$data}";
 			$save = $this->conn->query($sql);
 			
 			if($save){
@@ -746,21 +746,21 @@ Class Master extends DBConnection {
 				$data = "";
 				$gtotal = 0;
 				
-				$products = $this->conn->query("SELECT c.*, p.name as `name`, p.price, p.image_path, p.vendor_id FROM `cart_list` c INNER JOIN product_list p ON c.product_id = p.id WHERE c.client_id = '{$this->settings->userdata('id')}' AND p.vendor_id = '{$vrow['id']}' ORDER BY p.name ASC");
+				$products = $this->conn->query("SELECT c.*, p.name as `name`, p.price, p.image_path, p.agency_id FROM `booking_list` c INNER JOIN package_list p ON c.package_id = p.id WHERE c.traveler_id = '{$this->settings->userdata('id')}' AND p.agency_id = '{$vrow['id']}' ORDER BY p.name ASC");
 				
 				while($prow = $products->fetch_assoc()):
-					$total = $prow['price'] * $prow['quantity'] * $prow['days'];
+					$total = $prow['price'] * $prow['number_of_traveler'] * $prow['days'];
 					$gtotal += $total;
 					
 					if(!empty($data)) $data .= ", ";
-					$data .= "('{$oid}', '{$prow['product_id']}', '{$prow['quantity']}', '{$prow['price']}', '{$prow['days']}', '{$prow['check_in']}', '{$prow['check_out']}', '{$prow['payments_id']}')";
+					$data .= "('{$oid}', '{$prow['package_id']}', '{$prow['number_of_traveler']}', '{$prow['price']}', '{$prow['days']}', '{$prow['check_in']}', '{$prow['check_out']}', '{$prow['payments_id']}')";
 				endwhile;
 				
-				$sql2 = "INSERT INTO `order_items` (`order_id`,`product_id`,`quantity`,`price`, `days`, `check_in`, `check_out`, `payments_id`) VALUES {$data}";
+				$sql2 = "INSERT INTO `booked_packages` (`booked_packages_id`,`package_id`,`number_of_traveler`,`price`, `days`, `check_in`, `check_out`, `payments_id`) VALUES {$data}";
 				$save2 = $this->conn->query($sql2);
 				
 				if($save2){
-					$this->conn->query("UPDATE `order_list` SET `total_amount` = '{$gtotal}' WHERE id = '{$oid}'");
+					$this->conn->query("UPDATE `booked_packages_list` SET `total_amount` = '{$gtotal}' WHERE id = '{$oid}'");
 
 					// Check if a file is uploaded
 					if (isset($_FILES['proof_of_payment']) && $_FILES['proof_of_payment']['tmp_name'] != '') {
@@ -772,16 +772,16 @@ Class Master extends DBConnection {
 							mkdir($uploadDir, 0777, true); // Adjust permissions as needed
 						}
 
-						// Get the client_id of the logged-in user
-						$client_id = $this->settings->userdata('id');
+						// Get the traveler_id of the logged-in user
+						$traveler_id = $this->settings->userdata('id');
 
-						// Generate a unique filename based on client_id
-						$filename = $client_id . '_' . uniqid() . '_' . basename($_FILES['proof_of_payment']['name']);
+						// Generate a unique filename based on traveler_id
+						$filename = $traveler_id . '_' . uniqid() . '_' . basename($_FILES['proof_of_payment']['name']);
 
 						// ... (previous code)
 
 						// Define the path for the uploaded file
-						$filename = $client_id . '_' . uniqid() . '_' . basename($_FILES['proof_of_payment']['name']);
+						$filename = $traveler_id . '_' . uniqid() . '_' . basename($_FILES['proof_of_payment']['name']);
 
 						// Use a relative path for the uploaded file
 						$uploadedFile = "uploads/receipt/" . $filename;
@@ -789,8 +789,8 @@ Class Master extends DBConnection {
 						// Move the uploaded file to the desired directory
 						move_uploaded_file($_FILES['proof_of_payment']['tmp_name'], base_app . $uploadedFile);
 
-						// Save the file path to the "receipt" column in the "order_list" table
-						$this->conn->query("UPDATE `order_list` SET `receipt` = '{$uploadedFile}' WHERE id = '{$oid}'");
+						// Save the file path to the "receipt" column in the "booked_packages_list" table
+						$this->conn->query("UPDATE `booked_packages_list` SET `receipt` = '{$uploadedFile}' WHERE id = '{$oid}'");
 
 					}
 
@@ -810,14 +810,14 @@ Class Master extends DBConnection {
 		if(!$has_failed){
 			$resp['status'] = 'success';
 			$resp['msg'] = " Booking Reservation has been placed";
-			$this->conn->query("DELETE FROM `cart_list` WHERE client_id ='{$this->settings->userdata('id')}'");
+			$this->conn->query("DELETE FROM `booking_list` WHERE traveler_id ='{$this->settings->userdata('id')}'");
 		}else{
 			$resp['status'] = 'failed';
 			$resp['msg'] = " Order has failed to place";
 			$resp['error'] = $this->conn->error;
 			
 			if(count($inserted) > 0){
-				$this->conn->query("DELETE FROM `order_list` WHERE id IN (".(implode(',',array_values($inserted))).") ");
+				$this->conn->query("DELETE FROM `booked_packages_list` WHERE id IN (".(implode(',',array_values($inserted))).") ");
 			}
 		}
 		
@@ -830,7 +830,7 @@ Class Master extends DBConnection {
 
 	function cancel_order(){
 		extract($_POST);
-		$update = $this->conn->query("UPDATE `order_list` set `status` = 3 where id = '{$id}'");
+		$update = $this->conn->query("UPDATE `booked_packages_list` set `status` = 3 where id = '{$id}'");
 		if($update){
 			$resp['status'] = 'success';
 			$resp['msg'] = " Order has been cancelled successfully.";
@@ -845,7 +845,7 @@ Class Master extends DBConnection {
 
 	function update_status(){
 		extract($_POST);
-		$update = $this->conn->query("UPDATE `order_list` set `status` = '{$status}' where id = '{$id}'");
+		$update = $this->conn->query("UPDATE `booked_packages_list` set `status` = '{$status}' where id = '{$id}'");
 		if($update){
 			$resp['status'] = 'success';
 			$resp['msg'] = " Booking Status has been updated successfully.";
@@ -863,7 +863,7 @@ Class Master extends DBConnection {
 
     function update_payment_status(){
 		extract($_POST);
-		$update = $this->conn->query("UPDATE `order_list` SET `payment_status` = '{$payment_status}' WHERE id = '{$id}'");
+		$update = $this->conn->query("UPDATE `booked_packages_list` SET `payment_status` = '{$payment_status}' WHERE id = '{$id}'");
 	
 		if($update){
 			$resp['status'] = 'success';
@@ -890,7 +890,7 @@ Class Master extends DBConnection {
 			}
 		}
 	
-		$check = $this->conn->query("SELECT * FROM `payments` where `name` = '{$name}' and vendor_id = '{$vendor_id}' and delete_flag = 0 ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
+		$check = $this->conn->query("SELECT * FROM `payments` where `name` = '{$name}' and agency_id = '{$agency_id}' and delete_flag = 0 ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
 		if($this->capture_err())
 			return $this->capture_err();
 		if($check > 0){
@@ -978,8 +978,8 @@ Class Master extends DBConnection {
 		extract($_POST);
 	
 		// Check if the required parameters are provided
-		if (isset($order_id) && isset($_FILES['receipt_image']) && $_FILES['receipt_image']['tmp_name'] != '') {
-			$order_id = $this->conn->real_escape_string($order_id);
+		if (isset($booked_packages_id) && isset($_FILES['receipt_image']) && $_FILES['receipt_image']['tmp_name'] != '') {
+			$booked_packages_id = $this->conn->real_escape_string($booked_packages_id);
 	
 			// Specify the directory for receipt image uploads
 			$uploadDir = base_app . "uploads/receipt/";
@@ -989,8 +989,8 @@ Class Master extends DBConnection {
 				mkdir($uploadDir, 0777, true); // Adjust permissions as needed
 			}
 	
-			// Generate a unique filename based on order_id
-			$filename = $order_id . '_' . uniqid() . '_' . basename($_FILES['receipt_image']['name']);
+			// Generate a unique filename based on booked_packages_id
+			$filename = $booked_packages_id . '_' . uniqid() . '_' . basename($_FILES['receipt_image']['name']);
 	
 			// Define the path for the uploaded file
 			$uploadedFile = "uploads/receipt/" . $filename;
@@ -998,8 +998,8 @@ Class Master extends DBConnection {
 			// Move the uploaded file to the desired directory
 			move_uploaded_file($_FILES['receipt_image']['tmp_name'], base_app . $uploadedFile);
 	
-			// Update the receipt column in the order_list table with the new file path
-			$this->conn->query("UPDATE `order_list` SET `receipt` = '{$uploadedFile}' WHERE id = '{$order_id}'");
+			// Update the receipt column in the booked_packages_list table with the new file path
+			$this->conn->query("UPDATE `booked_packages_list` SET `receipt` = '{$uploadedFile}' WHERE id = '{$booked_packages_id}'");
 	
 			$resp['status'] = 'success';
 			$resp['msg'] = 'Receipt image uploaded successfully';
@@ -1021,7 +1021,7 @@ Class Master extends DBConnection {
 		$minPrice = isset($_GET['minPrice']) ? $this->conn->real_escape_string($_GET['minPrice']) : 0;
 		$maxPrice = isset($_GET['maxPrice']) ? $this->conn->real_escape_string($_GET['maxPrice']) : 50000;
 	
-		$query = "SELECT * FROM product_list WHERE price BETWEEN '{$minPrice}' AND '{$maxPrice}' AND delete_flag = 0 AND status = 1";
+		$query = "SELECT * FROM package_list WHERE price BETWEEN '{$minPrice}' AND '{$maxPrice}' AND delete_flag = 0 AND status = 1";
 		$result = $this->conn->query($query);
 	
 		$resp = array();

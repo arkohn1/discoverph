@@ -40,13 +40,13 @@
 				<tbody>
 				<?php 
 					$i = 1;
-					$vendor_id = 'admin_vendor_id'; // Replace 'admin_vendor_id' with the actual vendor_id of the admin
+					$agency_id = 'admin_agency_id'; // Replace 'admin_agency_id' with the actual agency_id of the admin
 					$qry = $conn->query("
 						SELECT i.*, p.name AS product_name, c.firstname, c.middlename, c.lastname
 						FROM `inquiries` i
-						LEFT JOIN `product_list` p ON i.product_id = p.id
-						LEFT JOIN `client_list` c ON i.client_id = c.id
-						WHERE i.vendor_id = '{$_settings->userdata('id')}'
+						LEFT JOIN `package_list` p ON i.package_id = p.id
+						LEFT JOIN `traveler_list` c ON i.traveler_id = c.id
+						WHERE i.agency_id = '{$_settings->userdata('id')}'
 						ORDER BY i.status ASC, unix_timestamp(i.date_created) DESC
 					");
 					while($row = $qry->fetch_assoc()):
