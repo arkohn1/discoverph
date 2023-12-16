@@ -314,7 +314,8 @@ Class Master extends DBConnection {
 			$this->settings->set_flashdata('success',$resp['msg']);
 		return json_encode($resp);
 	}
-	function delete_seat(){
+	
+	function delete_room(){
 		extract($_POST);
 		$del = $this->conn->query("UPDATE `rooms` set delete_flag = 1 where id = '{$id}'");
 		if($del){
@@ -375,7 +376,7 @@ Class Master extends DBConnection {
 							$gdImg = ($type == 'image/png') ? imagecreatefrompng($upload) : imagecreatefromjpeg($upload);
 							imagecopyresampled($t_image, $gdImg, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
-							$fname = 'uploads/products/' . $pid . '_gallery_' . $key . '.png';
+							$fname = 'uploads/packages/' . $pid . '_gallery_' . $key . '.png';
 							$dir_path = base_app . $fname;
 
 							if ($gdImg) {
@@ -403,10 +404,10 @@ Class Master extends DBConnection {
 				}
 				// Handle Travel Agency Image Upload
 				if (isset($_FILES['img']) && $_FILES['img']['tmp_name'] != '') {
-					if (!is_dir(base_app . "uploads/products")) {
-						mkdir(base_app . "uploads/products");
+					if (!is_dir(base_app . "uploads/packages")) {
+						mkdir(base_app . "uploads/packages");
 					}
-					$fname = 'uploads/products/' . ($pid) . '.png';
+					$fname = 'uploads/packages/' . ($pid) . '.png';
 					$dir_path = base_app . $fname;
 					$upload = $_FILES['img']['tmp_name'];
 					$type = mime_content_type($upload);
@@ -485,25 +486,34 @@ Class Master extends DBConnection {
 			}
 		}
 	
-		$check = $this->conn->query("SELECT * FROM booking_list where package_id = '{$package_id}' && traveler_id = '{$traveler_id}'")->num_rows;
+		// Check if there is an existing row for the same customer_id
+		$existingBooking = $this->conn->query("SELECT * FROM booking_list WHERE traveler_id = '{$traveler_id}'");
 	
-		if ($check > 0) {
-			// If the item already exists in the cart, do nothing (number_of_traveler remains unchanged)
+		if ($existingBooking->num_rows > 0) {
+			// If an existing row exists, delete it
+			$existingRow = $existingBooking->fetch_assoc();
+			$deleteSql = "DELETE FROM booking_list WHERE id = '{$existingRow['id']}'";
+			$deleteResult = $this->conn->query($deleteSql);
+	
+			if (!$deleteResult) {
+				$resp['status'] = 'failed';
+				$resp['msg'] = 'Failed to delete existing booking.';
+				$resp['error'] = $this->conn->error . "[{$deleteSql}]";
+				return json_encode($resp);
+			}
+		}
+	
+		// Insert the new booking with number_of_traveler set to 1
+		$sql = "INSERT INTO booking_list SET {$data}, `payments_id` = NULL, `number_of_traveler` = 1";
+		$save = $this->conn->query($sql);
+	
+		if ($save) {
 			$resp['status'] = 'success';
 			$resp['msg'] = " Number of Traveler(s) Confirmed.";
 		} else {
-			// If the item is not in the cart, insert it with number_of_traveler set to 1
-			$sql = "INSERT INTO booking_list SET {$data}, `payments_id` = NULL, `number_of_traveler` = 1";
-			$save = $this->conn->query($sql);
-	
-			if ($save) {
-				$resp['status'] = 'success';
-				$resp['msg'] = " Number of Traveler(s) Confirmed.";
-			} else {
-				$resp['status'] = 'failed';
-				$resp['msg'] = " The package has failed to add to the checkout.";
-				$resp['error'] = $this->conn->error . "[{$sql}]";
-			}
+			$resp['status'] = 'failed';
+			$resp['msg'] = " The package has failed to add to the checkout.";
+			$resp['error'] = $this->conn->error . "[{$sql}]";
 		}
 	
 		if ($resp['status'] == 'success') {
@@ -719,7 +729,7 @@ Class Master extends DBConnection {
 		$inserted=[];
 		$has_failed=false;
 		$gtotal = 0;
-		$vendors = $this->conn->query("SELECT * FROM `agency_list` where id in (SELECT agency_id from package_list where id in (SELECT package_id FROM `booking_list` where traveler_id ='{$this->settings->userdata('id')}')) order by `shop_name` asc");
+		$vendors = $this->conn->query("SELECT * FROM `agency_list` where id in (SELECT agency_id from package_list where id in (SELECT package_id FROM `booking_list` where traveler_id ='{$this->settings->userdata('id')}')) order by `agency_name` asc");
 		$prefix = date('Ym-');
 		$code = sprintf("%'.05d",1);
 		
@@ -748,15 +758,16 @@ Class Master extends DBConnection {
 				
 				$products = $this->conn->query("SELECT c.*, p.name as `name`, p.price, p.image_path, p.agency_id FROM `booking_list` c INNER JOIN package_list p ON c.package_id = p.id WHERE c.traveler_id = '{$this->settings->userdata('id')}' AND p.agency_id = '{$vrow['id']}' ORDER BY p.name ASC");
 				
-				while($prow = $products->fetch_assoc()):
+				while ($prow = $products->fetch_assoc()) {
 					$total = $prow['price'] * $prow['number_of_traveler'] * $prow['days'];
 					$gtotal += $total;
-					
-					if(!empty($data)) $data .= ", ";
-					$data .= "('{$oid}', '{$prow['package_id']}', '{$prow['number_of_traveler']}', '{$prow['price']}', '{$prow['days']}', '{$prow['check_in']}', '{$prow['check_out']}', '{$prow['payments_id']}')";
-				endwhile;
 				
-				$sql2 = "INSERT INTO `booked_packages` (`booked_packages_id`,`package_id`,`number_of_traveler`,`price`, `days`, `check_in`, `check_out`, `payments_id`) VALUES {$data}";
+					if (!empty($data)) $data .= ", ";
+					$data .= "('{$oid}', '{$prow['package_id']}', '{$prow['number_of_traveler']}', '{$prow['price']}', '{$prow['days']}', '{$prow['check_in']}', '{$prow['check_out']}', '{$prow['payments_id']}', '{$prow['payment_type_id']}', '{$prow['payment_amount']}', '{$prow['travel_type_id']}')";
+				}
+				
+				$sql2 = "INSERT INTO `booked_packages` (`booked_packages_id`,`package_id`,`number_of_traveler`,`price`, `days`, `check_in`, `check_out`, `payments_id`, `payment_type_id`, `payment_amount`, `travel_type_id`) VALUES {$data}";
+				
 				$save2 = $this->conn->query($sql2);
 				
 				if($save2){
@@ -1082,8 +1093,8 @@ switch ($action) {
 	case 'save_room':
 		echo $Master->save_room();
 	break;
-	case 'delete_seat':
-		echo $Master->delete_seat();
+	case 'delete_room':
+		echo $Master->delete_room();
 	break;
 	case 'save_product':
 		echo $Master->save_product();

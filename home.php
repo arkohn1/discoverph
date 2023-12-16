@@ -235,14 +235,14 @@
             
             <div class="row" id="package_list" style="margin-top: -20px;">
                 <?php 
-                $products = $conn->query("SELECT p.*, v.shop_name as vendor, c.name as `category` FROM `package_list` p inner join agency_list v on p.agency_id = v.id inner join category_list c on p.category_id = c.id where p.delete_flag = 0 and p.`status` =1 order by RAND() limit 4");
+                $products = $conn->query("SELECT p.*, v.agency_name as vendor, c.name as `category` FROM `package_list` p inner join agency_list v on p.agency_id = v.id inner join category_list c on p.category_id = c.id where p.delete_flag = 0 and p.`status` =1 order by RAND() limit 4");
                 
                 while($row = $products->fetch_assoc()):
                     $averageRating = get_average_rating($row['id'], $conn);
                 ?>
                 
                 <div class="col-lg-3 col-md-6 col-sm-12 product-item">
-                    <a href="./?page=products/view_product&id=<?= $row['id'] ?>" class="card shadow rounded-0 text-reset text-decoration-none">
+                    <a href="./?page=packages/view_package&id=<?= $row['id'] ?>" class="card shadow rounded-0 text-reset text-decoration-none">
                         <div class="product-img-holder position-relative">
                             <img src="<?= validate_image($row['image_path']) ?>" alt="Product-image" class="img-top product-img bg-gradient-gray">
                         </div>
@@ -290,7 +290,7 @@
             
             
             <div class="text-center">
-                <a href="./?page=products" class="btn btn-large btn-primary rounded-pill col-lg-3 col-md-5 col-sm-12">Explore More Packages</a>
+                <a href="./?page=packages" class="btn btn-large btn-primary rounded-pill col-lg-3 col-md-5 col-sm-12">Explore More Packages</a>
             </div>
         </div>
 

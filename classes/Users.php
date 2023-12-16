@@ -191,7 +191,7 @@ Class Users extends DBConnection {
 				$resp['status'] = "success";
 				$vid = empty($id) ? $this->conn->insert_id : $id;
 				if(empty($id)){
-					if(strpos($_SERVER['HTTP_REFERER'], 'vendor/register.php') > -1){
+					if(strpos($_SERVER['HTTP_REFERER'], 'agency_admin/register.php') > -1){
 						$resp['msg'] = " Your account has been registered successfully.";
 					}else{
 						$resp['msg'] = " Resort Account has been registered successfully.";
@@ -205,9 +205,9 @@ Class Users extends DBConnection {
 				}
 
 				if(isset($_FILES['img']) && $_FILES['img']['tmp_name'] != ''){
-					if(!is_dir(base_app."uploads/vendors"))
-					mkdir(base_app."uploads/vendors");
-					$fname = 'uploads/vendors/'.($vid).'.png';
+					if(!is_dir(base_app."uploads/travel_agencies"))
+					mkdir(base_app."uploads/travel_agencies");
+					$fname = 'uploads/travel_agencies/'.($vid).'.png';
 					$dir_path =base_app. $fname;
 					$upload = $_FILES['img']['tmp_name'];
 					$type = mime_content_type($upload);
@@ -330,9 +330,9 @@ Class Users extends DBConnection {
 				}
 
 				if(isset($_FILES['img']) && $_FILES['img']['tmp_name'] != ''){
-					if(!is_dir(base_app."uploads/clients"))
-					mkdir(base_app."uploads/clients");
-					$fname = 'uploads/clients/'.($vid).'.png';
+					if(!is_dir(base_app."uploads/travelers"))
+					mkdir(base_app."uploads/travelers");
+					$fname = 'uploads/travelers/'.($vid).'.png';
 					$dir_path =base_app. $fname;
 					$upload = $_FILES['img']['tmp_name'];
 					$type = mime_content_type($upload);

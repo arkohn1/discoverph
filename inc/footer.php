@@ -166,7 +166,7 @@
             <a href="./" class="nav-link home <?= isset($page) && $page == 'home' ? "active" : "" ?>">Home</a>
           </li>
           <li class="nav-item">
-            <a href="./?page=products" class="nav-link <?= isset($page) && $page == 'products' ? "active" : "" ?>">Resorts</a>
+            <a href="./?page=packages" class="nav-link <?= isset($page) && $page == 'packages' ? "active" : "" ?>">Resorts</a>
           </li>
           <li class="nav-item">
             <a class="nav-link <?= isset($page) && $page == 'about' ? "active" : "" ?>" data-target-section="about"
@@ -182,12 +182,12 @@
               $cart_count = $conn->query("SELECT sum(number_of_traveler) FROM `booking_list` where traveler_id = '{$_settings->userdata('id')}'")->fetch_array()[0];
               $cart_count = $cart_count > 0 ? $cart_count : 0;
               ?>
-              <a href="./?page=orders/cart" class="nav-link <?= isset($page) && $page == 'orders/cart' ? "active" : "" ?>"><span
+              <a href="./?page=bookings/cart" class="nav-link <?= isset($page) && $page == 'bookings/cart' ? "active" : "" ?>"><span
                   class="badge badge-secondary rounded-circle"><!--<?= format_num($cart_count) ?>--></span> Checkout</a>
             </li>
             <li class="nav-item">
-              <a href="./?page=orders/my_orders"
-                class="nav-link <?= isset($page) && $page == 'orders/my_orders' ? "active" : "" ?>"> Bookings</a>
+              <a href="./?page=bookings/my_bookings"
+                class="nav-link <?= isset($page) && $page == 'bookings/my_bookings' ? "active" : "" ?>"> Bookings</a>
             </li>
           <?php endif; ?>
           <?php if (!($_settings->userdata('id') > 0 && $_settings->userdata('login_type') == 3)) : ?>

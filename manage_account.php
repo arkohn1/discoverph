@@ -136,26 +136,26 @@ foreach($user->fetch_array() as $k =>$v){
             <div class="container-fluid text-center">
                 <div id="msg"></div>
 
-                <!-- Image and Upload Image -->
-                <div class="row">
-                    <div class="form-group col-md-6 mx-auto">
-                        <div class="custom-file ">
-                            <input type="file" id="logo" name="img" class="custom-file-input form-control-border" onchange="displayImg(this,$(this))" accept="image/png, image/jpeg">
-                            <label class="custom-file-label left-align-label" for="logo">Choose Image</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-md-6 mx-auto">
-                        <img src="<?= validate_image(isset($avatar) ? $avatar : "") ?>" alt="Profile Photo" id="cimg" class="border border-gray img-thumbnail">
-                    </div>
-                </div>
-               
-                <center><hr class="bg border w-100 border-10" ></center>
 
                 <!-- Form Inputs -->
-                <form action="" id="manage-user">    
+                <form action="" id="manage-user"> 
+                <!-- Image and Upload Image -->
+                    <div class="row">
+                        <div class="form-group col-md-6 mx-auto">
+                            <div class="custom-file ">
+                                <input type="file" id="logo" name="img" class="custom-file-input form-control-border" onchange="displayImg(this,$(this))" accept="image/png, image/jpeg">
+                                <label class="custom-file-label left-align-label" for="logo">Choose Image</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 mx-auto">
+                            <img src="<?= validate_image(isset($avatar) ? $avatar : "") ?>" alt="Profile Photo" id="cimg" class="border border-gray img-thumbnail">
+                        </div>
+                    </div>
+                
+                    <center><hr class="bg border w-100 border-10" ></center>
+
                     <input type="hidden" name="id" value="<?php echo $_settings->userdata('id') ?>">
 					<div class="row">
                         <div class="form-group col-md-4">

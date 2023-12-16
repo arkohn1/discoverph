@@ -32,7 +32,7 @@
                       </a>
                     </li> 
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=products" class="nav-link nav-products">
+                      <a href="<?php echo base_url ?>admin/?page=packages" class="nav-link nav-packages">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>
                           Travel Packages
@@ -40,7 +40,7 @@
                       </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=orders" class="nav-link nav-orders">
+                      <a href="<?php echo base_url ?>admin/?page=bookings" class="nav-link nav-bookings">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
                           Bookings
@@ -48,7 +48,7 @@
                       </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=vendors" class="nav-link nav-vendors">
+                      <a href="<?php echo base_url ?>admin/?page=agencies" class="nav-link nav-agencies">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                           Travel Agencies
@@ -56,10 +56,10 @@
                       </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=clients" class="nav-link nav-clients">
+                      <a href="<?php echo base_url ?>admin/?page=travelers" class="nav-link nav-travelers">
                         <i class="nav-icon fas fa-user-friends"></i>
                         <p>
-                          Customers
+                          Travelers
                         </p>
                       </a>
                     </li>
@@ -73,7 +73,7 @@
                     </li>
                     <li class="nav-header">Maintenance</li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=reports/order_reports" class="nav-link nav-reports_order_reports">
+                      <a href="<?php echo base_url ?>admin/?page=reports/booking_reports" class="nav-link nav-reports_booking_reports">
                         <i class="nav-icon fas fa-calendar"></i>
                         <p>
                           Monthly Booking Report
@@ -83,7 +83,7 @@
                     <?php if($_settings->userdata('type') == 1): ?>
                     <li class="nav-header">Maintenance</li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=shop_types" class="nav-link nav-shop_types">
+                      <a href="<?php echo base_url ?>admin/?page=agency_types" class="nav-link nav-agency_types">
                         <i class="nav-icon fas fa-th-list"></i>
                         <p>
                           Travel Agency Types

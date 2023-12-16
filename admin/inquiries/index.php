@@ -7,9 +7,9 @@
         border-radius:100%;
     }
 </style>
-<div class="card card-outline card-info rounded-0">
+<div class="card card-primary rounded-0 shadow">
 	<div class="card-header">
-		<h3 class="card-title">List of Inquiries</h3>
+		<h3 class="card-title">Inquiries</h3>
 	</div>
 	<div class="card-body">
 		<div class="container-fluid">

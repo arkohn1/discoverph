@@ -48,7 +48,7 @@
         </div>
         <div class="col-7 h-100 bg-gradient-light px-4">
             <div class="d-flex justify-content-center align-items-center w-100 h-100">
-                <div class="card card-outline card-primary col-12 rounded-0 shadow">
+                <div class="card card-outline card-primary col-12 rounded-0 shadow"> <!-- add h-100 to extend height of creation of account background-->
                     <div class="card-header text-center">
                     <a href="./register.php" class="h3"><b>Create an Account</b></a>
                     </div>
@@ -76,20 +76,18 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="contact" class="control-label">Contact #</label>
+                                <label for="contact" class="control-label">Contact</label>
                                 <input type="text" id="contact" name="contact" class="form-control form-control-sm form-control-border" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="email" class="control-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-control form-control-sm form-control-border" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label for="address" class="control-label">Address</label>
                                 <input type="text" id="address" name="address" class="form-control form-control-sm form-control-border" required></textarea>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="email" class="control-label">Email</label>
-                                <input type="email" id="email" name="email" class="form-control form-control-sm form-control-border" required>
                             </div>
                         </div>
                         <div class="row">

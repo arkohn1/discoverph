@@ -73,7 +73,7 @@ class Login extends DBConnection {
 	}
 	public function logout_vendor(){
 		if($this->settings->sess_des()){
-			redirect('vendor');
+			redirect('agency_admin');
 		}
 	}
 	public function login_client(){
