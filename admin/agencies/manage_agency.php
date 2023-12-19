@@ -93,7 +93,7 @@ if(isset($_GET['id'])){
 					</div>
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label for="logo" class="control-label">Resort Logo</label>
+							<label for="logo" class="control-label">Travel Agency Logo</label>
 							<input type="file" id="logo" name="img" class="form-control form-control-sm form-control-border" onchange="displayImg(this,$(this))" accept="image/png, image/jpeg">
 						</div>
 					</div>
