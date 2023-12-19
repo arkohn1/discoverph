@@ -30,12 +30,19 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 	#uni_modal .modal-footer{
 		display:none
 	}
+    
     .prod-img{
         width:calc(100%);
         height:auto;
         max-height: 10em;
         object-fit:scale-down;
         object-position:center center
+    }
+
+    .close-btn {
+        background-color: #6c757d;
+        color: #fff;
+        border: 1px solid #6c757d;
     }
 </style>
 <div class="container-fluid">
@@ -178,7 +185,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                         <div class="d-flex">
                             <div class="col-auto px-0"><small class="text-muted">Price: </small></div>
                             <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                                <p class="m-0 pl-3"><small class="text-primary"><?= format_num($prow['price']) ?></small></p>
+                                <p class="m-0 pl-3"><small class="text-primary">₱<?= format_num($prow['price']) ?></small></p>
                             </div>
                         </div>
                         <div class="d-flex">
@@ -209,7 +216,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                         <div class="d-flex">
                             <div class="col-auto px-0"><small class="text-muted">Payment Amount: </small></div>
                             <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                                <p class="m-0 pl-3"><small class="text-primary"><?= format_num($prow['payment_amount']) ?></small></p>
+                                <p class="m-0 pl-3"><small class="text-primary">₱<?= format_num($prow['payment_amount']) ?></small></p>
                             </div>
                         </div>
                         <div class="d-flex">
@@ -232,13 +239,13 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         <div class="col-12 border">
             <div class="d-flex">
                 <div class="col-9 h4 font-weight-bold text-right text-muted">Total</div>
-                <div class="col-3 h4 font-weight-bold text-right"><?= format_num($gtotal) ?></div>
+                <div class="col-3 h4 font-weight-bold text-right">₱<?= format_num($gtotal) ?></div>
             </div>
         </div>
     </div>
 	<div class="clear-fix mb-3"></div>
 	<div class="text-right">
-		<button class="btn btn-default bg-gradient-dark text-light btn-sm btn-flat" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+        <button class="btn close-btn" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
 	</div>
 </div>
 <script>

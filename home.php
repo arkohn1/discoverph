@@ -404,22 +404,22 @@
                                 
                                 <div class="form-group">
                                     <label for="fullname">Full Name</label>
-                                    <input type="text" class="form-control form-control-sm rounded-0" id="fullname" name="fullname" required placeholder="First Name, Middle Name, Last Name">
+                                    <input type="text" class="form-control form-control-sm form-control-border" id="fullname" name="fullname" maxlength="50" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="contact">Contact Number</label>
-                                    <input type="contact" class="form-control form-control-sm rounded-0" id="contactno" name="contact" required placeholder="09XX-XXX-XXXX">
+                                    <input type="contact" class="form-control form-control-sm form-control-border" id="contactno" name="contact" maxlength="13" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control form-control-sm rounded-0" id="email" name="email" required placeholder="sample@email.com">
+                                    <input type="email" class="form-control form-control-sm form-control-border" id="email" name="email" maxlength="50" required >
                                 </div>
 
                                 <div class="form-group">
                                     <label for="message" class="text-muted">Message</label>
-                                    <textarea name="message" id="message" rows="4" class="form-control form-control-sm rounded-0" required placeholder="Write your message here"></textarea>
+                                    <textarea name="message" id="message" rows="4" class="form-control form-control-sm rounded-0" maxlength="300" required placeholder="Write your message here"></textarea>
                                 </div>
 
                                 <div class="form-group text-center">
@@ -555,4 +555,59 @@
             1000 // Adjust the animation duration (in milliseconds) as needed
         );
     });*/
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var nameInputs = document.querySelectorAll('input[name^="fullname"]');
+
+        nameInputs.forEach(function (input) {
+            input.addEventListener('input', function () {
+                var inputValue = this.value;
+                var sanitizedValue = inputValue.replace(/[^A-Za-z.]/g, ''); // Remove characters other than letters and periods
+                this.value = sanitizedValue;
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var contactInput = document.getElementById('contactno');
+
+        contactInput.addEventListener('input', function () {
+            var inputValue = this.value.replace(/\D/g, ''); // Remove non-numeric characters
+            var formattedValue = formatPhoneNumber(inputValue);
+            this.value = formattedValue;
+
+            if (/^09[0-9]{2}-?[0-9]{3}-?[0-9]{4}$/.test(inputValue)) {
+                this.setCustomValidity('');
+            } else {
+                this.setCustomValidity('Invalid format. Must start with 09 and follow the pattern 09XX-XXX-XXXX.');
+            }
+        });
+
+        function formatPhoneNumber(value) {
+            // Add hyphens after the 4th and 7th characters as the user types
+            var formattedValue = value.replace(/^(\d{4})(\d{3})(\d{4})$/, '$1-$2-$3');
+            return formattedValue;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var emailInput = document.getElementById('email');
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        emailInput.addEventListener('input', function () {
+            if (emailPattern.test(this.value)) {
+                this.classList.remove('is-invalid');
+            } else {
+                this.classList.add('is-invalid');
+            }
+        });
+
+        emailInput.addEventListener('blur', function () {
+            if (!emailPattern.test(this.value)) {
+                this.classList.add('is-invalid');
+            }
+        });
+    });
 </script>

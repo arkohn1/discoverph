@@ -26,6 +26,12 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 	#uni_modal .modal-footer{
 		display:none
 	}
+
+	.close-btn {
+        background-color: #6c757d;
+        color: #fff;
+        border: 1px solid #6c757d;
+    }
 </style>
 <div class="container-fluid">
 	<dl>
@@ -46,6 +52,6 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
     </dl>
 	<div class="clear-fix mb-3"></div>
 	<div class="text-right">
-		<button class="btn btn-default bg-gradient-dark btn-sm btn-flat" type="button" data-dismiss="modal"><i class="fa f-times"></i> Close</button>
+		<button class="btn close-btn" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
 	</div>
 </div>

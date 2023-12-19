@@ -40,7 +40,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="./login.php" class="h1 text-decoration-none" style="font-size: 1.5rem;"><b>Customer Login</b></a>
+      <a href="./login.php" class="h1 text-decoration-none" style="font-size: 1.5rem;"><b>Traveler Login</b></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>

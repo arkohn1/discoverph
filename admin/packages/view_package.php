@@ -32,6 +32,12 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 		object-fit:scale-down;
 		object-position: center center;
 	}
+
+	.close-btn {
+        background-color: #6c757d;
+        color: #fff;
+        border: 1px solid #6c757d;
+    }
 </style>
 <div class="container-fluid">
 	<center><img src="<?= validate_image(isset($image_path) ? $image_path : "") ?>" alt="Product Image" class="img-thubmnail p-0 bg-gradient-gray" id="prod-img-view"></center>
@@ -43,7 +49,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         <dt class="text-muted">Category</dt>
         <dd class="pl-3"><?= isset($category) ? $category : "" ?></dd>
 		<dt class="text-muted">Price</dt>
-        <dd class="pl-3"><?= isset($price) ? format_num($price) : "" ?></dd>
+        <dd class="pl-3">₱<?= isset($price) ? format_num($price) : "" ?></dd>
         <dt class="text-muted">Description</dt>
         <dd class="pl-3"><?= isset($description) ? html_entity_decode($description) : "" ?></dd>
         <dt class="text-muted">Status</dt>
@@ -57,6 +63,6 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
     </dl>
 	<div class="clear-fix mb-3"></div>
 	<div class="text-right">
-		<button class="btn btn-default bg-gradient-dark btn-sm btn-flat" type="button" data-dismiss="modal"><i class="fa f-times"></i> Close</button>
+		<button class="btn close-btn" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
 	</div>
 </div>

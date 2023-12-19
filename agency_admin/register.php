@@ -58,19 +58,20 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="agency_name" class="control-label">Trave Agency Name</label>
-                                <input type="text" id="agency_name" autofocus name="agency_name" class="form-control form-control-sm form-control-border" required>
+                                <input type="text" id="agency_name" autofocus name="agency_name" class="form-control form-control-sm form-control-border" maxlength="50" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="agency_owner" class="control-label">Travel Agency Owner Fullname</label>
-                                <input type="text" id="agency_owner" name="agency_owner" class="form-control form-control-sm form-control-border" required>
+                                <input type="text" id="agency_owner" name="agency_owner" class="form-control form-control-sm form-control-border" maxlength="50" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="contact" class="control-label">Contact</label>
-                                <input type="text" id="contact" name="contact" class="form-control form-control-sm form-control-border" required>
+                                <input type="text" id="contact" name="contact" class="form-control form-control-sm form-control-border" maxlength="13" placeholder="09XX-XXX-XXXX" required pattern="^09[0-9]{2}-?[0-9]{3}-?[0-9]{4}$">
                             </div>
                             <div class="form-group col-md-6">
-							    <label for="contact" class="control-label">Email</label>
-                                <input type="text" id="email" name="email" class="form-control form-control-sm form-control-border" value="<?= isset($email) ? $email : "" ?>" required>
+                                <label for="email" class="control-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-control form-control-sm form-control-border" maxlength="50" required>
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="agency_type_id" class="control-label">Travel Agency Type</label>
@@ -86,14 +87,14 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="username" class="control-label">Username</label>
-                                <input type="text" id="username" name="username" class="form-control form-control-sm form-control-border" required>
+                                <input type="text" id="username" name="username" class="form-control form-control-sm form-control-border" maxlength="50" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="password" class="control-label">Password</label>
                                 <div class="input-group input-group-sm">
-                                    <input type="password" id="password" name="password" class="form-control form-control-sm form-control-border" required>
+                                    <input type="password" id="password" name="password" class="form-control form-control-sm form-control-border" maxlength="50" required>
                                     <div class="input-group-append bg-transparent border-top-0 border-left-0 border-right-0 rounded-0">
                                         <span class="input-group-text bg-transparent border-top-0 border-left-0 border-right-0 rounded-0">
                                             <a href="javascript:void(0)" class="text-reset text-decoration-none pass_view"> <i class="fa fa-eye-slash"></i></a>
@@ -104,7 +105,7 @@
                             <div class="form-group col-md-6">
                                 <label for="cpassword" class="control-label">Confirm Password</label>
                                 <div class="input-group input-group-sm">
-                                    <input type="password" id="cpassword" class="form-control form-control-sm form-control-border" required>
+                                    <input type="password" id="cpassword" class="form-control form-control-sm form-control-border" maxlength="50" required>
                                     <div class="input-group-append bg-transparent border-top-0 border-left-0 border-right-0 rounded-0">
                                         <span class="input-group-text bg-transparent border-top-0 border-left-0 border-right-0 rounded-0">
                                             <a href="javascript:void(0)" class="text-reset text-decoration-none pass_view"> <i class="fa fa-eye-slash"></i></a>
@@ -250,6 +251,61 @@
         })
     })
   })
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var nameInputs = document.querySelectorAll('input[name^="agency_owner"]');
+
+        nameInputs.forEach(function (input) {
+            input.addEventListener('input', function () {
+                var inputValue = this.value;
+                var sanitizedValue = inputValue.replace(/[^A-Za-z.]/g, ''); // Remove characters other than letters and periods
+                this.value = sanitizedValue;
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var contactInput = document.getElementById('contact');
+
+        contactInput.addEventListener('input', function () {
+            var inputValue = this.value.replace(/\D/g, ''); // Remove non-numeric characters
+            var formattedValue = formatPhoneNumber(inputValue);
+            this.value = formattedValue;
+
+            if (/^09[0-9]{2}-?[0-9]{3}-?[0-9]{4}$/.test(inputValue)) {
+                this.setCustomValidity('');
+            } else {
+                this.setCustomValidity('Invalid format. Must start with 09 and follow the pattern 09XX-XXX-XXXX.');
+            }
+        });
+
+        function formatPhoneNumber(value) {
+            // Add hyphens after the 4th and 7th characters as the user types
+            var formattedValue = value.replace(/^(\d{4})(\d{3})(\d{4})$/, '$1-$2-$3');
+            return formattedValue;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var emailInput = document.getElementById('email');
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        emailInput.addEventListener('input', function () {
+            if (emailPattern.test(this.value)) {
+                this.classList.remove('is-invalid');
+            } else {
+                this.classList.add('is-invalid');
+            }
+        });
+
+        emailInput.addEventListener('blur', function () {
+            if (!emailPattern.test(this.value)) {
+                this.classList.add('is-invalid');
+            }
+        });
+    });
 </script>
 </body>
 </html>

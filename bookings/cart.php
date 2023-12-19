@@ -372,7 +372,7 @@
         })
 
         $('.rem_item').click(function(){
-            _conf("Are you sure delete this item from cart list?",'delete_cart',[$(this).attr('data-id')])
+            _conf("Are you sure you want to cancel this booking?",'delete_cart',[$(this).attr('data-id')])
         })
     })
 
@@ -759,4 +759,53 @@
             }
         });
     }
+</script>
+
+<script>
+    // Function to check if all required inputs are filled
+    function areAllInputsFilled() {
+        var allInputsFilled = true;
+
+        // Check each required input
+        $('.travel-type, .check-in-date, .payment-type, .payment-amount, .payment-method').each(function () {
+            if (!$(this)[0].checkValidity()) {
+                allInputsFilled = false;
+                return false; // Break out of the loop early if any input is not valid
+            }
+        });
+
+        return allInputsFilled;
+    }
+
+    // Update the Confirm Details button state based on input validity
+    function updateConfirmDetailsButtonState() {
+        var confirmDetailsButton = $('.checkout-btn a');
+
+        if (areAllInputsFilled()) {
+            confirmDetailsButton.removeClass('disabled').attr('href', './?page=bookings/checkout'); // Enable the button
+        } else {
+            confirmDetailsButton.addClass('disabled').removeAttr('href'); // Disable the button
+        }
+    }
+
+    // Add change event listeners to the required inputs and payment type/payment method dropdowns
+    $('.travel-type, .check-in-date, .payment-type, .payment-amount, .payment-method').change(function () {
+        updateConfirmDetailsButtonState();
+    });
+
+    // Disable the Confirm Details button initially
+    updateConfirmDetailsButtonState();
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the payment amount input element
+        var paymentAmountInput = document.querySelector('.payment-amount');
+
+        // Add an input event listener to enforce the maximum length
+        paymentAmountInput.addEventListener('input', function () {
+            if (paymentAmountInput.value.length > 9) {
+                // Truncate the value to 9 digits
+                paymentAmountInput.value = paymentAmountInput.value.slice(0, 9);
+            }
+        });
+    });
 </script>

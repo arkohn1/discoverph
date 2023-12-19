@@ -33,7 +33,7 @@
 					<col width="10%">
 				</colgroup>
 				<thead>
-					<tr>
+					<tr class="bg-secondary">
 						<th>#</th>
 						<th>Avatar</th>
 						<th>Name</th>
@@ -49,12 +49,12 @@
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>
-							<td class="text-center"><?php echo $i++; ?></td>
-							<td class="text-center"><img src="<?php echo validate_image($row['avatar']) ?>" class="img-avatar img-thumbnail p-0 border-2" alt="user_avatar"></td>
-							<td><?php echo ucwords($row['name']) ?></td>
-							<td ><p class="m-0 truncate-1"><?php echo $row['username'] ?></p></td>
-							<td><?php echo ($row['type'] == 1) ? 'Administrator' : 'Staff' ?></td>
-							<td align="center">
+							<td class="align-middle text-center"><?php echo $i++; ?></td>
+							<td class="align-middle text-center"><img src="<?php echo validate_image($row['avatar']) ?>" class="img-avatar img-thumbnail p-0 border-2" alt="user_avatar"></td>
+							<td class="align-middle"><?php echo ucwords($row['name']) ?></td>
+							<td class="align-middle"><p class="m-0 truncate-1"><?php echo $row['username'] ?></p></td>
+							<td class="align-middle"><?php echo ($row['type'] == 1) ? 'Administrator' : 'Staff' ?></td>
+							<td class="align-middle" align="center">
 								 <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
 				                  		Action
 				                    <span class="sr-only">Toggle Dropdown</span>

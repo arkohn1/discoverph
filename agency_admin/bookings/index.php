@@ -16,6 +16,7 @@
                 <colgroup>
                     <col width="5%">
                     <col width="15%">
+                    <col width="15%">
                     <col width="20%">
                     <col width="8%">
                     <col width="20%">
@@ -23,27 +24,41 @@
                     <col width="20%">
                 </colgroup>
                 <thead>
-                    <tr>
-                        <th class="p1 text-center">#</th>
-                        <th class="p1 text-center">Date Booked</th>
-                        <th class="p1 text-center">Ref. Code</th>
-                        <th class="p1 text-center">Amount</th>
-                        <th class="p1 text-center">Status</th>
-                        <th class="p1 text-center">Payment Status</th>
-                        <th class="p1 text-center">Action</th>
+                    <tr class="bg-secondary">
+                        <th>#</th>
+                        <th>Date Booked</th>
+                        <th>Ref. Code</th>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Payment Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php 
                     $i = 1;
-                    $orders = $conn->query("SELECT * FROM `booked_packages_list` where agency_id = '{$_settings->userdata('id')}' order by `status` asc,unix_timestamp(date_created) desc ");
+                    $orders = $conn->query("
+                    SELECT 
+                        o.*, 
+                        c.code as ccode, 
+                        CONCAT(c.firstname, ' ', COALESCE(c.middlename, ''), ' ', c.lastname) as client_name,
+                        c.firstname as client_firstname,
+                        c.middlename as client_middlename,
+                        c.lastname as client_lastname
+                    FROM `booked_packages_list` o 
+                    INNER JOIN traveler_list c ON o.traveler_id = c.id 
+                    WHERE o.agency_id = '{$_settings->userdata('id')}' 
+                    ORDER BY o.status ASC, UNIX_TIMESTAMP(o.date_created) DESC
+                    ");                    
                     while($row = $orders->fetch_assoc()):
                     ?>
                     <tr>
                         <td class="px-2 py-1 align-middle text-center"><?= $i++; ?></td>
                         <td class="px-2 py-1 align-middle"><?= date("Y-m-d H:i", strtotime($row['date_created'])) ?></td>
                         <td class="px-2 py-1 align-middle"><?= $row['code'] ?></td>
-                        <td class="px-2 py-1 align-middle text-right"><?= format_num($row['total_amount']) ?></td>
+                        <td class="px-2 py-1 align-middle "><?= $row['client_name'] ?></td>
+                        <td class="px-2 py-1 align-middle text-right">₱<?= format_num($row['total_amount']) ?></td>
                         <td class="px-2 py-1 align-middle text-center">
                             <?php 
                                 switch($row['status']){
@@ -104,7 +119,7 @@
 <script>
     $(function(){
         $('.view_data').click(function(){
-            uni_modal("View Order Details - <b>"+($(this).attr('data-code'))+"</b>","bookings/view_booking.php?id="+$(this).attr('data-id'),'mid-large')
+            uni_modal("View Booking Details - <b>"+($(this).attr('data-code'))+"</b>","bookings/view_booking.php?id="+$(this).attr('data-id'),'mid-large')
         })
         $('table').dataTable();
     })

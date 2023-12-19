@@ -1,4 +1,11 @@
 <?php $month = isset($_GET['month']) ? $_GET['month'] : date("Y-m"); ?>
+<style>
+    .badge {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 0.375rem;
+    }
+</style>
 <div class="content py-3">
     <div class="card card-primary rounded-0 shadow">
         <div class="card-header">
@@ -35,11 +42,11 @@
                             <col width="15%">
                         </colgroup>
                         <thead>
-                            <tr class="">
+                            <tr class="bg-secondary">
                                 <th class="text-center align-middle py-1">#</th>
                                 <th class="text-center align-middle py-1">Date Created</th>
                                 <th class="text-center align-middle py-1">Ref. Code</th>
-                                <th class="text-center align-middle py-1">Customer</th>
+                                <th class="text-center align-middle py-1">Traveler</th>
                                 <th class="text-center align-middle py-1">Status</th>
                                 <th class="text-center align-middle py-1">Total Amount</th>
                             </tr>
@@ -56,7 +63,7 @@
                                     <td class="text-center align-middle px-2 py-1"><?php echo $i++; ?></td>
                                     <td class="align-middle px-2 py-1"><?php echo date("Y-m-d H:i",strtotime($row['date_created'])) ?></td>
                                     <td class="align-middle px-2 py-1"><?= $row['code'] ?></td>
-                                    <td class="align-middle px-2 py-1"><?php echo ucwords($row['ccode'].' - '.$row['client']) ?></td>
+                                    <td class="align-middle px-2 py-1"><?php echo ucwords($row['client']) ?></td>
                                     <td class="text-center align-middle px-2 py-1">
                                         <?php 
                                             switch($row['status']){
@@ -78,14 +85,14 @@
                                             }
                                         ?>
                                     </td>
-                                    <td class="text-right align-middle px-2 py-1"><?php echo format_num($row['total_amount']) ?></td>
+                                    <td class="text-right align-middle px-2 py-1">₱<?php echo format_num($row['total_amount']) ?></td>
                                 </tr>
                             <?php endwhile; ?>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th class="text-center px-1 py-1 align-middel" colspan="5">Total</th>
-                                <th class="text-right px-1 py-1 align-middel"><?= format_num($total) ?></th>
+                                <th class="text-right px-1 py-1 align-middel">₱<?= format_num($total) ?></th>
                             </tr>
                         </tfoot>
                     </table>

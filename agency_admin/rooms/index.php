@@ -3,6 +3,13 @@
 	alert_toast("<?php echo $_settings->flashdata('success') ?>",'success')
 </script>
 <?php endif;?>
+<style>
+    .badge {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 0.375rem;
+    }
+</style>
 <div class="card card-primary rounded-0 shadow">
 	<div class="card-header">
 		<h3 class="card-title">Seat Rooms for Joiner Travel Types</h3>
@@ -24,7 +31,7 @@
 					<col width="15%">
 				</colgroup>
 				<thead>
-					<tr class="bg-gradient-secondary">
+					<tr class="bg-secondary">
 						<th>#</th>
 						<th>Date Created</th>
 						<th>Number</th>
@@ -86,7 +93,7 @@
 			uni_modal('Update Room',"rooms/manage_room.php?id="+$(this).attr('data-id'))
 		})
 		$('.delete_data').click(function(){
-			_conf("Are you sure to delete this Room permanently?","delete_room",[$(this).attr('data-id')])
+			_conf("Are you sure to delete this Seat Room permanently?","delete_room",[$(this).attr('data-id')])
 		})
 		$('table .th,table .td').addClass('align-middle px-2 py-1')
 		$('.table').dataTable();

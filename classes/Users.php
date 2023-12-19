@@ -194,13 +194,13 @@ Class Users extends DBConnection {
 					if(strpos($_SERVER['HTTP_REFERER'], 'agency_admin/register.php') > -1){
 						$resp['msg'] = " Your account has been registered successfully.";
 					}else{
-						$resp['msg'] = " Resort Account has been registered successfully.";
+						$resp['msg'] = " Travel Agency Account has been registered successfully.";
 					}
 				}else{
 					if($this->settings->userdata('login_type') == 2){
 						$resp['msg'] = " Your account details has been updated successfully.";
 					}else{
-						$resp['msg'] = " Resort Account Details has been updated successfully.";
+						$resp['msg'] = " Travel Agency Account Details has been updated successfully.";
 					}	
 				}
 
@@ -319,13 +319,13 @@ Class Users extends DBConnection {
 					if(strpos($_SERVER['HTTP_REFERER'], 'client/register.php') > -1){
 						$resp['msg'] = " Your account has been registered successfully.";
 					}else{
-						$resp['msg'] = " Client's Account has been registered successfully.";
+						$resp['msg'] = " Traveler's Account has been registered successfully.";
 					}
 				}else{
 					if($this->settings->userdata('login_type') == 3){
 						$resp['msg'] = " Your account details has been updated successfully.";
 					}else{
-						$resp['msg'] = " Client's Account Details has been updated successfully.";
+						$resp['msg'] = " Traveler's Account Details has been updated successfully.";
 					}	
 				}
 

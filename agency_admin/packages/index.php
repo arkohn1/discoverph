@@ -11,6 +11,12 @@
 		object-fit:scale-down;
 		object-position:center center;
 	}
+
+	.badge {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 0.375rem;
+    }
 </style>
 <div class="card card-primary rounded-0 shadow">
 	<div class="card-header">
@@ -34,13 +40,13 @@
 					<col width="15%">
 				</colgroup>
 				<thead>
-					<tr class="bg-gradient-secondary">
+					<tr class="bg-secondary">
 						<th>#</th>
 						<th>Date Created</th>
 						<th>Image</th>
 						<th>Travel Agency Name</th>
-						<th>Cost</th>
-						<th>Tour Category</th>
+						<th>Price</th>
+						<th>Package Category</th>
 						<th>Status</th>
 						<th>Action</th>
 					</tr>
@@ -61,7 +67,7 @@
 							<td><?php echo date("Y-m-d H:i",strtotime($row['date_created'])) ?></td>
 							<td class="text-center"><img src="<?= validate_image($row['image_path']) ?>" alt="Product Image" class="border border-gray img-thumbnail product-img"></td>
 							<td><?php echo $row['name'] ?></td>
-							<td class="text-right"><?php echo format_num($row['price']) ?></td>
+							<td class="text-right">₱<?php echo format_num($row['price']) ?></td>
 							<!-- Add the column for the package type -->
 							<td><?php echo $row['category_name'] ?></td>
 

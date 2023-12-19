@@ -11,6 +11,12 @@
 		object-fit:scale-down;
 		object-position:center center;
 	}
+
+	.badge {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 0.375rem;
+    }
 </style>
 <div class="card card-primary rounded-0 shadow">
 	<div class="card-header">
@@ -26,11 +32,11 @@
 					<col width="10%">
 					<col width="25%">
 					<col width="15%">
-					<col width="15%">
-					<col width="15%">
+					<col width="20%">
+					<col width="5%">
 				</colgroup>
 				<thead>
-					<tr class="bg-gradient-secondary">
+					<tr class="bg-secondary">
 						<th>#</th>
 						<th>Date Created</th>
 						<th>Image</th>
@@ -51,10 +57,10 @@
 							<td><?php echo date("Y-m-d H:i",strtotime($row['date_created'])) ?></td>
 							<td class="text-center"><img src="<?= validate_image($row['image_path']) ?>" alt="Product Image" class="border border-gray img-thumbnail product-img"></td>
 							<td>
-								<div class="border-bottom text-truncate"><?= $row['code'].'-'.$row['vendor'] ?></div>
+								<div class="border-bottom text-truncate"><?= $row['vendor'] ?></div>
 								<div class="text-truncate"><?= $row['name'] ?></div>
 							</td>
-							<td class="text-right"><?php echo format_num($row['price']) ?></td>
+							<td class="text-right">₱<?php echo format_num($row['price']) ?></td>
 							<td class="text-center">
                                 <?php if($row['status'] == 1): ?>
                                     <span class="badge badge-success bg-gradient-success px-3 rounded-pill">Active</span>
@@ -91,7 +97,7 @@
 			uni_modal('Update Package',"packages/manage_product.php?id="+$(this).attr('data-id'),'large')
 		})
 		$('.delete_data').click(function(){
-			_conf("Are you sure to delete this product permanently?","delete_product",[$(this).attr('data-id')])
+			_conf("Are you sure to delete this Package permanently?","delete_product",[$(this).attr('data-id')])
 		})
 		$('table th,table td').addClass('align-middle px-2 py-1')
 		$('.table').dataTable();

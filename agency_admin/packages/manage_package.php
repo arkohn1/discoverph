@@ -66,7 +66,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-					<label for="price" class="control-label">Cost</label>
+					<label for="price" class="control-label">Price</label>
 					<input name="price" id="price" type="number" step="any" class="form-control form-control-sm form-control-border" value="<?php echo isset($price) ? $price : ''; ?>" required>
 				</div>
 				<div class="form-group">

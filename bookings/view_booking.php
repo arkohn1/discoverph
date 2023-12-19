@@ -227,7 +227,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                         <div class="d-flex">
                             <div class="col-auto px-0"><small class="text-muted">Price: </small></div>
                             <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                                <p class="m-0 pl-3"><small class="text-primary"><?= format_num($prow['price']) ?></small></p>
+                                <p class="m-0 pl-3"><small class="text-primary">₱<?= format_num($prow['price']) ?></small></p>
                             </div>
                         </div>
                         <div class="d-flex">
@@ -258,7 +258,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                         <div class="d-flex">
                             <div class="col-auto px-0"><small class="text-muted">Payment Amount: </small></div>
                             <div class="col-auto px-0 flex-shrink-1 flex-grow-1">
-                                <p class="m-0 pl-3"><small class="text-primary"><?= format_num($prow['payment_amount']) ?></small></p>
+                                <p class="m-0 pl-3"><small class="text-primary">₱<?= format_num($prow['payment_amount']) ?></small></p>
                             </div>
                         </div>
                         <div class="d-flex">
@@ -281,7 +281,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         <div class="col-12 border">
             <div class="d-flex">
                 <div class="col-9 h4 font-weight-bold text-right text-muted">Total</div>
-                <div class="col-3 h4 font-weight-bold text-right"><?= format_num($gtotal) ?></div>
+                <div class="col-3 h4 font-weight-bold text-right">₱<?= format_num($gtotal) ?></div>
             </div>  
         </div>
     </div>
@@ -297,7 +297,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 <script>
     $(function () {
         $('#cancel_order').click(function () {
-            _conf("Are you sure to cancel this order?", "cancel_order", ['<?= isset($id) ? $id : '' ?>'])
+            _conf("Are you sure to cancel this booking?", "cancel_order", ['<?= isset($id) ? $id : '' ?>'])
         })
     })
     function cancel_order($id){
@@ -325,7 +325,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 
     $(document).ready(function () {
         $(document).off('click', '#cancel_order').on('click', '#cancel_order', function () {
-            _conf("Are you sure to cancel this order?", "cancel_order", ['<?= isset($id) ? $id : '' ?>']);
+            _conf("Are you sure to cancel this booking?", "cancel_order", ['<?= isset($id) ? $id : '' ?>']);
         });
 
         $(document).off('click', '#uploadReceiptBtn').on('click', '#uploadReceiptBtn', function () {

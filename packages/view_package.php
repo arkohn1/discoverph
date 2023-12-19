@@ -7,7 +7,7 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
             $$k = $v;
         }
 
-        // Now, let's get the total number of available and taken rooms for this product's category
+        // Now, let's get the total number of available and taken rooms for this package's category
         $roomQry = $conn->query("SELECT 
                                     SUM(CASE WHEN r.status = 1 THEN 1 ELSE 0 END) AS available_rooms,
                                     SUM(CASE WHEN r.status = 0 THEN 1 ELSE 0 END) AS taken_rooms
@@ -27,11 +27,11 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
 
 
     } else {
-        echo "<script> alert('Unknown Product ID.'); location.replace('./?page=packages') </script>";
+        echo "<script> alert('Unknown Package ID.'); location.replace('./?page=packages') </script>";
         exit;
     }
 } else {
-    echo "<script> alert('Product ID is required.'); location.replace('./?page=packages') </script>";
+    echo "<script> alert('Package ID is required.'); location.replace('./?page=packages') </script>";
     exit;
 }
 
@@ -725,7 +725,7 @@ function get_product_reviews($package_id) {
                             <textarea class="form-control" id="review" name="review" rows="4" required></textarea>
                         </div>
 
-                        <button type="button" class="btn btn-primary" id="submitReviewBtn">Submit Review </button>
+                        <button type="button" class="btn btn-primary" id="submitReviewBtn" disabled>Submit Review </button>
                     </form>
                 </div>
                 <div style="clear: both;"></div> <!-- Clear the float to prevent layout issues -->
@@ -966,5 +966,25 @@ function get_product_reviews($package_id) {
             // Reviews exist, handle accordingly (e.g., show a message or enable the button)
             console.log('Reviews exist');
         }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ratingInput = document.getElementById('rating');
+        var reviewInput = document.getElementById('review');
+        var submitButton = document.getElementById('submitReviewBtn');
+
+        function updateSubmitButton() {
+            // Enable the submit button if both rating and review have values
+            submitButton.disabled = !(ratingInput.value !== '0' && reviewInput.value.trim().length > 0);
+        }
+
+        // Update the submit button whenever there is an input change
+        ratingInput.addEventListener('input', updateSubmitButton);
+        reviewInput.addEventListener('input', updateSubmitButton);
+
+        // Initial update
+        updateSubmitButton();
     });
 </script>

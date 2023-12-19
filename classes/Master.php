@@ -201,9 +201,9 @@ Class Master extends DBConnection {
 			if($save){
 				$resp['status'] = 'success';
 				if(empty($id))
-				$resp['msg'] = " New Shop Type successfully saved.";
+				$resp['msg'] = " New Agency Type successfully saved.";
 				else
-				$resp['msg'] = " Shop Type successfully updated.";
+				$resp['msg'] = " Travel Agency Type successfully updated.";
 			}else{
 				$resp['status'] = 'failed';
 				$resp['err'] = $this->conn->error."[{$sql}]";
@@ -218,7 +218,7 @@ Class Master extends DBConnection {
 		$del = $this->conn->query("UPDATE `agency_type_list` set delete_flag = 1 where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
-			$this->settings->set_flashdata('success'," Shop Type successfully deleted.");
+			$this->settings->set_flashdata('success'," Agency Type successfully deleted.");
 		}else{
 			$resp['status'] = 'failed';
 			$resp['error'] = $this->conn->error;
@@ -302,9 +302,9 @@ Class Master extends DBConnection {
 			if($save){
 				$resp['status'] = 'success';
 				if(empty($id))
-				$resp['msg'] = " New Room successfully saved.";
+				$resp['msg'] = " New Seat Room successfully saved.";
 				else
-				$resp['msg'] = " Room successfully updated.";
+				$resp['msg'] = " Seat Room successfully updated.";
 			}else{
 				$resp['status'] = 'failed';
 				$resp['err'] = $this->conn->error."[{$sql}]";
@@ -320,7 +320,7 @@ Class Master extends DBConnection {
 		$del = $this->conn->query("UPDATE `rooms` set delete_flag = 1 where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
-			$this->settings->set_flashdata('success'," Room successfully deleted.");
+			$this->settings->set_flashdata('success'," Seat Room successfully deleted.");
 		}else{
 			$resp['status'] = 'failed';
 			$resp['error'] = $this->conn->error;
@@ -712,10 +712,10 @@ Class Master extends DBConnection {
 		$del = $this->conn->query("DELETE FROM `booking_list` where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
-			$resp['msg'] = " Room has been deleted successfully.";
+			$resp['msg'] = " Booking has been deleted successfully.";
 		}else{
 			$resp['status'] = 'failed';
-			$resp['msg'] = " Room has failed to delete.";
+			$resp['msg'] = " Booking has failed to delete.";
 			$resp['error'] = $this->conn->error;
 		}
 		if($resp['status'] =='success'){
@@ -844,7 +844,7 @@ Class Master extends DBConnection {
 		$update = $this->conn->query("UPDATE `booked_packages_list` set `status` = 3 where id = '{$id}'");
 		if($update){
 			$resp['status'] = 'success';
-			$resp['msg'] = " Order has been cancelled successfully.";
+			$resp['msg'] = " Booking has been cancelled successfully.";
 		}else{
 			$resp['status'] = 'success';
 			$resp['error'] = $this->conn->error;

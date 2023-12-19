@@ -69,16 +69,18 @@
                         <col width="5%">
                         <col width="15%">
                         <col width="20%">
+                        <col width="20%">
                         <col width="10%">
                         <col width="15%">
                         <col width="15%">
                         <col width="15%">
                     </colgroup>
                     <thead>
-                        <tr>
+                        <tr class="bg-secondary">
                             <th class="p1 text-center">#</th>
                             <th class="p1 text-center">Date Booked</th>
                             <th class="p1 text-center">Ref. Code</th>
+                            <th class="p1 text-center">Package Name</th>
                             <th class="p1 text-center">Amount</th>
                             <th class="p1 text-center">Status</th>
                             <th class="p1 text-center">Payment Status</th>
@@ -88,14 +90,21 @@
                     <tbody>
                         <?php 
                         $i = 1;
-                        $orders = $conn->query("SELECT * FROM `booked_packages_list` where traveler_id = '{$_settings->userdata('id')}' order by `status` asc,unix_timestamp(date_created) desc ");
+                        $orders = $conn->query("SELECT bpl.*, bp.package_id, pl.name AS package_name
+                                                FROM `booked_packages_list` bpl
+                                                LEFT JOIN `booked_packages` bp ON bpl.id = bp.booked_packages_id
+                                                LEFT JOIN `package_list` pl ON bp.package_id = pl.id
+                                                WHERE bpl.traveler_id = '{$_settings->userdata('id')}'
+                                                ORDER BY bpl.`status` ASC, UNIX_TIMESTAMP(bpl.date_created) DESC ");
+
                         while($row = $orders->fetch_assoc()):
                         ?>
                         <tr>
                             <td class="px-2 py-1 align-middle text-center"><?= $i++; ?></td>
                             <td class="px-2 py-1 align-middle"><?= date("Y-m-d H:i", strtotime($row['date_created'])) ?></td>
                             <td class="px-2 py-1 align-middle"><?= $row['code'] ?></td>
-                            <td class="px-2 py-1 align-middle text-right"><?= format_num($row['total_amount']) ?></td>
+                            <td class="px-2 py-1 align-middle"><?= $row['package_name'] ?></td>
+                            <td class="px-2 py-1 align-middle text-right">₱<?= format_num($row['total_amount']) ?></td>
                             <td class="px-2 py-1 align-middle text-center">
                                 <?php 
                                     switch($row['status']){
@@ -156,7 +165,7 @@
 <script>
     $(function(){
         $('.view_data').click(function(){
-            uni_modal("View Order Details - <b>"+($(this).attr('data-code'))+"</b>","bookings/view_booking.php?id="+$(this).attr('data-id'),'mid-large')
+            uni_modal("View Booking Details - <b>"+($(this).attr('data-code'))+"</b>","bookings/view_booking.php?id="+$(this).attr('data-id'),'mid-large')
         })
         $('table').dataTable();
     })

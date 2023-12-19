@@ -12,6 +12,12 @@
         object-position:center center;
         border-radius:100%;
     }
+	
+	.badge {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 0.375rem;
+    }
 </style>
 <div class="card card-primary rounded-0 shadow">
 	<div class="card-header">
@@ -31,7 +37,7 @@
 					<col width="10%">
 				</colgroup>
 				<thead>
-					<tr>
+					<tr class="bg-secondary">
 						<th>#</th>
 						<th>Logo</th>
 						<th>Code</th>
@@ -48,19 +54,19 @@
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>
-							<td class="text-center"><?php echo $i++; ?></td>
-							<td class="text-center"><img src="<?php echo validate_image($row['avatar']) ?>" class="img-avatar img-thumbnail p-0 border-2" alt="vendor_avatar"></td>
-							<td><?php echo ($row['code']) ?></td>
-							<td><?php echo ucwords($row['agency_name']) ?></td>
-							<td><?php echo ucwords($row['agency_owner']) ?></td>
-							<td class="text-center">
-								<?php if($row['status'] == 1): ?>
-									<span class="bage badge-primary px-3 rounded-pill">Active</span>
-								<?php else: ?>
-									<span class="bage badge-danger px-3 rounded-pill">Inactive</span>
-								<?php endif; ?>
-							</td>
-							<td align="center">
+							<td class="align-middle text-center"><?php echo $i++; ?></td>
+							<td class="align-middle text-center"><img src="<?php echo validate_image($row['avatar']) ?>" class="img-avatar img-thumbnail p-0 border-2" alt="vendor_avatar"></td>
+							<td class="align-middle"><?php echo ($row['code']) ?></td>
+							<td class="align-middle"><?php echo ucwords($row['agency_name']) ?></td>
+							<td class="align-middle"><?php echo ucwords($row['agency_owner']) ?></td>
+							<td class="align-middle text-center">
+                                <?php if($row['status'] == 1): ?>
+                                    <span class="badge badge-success bg-gradient-success px-3 rounded-pill">Active</span>
+                                <?php else: ?>
+                                    <span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Inactive</span>
+                                <?php endif; ?>
+                            </td>
+							<td class="align-middle" align="center">
 								 <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
 				                  		Action
 				                    <span class="sr-only">Toggle Dropdown</span>

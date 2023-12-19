@@ -20,6 +20,12 @@
     td.qr-code-cell {
         text-align: center; /* Optional: Center the text horizontally as well */
     }
+
+	.badge {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 0.375rem;
+    }
 </style>
 <div class="card card-primary rounded-0 shadow">
 	<div class="card-header">
@@ -42,7 +48,7 @@
 					<col width="15%">
 				</colgroup>
 				<thead>
-					<tr class="bg-gradient-secondary">
+					<tr class="bg-secondary">
 						<th>#</th>
 						<th>Date Created</th>
 						<th>Payment Method</th>
