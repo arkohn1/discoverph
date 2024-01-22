@@ -30,7 +30,7 @@
                         <th>Ref. Code</th>
                         <th>Name</th>
                         <th>Amount</th>
-                        <th>Status</th>
+                        <th>Booking Status</th>
                         <th>Payment Status</th>
                         <th>Action</th>
                     </tr>

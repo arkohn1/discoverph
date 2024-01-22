@@ -150,7 +150,6 @@
                                 </div>
                             </div>
                             <br><br>
-                            <!-- number_of_traveler and Confirm Total Days -->
                             <div class="d-flex mb-3">
                                 <!-- Number of Travelers -->
                                 <div class="col-auto text-center">
@@ -291,6 +290,8 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
+//----------------------------------------------------------------------------------------------------------------
+    // NUMBER OF TRAVELERS
     $(function(){
         $('.plus-qty').click(function(){
             var group = $(this).closest('.input-group')
@@ -376,44 +377,61 @@
         })
     })
 
-    function delete_cart($id){
-		start_loader();
-		$.ajax({
-			url:_base_url_+"classes/Master.php?f=delete_cart",
-			method:"POST",
-			data:{id: $id},
-			dataType:"json",
-			error:err=>{
-				console.log(err)
-				alert_toast("An error occured.",'error');
-				end_loader();
-			},
-			success:function(resp){
-				if(typeof resp== 'object' && resp.status == 'success'){
-					location.reload();
-				}else{
-					alert_toast("An error occured.",'error');
-					end_loader();
-				}
-			}
-		})
-	}
+//----------------------------------------------------------------------------------------------------------------
+    // TRAVEL TYPE SELECTION
+    function updateTravelTypeInDatabase(prodId, travelTypeId) {
+        start_loader();
+        $.ajax({
+            url: _base_url_ + 'classes/Master.php?f=update_travel_type',
+            method: 'POST',
+            data: {
+                prod_id: prodId,
+                travel_type_id: travelTypeId
+            },
+            dataType: 'json',
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+                alert_toast('An error occurred: ' + error, 'error');
+                end_loader();
+            },
+            success: function (resp) {
+                if (resp.status == 'success') {
+                    // Handle success if needed
+                    console.log('Travel type updated successfully');
+                    // Save the selected value to local storage
+                    sessionStorage.setItem('selectedTravelType_' + prodId, travelTypeId);
+                } else if (!!resp.msg) {
+                    // Handle error message if needed
+                    console.error('Error updating travel type: ' + resp.msg);
+                } else {
+                    // Handle generic error if needed
+                    console.error('Unknown error occurred while updating travel type');
+                }
+                end_loader();
+            }
+        });
+    }
 
+    // On page load, retrieve the selected value from local storage and set it as the selected option
+    $(document).ready(function () {
+        $('.travel-type').each(function () {
+            var prodId = $(this).data('prod-id');
+            var storedTravelTypeId = sessionStorage.getItem('selectedTravelType_' + prodId);
+            if (storedTravelTypeId) {
+                $(this).val(storedTravelTypeId).change(); // Trigger change event to update the server if needed
+            }
+        });
+    });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Fetch check-in date from the server and initialize Flatpickr
+    // On change of travel type, save the selected value in local storage
+    $('.travel-type').change(function () {
+        var prodId = $(this).data('prod-id');
+        var selectedTravelTypeId = $(this).val();
+        updateTravelTypeInDatabase(prodId, selectedTravelTypeId);
+        sessionStorage.setItem('selectedTravelType_' + prodId, selectedTravelTypeId);
+    });
+//----------------------------------------------------------------------------------------------------------------
+    // Fetch TRAVEL DATE from the server and initialize Flatpickr
     $('.check-in-date').each(function () {
         var prodId = $(this).data('prod-id');
 
@@ -488,22 +506,128 @@
             }
         });
     }
+//----------------------------------------------------------------------------------------------------------------
+
+    // PAYMENT TYPE AND PAYMENT AMOUNT
+    // On change of payment type, save the selected value in local storage
+    $('.payment-type').change(function () {
+        var prodId = $(this).data('prod-id');
+        var selectedPaymentType = $(this).val();
+        
+        // Call the server-side script to update the payment type
+        updatePaymentType(prodId, selectedPaymentType);
+
+        // Check if the selected payment type is "Full Payment" (assuming '2' is the ID for "Full Payment")
+        var paymentAmountInput = $('.payment-amount[data-prod-id="' + prodId + '"]');
+        if (selectedPaymentType === '2') {
+            // Set the payment amount to the total amount
+            var totalAmount = <?= $gtotal ?>;
+            paymentAmountInput.val(totalAmount).prop('readonly', true).change();
+        } else {
+            // Reset the payment amount and remove readonly
+            paymentAmountInput.val('').prop('readonly', false).change();
+        }
+
+        // Save the selected payment type in local storage
+        localStorage.setItem('paymentType_' + prodId, selectedPaymentType);
+    });
+
+    // On page load, retrieve the selected payment type from local storage
+    $(document).ready(function () {
+        $('.payment-type').each(function () {
+            var prodId = $(this).data('prod-id');
+            var storedPaymentType = localStorage.getItem('paymentType_' + prodId);
+            if (storedPaymentType) {
+                // Trigger change event to update the server if needed
+                $(this).val(storedPaymentType).change();
+            }
+        });
+    });
+
+    function updatePaymentType(prodId, paymentTypeId) {
+        $.ajax({
+            type: 'POST',
+            url: 'classes/Master.php?f=update_payment_type',
+            data: {
+                prod_id: prodId,
+                payment_type_id: paymentTypeId
+            },
+            dataType: 'json',
+            success: function (response) {
+                // Handle success
+                if (response.status === 'success') {
+                    console.log(response.msg);
+                } else {
+                    console.error(response.msg);
+                    console.error(response.error);
+                }
+            },
+            error: function (error) {
+                // Handle error
+                console.error('Failed to update payment type:', error);
+            }
+        });
+    }
+
+    //FOR THE PAYMENT AMOUNT INPUT
+    // On change of payment amount, save the entered value in local storage
+    $('.payment-amount').change(function () {
+        var prodId = $(this).data('prod-id');
+        var enteredPaymentAmount = $(this).val();
+        updatePaymentAmountInDatabase(prodId, enteredPaymentAmount);
+        
+        // Save the entered payment amount in local storage
+        localStorage.setItem('enteredPaymentAmount_' + prodId, enteredPaymentAmount);
+    });
+
+    // On page load, retrieve the entered value from local storage and set it as the entered value
+    $(document).ready(function () {
+        $('.payment-amount').each(function () {
+            var prodId = $(this).data('prod-id');
+            var storedPaymentAmount = localStorage.getItem('enteredPaymentAmount_' + prodId);
+            if (storedPaymentAmount) {
+                // Trigger change event to update the server if needed
+                $(this).val(storedPaymentAmount).change();
+            }
+        });
+    });
+
+    // Function to update payment amount in the database
+    function updatePaymentAmountInDatabase(prodId, paymentAmount) {
+        start_loader();
+        $.ajax({
+            url: _base_url_ + 'classes/Master.php?f=update_payment_amount',
+            method: 'POST',
+            data: {
+                prod_id: prodId,
+                payment_amount: paymentAmount
+            },
+            dataType: 'json',
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+                alert_toast('An error occurred: ' + error, 'error');
+                end_loader();
+            },
+            success: function (resp) {
+                if (resp.status == 'success') {
+                    // Handle success if needed
+                    console.log('Payment amount updated successfully');
+                } else if (!!resp.msg) {
+                    // Handle error message if needed
+                    console.error('Error updating payment amount: ' + resp.msg);
+                } else {
+                    // Handle generic error if needed
+                    console.error('Unknown error occurred while updating payment amount');
+                }
+                end_loader();
+            }
+        });
+    }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+//----------------------------------------------------------------------------------------------------------------
+    // PAYMENT METHOD
     // Add an event listener for the payment method dropdown change
     $('.payment-method').change(function () {
         var prodId = $(this).data('prod-id');
@@ -586,7 +710,7 @@
             }
         });
     }
-    
+//----------------------------------------------------------------------------------------------------------------
    // On change of payment method, save the selected value in session storage
    $('.payment-method').change(function () {
         var prodId = $(this).data('prod-id');
@@ -604,161 +728,33 @@
             }
         });
     });
+//----------------------------------------------------------------------------------------------------------------
+    // DISCARD BOOKING
+    function delete_cart($id){
+		start_loader();
+		$.ajax({
+			url:_base_url_+"classes/Master.php?f=delete_cart",
+			method:"POST",
+			data:{id: $id},
+			dataType:"json",
+			error:err=>{
+				console.log(err)
+				alert_toast("An error occured.",'error');
+				end_loader();
+			},
+			success:function(resp){
+				if(typeof resp== 'object' && resp.status == 'success'){
+					location.reload();
+				}else{
+					alert_toast("An error occured.",'error');
+					end_loader();
+				}
+			}
+		})
+	}
 
-    // FOR THE TRAVEL TYPE SELECTION
-    function updateTravelTypeInDatabase(prodId, travelTypeId) {
-        start_loader();
-        $.ajax({
-            url: _base_url_ + 'classes/Master.php?f=update_travel_type',
-            method: 'POST',
-            data: {
-                prod_id: prodId,
-                travel_type_id: travelTypeId
-            },
-            dataType: 'json',
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-                alert_toast('An error occurred: ' + error, 'error');
-                end_loader();
-            },
-            success: function (resp) {
-                if (resp.status == 'success') {
-                    // Handle success if needed
-                    console.log('Travel type updated successfully');
-                    // Save the selected value to local storage
-                    sessionStorage.setItem('selectedTravelType_' + prodId, travelTypeId);
-                } else if (!!resp.msg) {
-                    // Handle error message if needed
-                    console.error('Error updating travel type: ' + resp.msg);
-                } else {
-                    // Handle generic error if needed
-                    console.error('Unknown error occurred while updating travel type');
-                }
-                end_loader();
-            }
-        });
-    }
-
-    // On page load, retrieve the selected value from local storage and set it as the selected option
-    $(document).ready(function () {
-        $('.travel-type').each(function () {
-            var prodId = $(this).data('prod-id');
-            var storedTravelTypeId = sessionStorage.getItem('selectedTravelType_' + prodId);
-            if (storedTravelTypeId) {
-                $(this).val(storedTravelTypeId).change(); // Trigger change event to update the server if needed
-            }
-        });
-    });
-
-    // On change of travel type, save the selected value in local storage
-    $('.travel-type').change(function () {
-        var prodId = $(this).data('prod-id');
-        var selectedTravelTypeId = $(this).val();
-        updateTravelTypeInDatabase(prodId, selectedTravelTypeId);
-        sessionStorage.setItem('selectedTravelType_' + prodId, selectedTravelTypeId);
-    });
-
-    // On change of payment type, save the selected value in local storage
-    $('.payment-type').change(function () {
-        var prodId = $(this).data('prod-id');
-        var selectedPaymentTypeId = $(this).val();
-        updatePaymentTypeInDatabase(prodId, selectedPaymentTypeId);
-        sessionStorage.setItem('selectedPaymentType_' + prodId, selectedPaymentTypeId);
-    });
-
-    // On page load, retrieve the selected value from local storage and set it as the selected option
-    $(document).ready(function () {
-        $('.payment-type').each(function () {
-            var prodId = $(this).data('prod-id');
-            var storedPaymentTypeId = sessionStorage.getItem('selectedPaymentType_' + prodId);
-            if (storedPaymentTypeId) {
-                $(this).val(storedPaymentTypeId).change(); // Trigger change event to update the server if needed
-            }
-        });
-    });
-
-    // Function to update payment type in the database
-    function updatePaymentTypeInDatabase(prodId, paymentTypeId) {
-        start_loader();
-        $.ajax({
-            url: _base_url_ + 'classes/Master.php?f=update_payment_type',
-            method: 'POST',
-            data: {
-                prod_id: prodId,
-                payment_type_id: paymentTypeId
-            },
-            dataType: 'json',
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-                alert_toast('An error occurred: ' + error, 'error');
-                end_loader();
-            },
-            success: function (resp) {
-                if (resp.status == 'success') {
-                    // Handle success if needed
-                    console.log('Payment type updated successfully');
-                } else if (!!resp.msg) {
-                    // Handle error message if needed
-                    console.error('Error updating payment type: ' + resp.msg);
-                } else {
-                    // Handle generic error if needed
-                    console.error('Unknown error occurred while updating payment type');
-                }
-                end_loader();
-            }
-        });
-    }
-
-    // On change of payment amount, save the entered value in local storage
-    $('.payment-amount').change(function () {
-        var prodId = $(this).data('prod-id');
-        var enteredPaymentAmount = $(this).val();
-        updatePaymentAmountInDatabase(prodId, enteredPaymentAmount);
-        sessionStorage.setItem('enteredPaymentAmount_' + prodId, enteredPaymentAmount);
-    });
-
-    // On page load, retrieve the entered value from local storage and set it as the entered value
-    $(document).ready(function () {
-        $('.payment-amount').each(function () {
-            var prodId = $(this).data('prod-id');
-            var storedPaymentAmount = sessionStorage.getItem('enteredPaymentAmount_' + prodId);
-            if (storedPaymentAmount) {
-                $(this).val(storedPaymentAmount).change(); // Trigger change event to update the server if needed
-            }
-        });
-    });
-
-    // Function to update payment amount in the database
-    function updatePaymentAmountInDatabase(prodId, paymentAmount) {
-        start_loader();
-        $.ajax({
-            url: _base_url_ + 'classes/Master.php?f=update_payment_amount',
-            method: 'POST',
-            data: {
-                prod_id: prodId,
-                payment_amount: paymentAmount
-            },
-            dataType: 'json',
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-                alert_toast('An error occurred: ' + error, 'error');
-                end_loader();
-            },
-            success: function (resp) {
-                if (resp.status == 'success') {
-                    // Handle success if needed
-                    console.log('Payment amount updated successfully');
-                } else if (!!resp.msg) {
-                    // Handle error message if needed
-                    console.error('Error updating payment amount: ' + resp.msg);
-                } else {
-                    // Handle generic error if needed
-                    console.error('Unknown error occurred while updating payment amount');
-                }
-                end_loader();
-            }
-        });
-    }
+    
+//----------------------------------------------------------------------------------------------------------------
 </script>
 
 <script>

@@ -28,7 +28,7 @@
                         <th>Date Booked</th>
                         <th>Ref. Code</th>
                         <th>Total Amount</th>
-                        <th>Status</th>
+                        <th>Booking Status</th>
                         <th>Payment Status</th>
                         <th>Action</th>
                     </tr>

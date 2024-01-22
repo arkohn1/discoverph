@@ -71,7 +71,7 @@
             <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
           </div>
           <div class="col-12 text-center">
-          <a href="<?= base_url.'agency_admin/register.php' ?>">Create an Account</a>
+          <!--<a href="<?= base_url.'agency_admin/register.php' ?>">Create an Account</a>-->
           </div>
           <!-- /.col -->
         </div>

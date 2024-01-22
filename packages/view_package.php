@@ -443,6 +443,18 @@ function get_product_reviews($package_id) {
     .rating span.star.active {
         color: gold;
     }
+    .carousel-control-prev,
+    .carousel-control-next {
+        background: none;
+        border: none;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background: none;
+        opacity: 0;
+        visibility: hidden;
+    }
 
 </style>
 <div class="content py-3">
