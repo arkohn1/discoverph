@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2023 at 04:47 AM
+-- Generation Time: Jan 22, 2024 at 08:53 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -126,7 +126,8 @@ INSERT INTO `booked_packages` (`id`, `booked_packages_id`, `package_id`, `number
 (47, 52, 19, 2, 2, 1, 2499, '2024-01-11', '0000-00-00', 1, 1000, 11, '2023-12-17 02:33:42'),
 (48, 53, 18, 4, 4, 1, 799, '2024-01-21', '0000-00-00', 1, 1000, 12, '2023-12-17 02:34:52'),
 (49, 54, 19, 5, 2, 1, 2499, '2024-01-25', '0000-00-00', 1, 5000, 11, '2023-12-18 21:03:51'),
-(50, 55, 19, 5, 2, 1, 2499, '2024-01-10', '0000-00-00', 1, 2000, 11, '2023-12-19 10:12:32');
+(50, 55, 19, 5, 2, 1, 2499, '2024-01-10', '0000-00-00', 1, 2000, 11, '2023-12-19 10:12:32'),
+(51, 56, 18, 1, 2, 1, 799, '0000-00-00', '0000-00-00', 1, 500, 12, '2024-01-20 17:05:07');
 
 -- --------------------------------------------------------
 
@@ -163,14 +164,15 @@ INSERT INTO `booked_packages_list` (`id`, `code`, `traveler_id`, `agency_id`, `t
 (42, '202311-00009', 3, 4, 7650, 'uploads/receipt/3_6563be0e96023_AAA.jpg', '3 days 3 rooms testing', 3, 1, '2023-11-27 05:52:14', '2023-11-27 06:26:17'),
 (43, '202311-00010', 3, 4, 5100, 'uploads/receipt/3_6564907200d23_376357602_831507191701156_1441885424189076074_n.jpg', '2 rooms 3 days gcash 5100', 3, 0, '2023-11-27 20:49:53', '2023-11-28 07:26:31'),
 (44, '202311-00011', 3, 4, 850, '', '123', 0, 0, '2023-11-30 08:27:49', '2023-11-30 08:27:49'),
-(45, '202312-00001', 3, 8, 1598, 'uploads/receipt/3_656eb7f7a40df_DDD.jpg', 'sample booking 1', 0, 0, '2023-12-05 13:41:11', '2023-12-05 13:41:11'),
+(45, '202312-00001', 3, 8, 1598, 'uploads/receipt/3_656eb7f7a40df_DDD.jpg', 'sample booking 1', 1, 0, '2023-12-05 13:41:11', '2024-01-20 17:17:57'),
 (48, '202312-00004', 3, 8, 1598, 'uploads/receipt/3_657c6adbe2f00_376357602_831507191701156_1441885424189076074_n.jpg', 'testing travel type', 0, 0, '2023-12-15 23:03:55', '2023-12-17 02:03:35'),
 (49, '202312-00005', 3, 8, 2397, 'uploads/receipt/3_657c6d5944aaf_376357602_831507191701156_1441885424189076074_n.jpg', 'test book 3', 2, 1, '2023-12-15 23:14:33', '2023-12-16 04:57:26'),
 (50, '202312-00006', 3, 8, 799, 'uploads/receipt/3_657d90599320a_sdasd.jpg', 'test book ', 3, 1, '2023-12-16 19:56:09', '2023-12-17 02:05:06'),
 (52, '202312-00002', 6, 8, 4998, 'uploads/receipt/6_657ded863aaeb_376357602_831507191701156_1441885424189076074_n.jpg', 'test book sopi', 3, 0, '2023-12-17 02:33:42', '2023-12-18 00:50:25'),
 (53, '202312-00003', 6, 8, 3196, 'uploads/receipt/6_657dedcc552db_DDD.jpg', 'test book sopi part 2', 1, 2, '2023-12-17 02:34:52', '2023-12-17 03:38:44'),
 (54, '202312-00007', 7, 8, 12495, 'uploads/receipt/7_65804337291d4_376357602_831507191701156_1441885424189076074_n.jpg', 'test book khistan 1', 1, 2, '2023-12-18 21:03:51', '2023-12-18 21:04:33'),
-(55, '202312-00008', 6, 8, 12495, 'uploads/receipt/6_6580fc1054f71_CCC.jpg', 'test  book', 2, 1, '2023-12-19 10:12:32', '2023-12-19 10:15:30');
+(55, '202312-00008', 6, 8, 12495, 'uploads/receipt/6_6580fc1054f71_CCC.jpg', 'test  book', 2, 1, '2023-12-19 10:12:32', '2023-12-19 10:15:30'),
+(56, '202401-00001', 3, 8, 799, 'uploads/receipt/3_65ab8cc364769_BBB.jpg', 'hahaha', 0, 0, '2024-01-20 17:05:07', '2024-01-20 17:05:07');
 
 -- --------------------------------------------------------
 
@@ -198,7 +200,8 @@ CREATE TABLE `booking_list` (
 
 INSERT INTO `booking_list` (`id`, `traveler_id`, `package_id`, `payments_id`, `payment_type_id`, `payment_amount`, `number_of_traveler`, `travel_type_id`, `days`, `check_in`, `check_out`) VALUES
 (314, 7, 19, NULL, 1, 0, 1, NULL, 1, '0000-00-00', '0000-00-00'),
-(321, 6, 18, 12, NULL, 0, 1, NULL, 1, '0000-00-00', '0000-00-00');
+(323, 6, 19, NULL, NULL, 0, 1, NULL, 1, '0000-00-00', '0000-00-00'),
+(343, 3, 18, NULL, 1, 0, 2, NULL, 1, '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -302,8 +305,8 @@ INSERT INTO `message_list` (`id`, `fullname`, `contact`, `email`, `message`, `st
 (29, '112', '112', '112@112', '112', 0, '2023-11-27 01:25:32'),
 (30, '222', '222', '222@222', '222', 0, '2023-11-27 01:26:14'),
 (31, 'mark', '123', 'mark@123', 'mark123', 1, '2023-11-27 01:29:52'),
-(32, '555', '555', '555@555', '555', 0, '2023-11-27 01:30:46'),
-(33, '1221', '2123121', '22@12312', '21312312312312', 0, '2023-11-27 01:32:33'),
+(32, '555', '555', '555@555', '555', 1, '2023-11-27 01:30:46'),
+(33, '1221', '2123121', '22@12312', '21312312312312', 1, '2023-11-27 01:32:33'),
 (34, '321312', '213231', '223@231231', '231231', 1, '2023-11-27 01:32:58'),
 (35, 'mark', 'mark', 'mark@mark', 'markmark', 1, '2023-11-27 06:15:02'),
 (36, 'Dustin Sophie Luna', '0901-234-5678', 'dustin@gmail.com', 'test message', 1, '2023-12-17 01:47:22');
@@ -372,7 +375,7 @@ INSERT INTO `payments` (`id`, `agency_id`, `name`, `description`, `status`, `qr_
 (6, 4, 'PayMaya', '09123456789', 1, 'uploads/qr/6.png', 0, '2023-11-18 07:56:23', NULL),
 (7, 5, 'Cash', '123', 1, NULL, 0, '2023-11-19 01:04:23', NULL),
 (9, 5, 'abc', 'abc', 1, 'uploads/qr/1.png', 0, '2023-11-19 01:06:48', NULL),
-(10, 8, 'Cash', 'Please provide payment (cash) on tour day.', 1, 'uploads/qr/1.png', 0, '2023-12-01 19:10:09', NULL),
+(10, 8, 'Cash', 'Please provide payment (cash) on tour day.', 0, 'uploads/qr/1.png', 0, '2023-12-01 19:10:09', NULL),
 (11, 8, 'GCash', 'Jose Rizal | 0901-234-5678', 1, 'uploads/qr/11.png', 0, '2023-12-01 19:16:27', NULL),
 (12, 8, 'BDO', '(sample bank details)', 1, 'uploads/qr/12.png', 0, '2023-12-01 19:17:39', NULL),
 (13, 8, 'PayMaya', 'Jose Rizal | 0901-234-5678', 1, 'uploads/qr/13.png', 0, '2023-12-01 19:19:45', NULL);
@@ -394,8 +397,7 @@ CREATE TABLE `payment_type` (
 
 INSERT INTO `payment_type` (`id`, `payment_type_name`) VALUES
 (1, 'Down Payment'),
-(2, 'Full Payment'),
-(3, 'Book Now Pay Later');
+(2, 'Full Payment');
 
 -- --------------------------------------------------------
 
@@ -451,7 +453,8 @@ INSERT INTO `ratings_reviews` (`id`, `package_id`, `traveler_id`, `agency_id`, `
 (85, 19, 3, 8, 3, 'test review\n', 1, '2023-12-17 02:31:55'),
 (87, 19, 6, 8, 4, 'test review', 1, '2023-12-17 02:32:25'),
 (91, 19, 7, 8, 1, 'test review', 0, '2023-12-18 20:14:44'),
-(93, 19, 6, 8, 5, 'test review masaya', 0, '2023-12-19 10:16:33');
+(93, 19, 6, 8, 5, 'test review masaya', 0, '2023-12-19 10:16:33'),
+(94, 18, 3, 8, 4, 'wow', 0, '2024-01-20 17:08:40');
 
 -- --------------------------------------------------------
 
@@ -749,19 +752,19 @@ ALTER TABLE `agency_type_list`
 -- AUTO_INCREMENT for table `booked_packages`
 --
 ALTER TABLE `booked_packages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `booked_packages_list`
 --
 ALTER TABLE `booked_packages_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `booking_list`
 --
 ALTER TABLE `booking_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=322;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=344;
 
 --
 -- AUTO_INCREMENT for table `category_list`
@@ -803,7 +806,7 @@ ALTER TABLE `payment_type`
 -- AUTO_INCREMENT for table `ratings_reviews`
 --
 ALTER TABLE `ratings_reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `rooms`
