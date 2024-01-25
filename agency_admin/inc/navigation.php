@@ -76,7 +76,7 @@
                       <a href="<?php echo base_url ?>agency_admin/?page=reports/booking_reports" class="nav-link nav-reports_booking_reports">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>
-                          Monthly Booking Report
+                          Reports
                         </p>
                       </a>
                     </li>

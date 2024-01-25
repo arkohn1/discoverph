@@ -121,7 +121,20 @@
       </div>
     </div>
   </div>
-  <div class="col-12 col-sm-4 col-md-4" onclick="location.href='<?php echo base_url ?>agency_admin/?page=rooms';" style="cursor: pointer;">
+  <div class="col-12 col-sm-4 col-md-4" onclick="location.href='<?php echo base_url ?>agency_admin/?page=reports/booking_reports';" style="cursor: pointer;">
+    <div class="info-box">
+      <span class="info-box-icon bg-gradient-primary elevation-1"><i class="fas fa-chart-bar"></i></span>
+
+      <div class="info-box-content">
+        <span class="info-box-text">Generate Reports</span>
+        <span class="iinfo-box-number text-right h4">
+      
+          <?php ?>
+        </span>
+      </div>
+    </div>
+  </div>
+  <!--<div class="col-12 col-sm-4 col-md-4" onclick="location.href='<?php echo base_url ?>agency_admin/?page=rooms';" style="cursor: pointer;">
     <div class="info-box">
       <span class="info-box-icon bg-gradient-orange elevation-1"><i class="fas fa-shuttle-van"></i></span>
       <div class="info-box-content">
@@ -135,7 +148,7 @@
         </span>
       </div>
     </div>
-  </div>
+  </div>-->
 </div>
 <div class="clear-fix mb-2">
   <div class="text-center w-100">

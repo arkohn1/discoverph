@@ -76,7 +76,7 @@
                       <a href="<?php echo base_url ?>admin/?page=reports/booking_reports" class="nav-link nav-reports_booking_reports">
                         <i class="nav-icon fas fa-calendar"></i>
                         <p>
-                          Monthly Booking Report
+                          Reports
                         </p>
                       </a>
                     </li>
