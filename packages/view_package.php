@@ -443,6 +443,7 @@ function get_product_reviews($package_id) {
     .rating span.star.active {
         color: gold;
     }
+    
     .carousel-control-prev,
     .carousel-control-next {
         background: none;
@@ -494,13 +495,11 @@ function get_product_reviews($package_id) {
                         </div>
                         <br>                
                         <!-- rooms Container -->
-                        <div class="rooms-container">
-                            <!-- Text for Joiner Travel Type -->
+                        <!--<div class="rooms-container">
                             <div class="joiner-travel-type-text" style="color: white;">
                                 <p><strong>For Joiners and Groups Travel Type</strong></p>
                             </div>
 
-                            <!-- Available rooms Box -->
                             <div class="room-box available-rooms">
                                 <div style="display: flex;">
                                     <div class="room-header"><small>Available Seat:</small></div>
@@ -508,16 +507,13 @@ function get_product_reviews($package_id) {
                                 </div>
                             </div>
 
-                            <!-- Taken rooms Box -->
                             <div class="room-box taken-rooms">
                                 <div style="display: flex;">
                                     <div class="room-header"><small>Taken Seat:</small></div>
                                     <div class="room-content"><p class="m-0"><?= $takenRooms ?></p></div>
                                 </div>
                             </div>
-                        </div>
-
-
+                        </div>-->
                         <br>
                     </div>
 
@@ -684,14 +680,17 @@ function get_product_reviews($package_id) {
                         $reviews = get_product_reviews($id); // Replace with your actual function
                         if ($reviews) {
                             foreach ($reviews as $review) {
-                                echo '<div class="review-container" style="background-color: #;">';
+                                echo '<div class="review-container" style="background-color: #; display: flex; align-items: center; flex-wrap: wrap;">';
                                 echo '<div class="review-header">';
                                 echo '<img src="' . validate_image($review['avatar']) . '" class="img-avatar-small img-thumbnail p-0 border-2" alt="client_avatar">';
-                                echo '<h5 style="margin: 0; padding: 0; margin-left: -220px;">' . $review['client_name'] . '</h5>';
-                                echo '<p> ' . date('F j, Y', strtotime($review['date_created'])) . '</p>';
+                                echo '<div style="margin-left: 10px;">'; // Adjusted margin for spacing
+                                echo '<h5 style="margin: 0; padding: 0; text-align: left;">' . $review['client_name'] . '</h5>';
+                                echo '<p style="margin: 0;">' . date('F j, Y', strtotime($review['date_created'])) . '</p>';
+                                echo '</div>';
                                 echo '</div>';
                                 
-                                // Display stars based on the rating
+                                // Display stars based on the rating at the top right
+                                echo '<div style="flex-grow: 1; text-align: right;">';
                                 echo '<p> ';
                                 for ($i = 1; $i <= 5; $i++) {
                                     if ($i <= $review['rating']) {
@@ -703,8 +702,9 @@ function get_product_reviews($package_id) {
                                     }
                                 }
                                 echo '</p>';
+                                echo '</div>';
                                 
-                                echo '<div class="review-content">';
+                                echo '<div class="review-content" style="width: 100%; padding-top: 10px;">'; // Adjusted styling for review content
                                 echo '<p>' . $review['review'] . '</p>';
                                 echo '</div>';
                                 echo '</div>';
@@ -713,6 +713,8 @@ function get_product_reviews($package_id) {
                         ?>
                     </div>
                 </div>
+
+
                 <!-- Form for submitting reviews on the right side -->
                 <div id="newReviewForm" style="width: 100%; float: left;">
                     <form id="reviewForm">

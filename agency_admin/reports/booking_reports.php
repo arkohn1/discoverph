@@ -125,6 +125,12 @@
 <hr>
 </noscript>
 <script>
+    $(document).ready(function(){
+		$('.table').dataTable();
+		$('#uni_modal').on('hide.bs.modal',function(){
+			location.reload()
+		})
+	})
     $(function(){
         $('#filter').submit(function(e){
             e.preventDefault()

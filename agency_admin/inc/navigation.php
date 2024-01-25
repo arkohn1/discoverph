@@ -89,14 +89,14 @@
                         </p>
                       </a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <!--<li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>agency_admin/?page=rooms" class="nav-link nav-rooms">
                         <i class="nav-icon fas fa-shuttle-van"></i>
                         <p>
                           Joiner Room
                         </p>
                       </a>
-                    </li>
+                    </li>-->
                   </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

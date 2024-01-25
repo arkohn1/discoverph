@@ -73,7 +73,9 @@
 </style>
 <div class="content py-3">
     <div class="row">
-        <div class="col-md-4 order-md-2">
+       
+        
+        <!--<div class="col-md-4 order-md-2">
             <div class="card card-outline rounded-0 card-primary shadow">
                 <div class="card-body">
                     <div class="list-group">
@@ -100,9 +102,7 @@
                                 </div>
                             </div>
                         </div>
-
-
-
+                                            
                         <div class="list-group-item list-group-item-action">
                             <div class="form-group">
                                 <label for="priceRangeSlider">Select Price Range</label>
@@ -116,17 +116,15 @@
                                 <output id="priceRangeValues">Price Range: ₱<?= $minPrice ?> - ₱<?= $maxPrice ?></output>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
 
 
         
-        <div class="col-md-8 order-md-1">
+        <div class="col-md-12 order-md-1">
             <div class="card card-outline card-primary shadow rounded-0">
                 <div class="card-body">
                     <div class="container-fluid">
@@ -139,6 +137,27 @@
                                         <div class="input-group-append"><span class="input-group-text"><i class="fa fa-search"></i></span></div>
                                     </div>
                                 </form>
+                            </div>
+
+                            <div class="col-lg-4 col-md-2 col-sm-12">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-white border-right-0">
+                                            <i class="fas fa-filter"></i>
+                                        </span>
+                                    </div>
+                                    <select class="form-control custom-select" id="categoryDropdown" name="category">
+                                        <option value="all" <?= (!is_array($category_ids) && $category_ids =='all') ? "selected" : "" ?>>All</option>
+                                        <?php 
+                                        $categories = $conn->query("SELECT * FROM `category_list` where delete_flag = 0 and status = 1 order by `name` asc ");
+                                        while($row = $categories->fetch_assoc()):
+                                        ?>
+                                        <option value="<?= $row['id'] ?>" <?= in_array($row['id'],explode(',',$category_ids)) ? "selected" : '' ?>>
+                                            <?= $row['name'] ?>
+                                        </option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="row" id="package_list" style="display: flex; flex-wrap: wrap;">
@@ -160,7 +179,7 @@
                                 ?>
 
 
-                                <div class="col-lg-4 col-md-6 col-sm-12 product-item">
+                                <div class="col-lg-3 col-md-6 col-sm-12 product-item">
                                     <a href="./?page=packages/view_package&id=<?= $row['id'] ?>" class="card shadow rounded-0 text-reset text-decoration-none">
                                     <!-- <div class="product-img-holders position-relatives">
                                         <img src="<?= validate_image($row['image_path']) ?>" alt="Product-image" class="img-top product-img bg-gradient-gray">
