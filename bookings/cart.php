@@ -150,21 +150,25 @@
                                 </div>
                             </div>
                             <br><br>
-                            <div class="d-flex mb-3">
-                                <!-- Number of Travelers -->
-                                <div class="col-auto text-center">
-                                    <small class="text-muted">Number of Travelers</small>
+                            <!-- Number of Travelers -->
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-muted">Number of Travelers</label>
                                     <div class="input-group input-group-sm">
+                                        <input type="number" value="<?= $prow['number_of_traveler'] ?>" class="form-control text-center qty-input" data-id="<?= $prow['id'] ?>">
                                         <div class="input-group-prepend">
                                             <button class="btn btn-primary min-qty" data-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-minus"></i></button>
                                         </div>
-                                        <input type="text" value="<?= $prow['number_of_traveler'] ?>" class="form-control text-center" readonly="readonly">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary plus-qty" data-id="<?= $prow['id'] ?>" type="button"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success confirm-btn" required data-id="<?= $prow['id'] ?>" type="button">Confirm</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
                             <!-- Check-in and Check-out Dates -->
                             <div class="row mb-3">
                                 <div class="col-md-6">
@@ -292,91 +296,113 @@
 <script>
 //----------------------------------------------------------------------------------------------------------------
     // NUMBER OF TRAVELERS
-    $(function(){
-        $('.plus-qty').click(function(){
-            var group = $(this).closest('.input-group')
+    $(function () {
+        // Function to update cart quantity
+        function updateCartQty(cart_id, qty) {
+            var el = $('<div>');
+            el.addClass('alert alert-danger');
+            el.hide();
+            start_loader();
+
+            $.ajax({
+                url: _base_url_ + 'classes/Master.php?f=update_cart_qty',
+                method: 'POST',
+                data: { cart_id: cart_id, number_of_traveler: qty },
+                dataType: 'json',
+                error: function (err) {
+                    console.error(err);
+                    alert_toast('An error occurred.', 'error');
+                    end_loader();
+                },
+                success: function (resp) {
+                    if (resp.status === 'success') {
+                        // location.reload(); // Uncomment this line if you want to reload the page after successful update
+                    } else if (!!resp.msg) {
+                        el.text(resp.msg);
+                        $('#msg').append(el);
+                        el.show('slow');
+                        $('html, body').scrollTop(0);
+                    } else {
+                        el.text("An error occurred. Please try to refresh this page.");
+                        $('#msg').append(el);
+                        el.show('slow');
+                        $('html, body').scrollTop(0);
+                    }
+                    end_loader();
+                }
+            });
+        }
+
+        // Plus button click event
+        $('.plus-qty').click(function () {
+            var group = $(this).closest('.input-group');
             var qty = parseFloat(group.find('input').val()) + 1;
-            group.find('input').val(qty)
-            var cart_id = $(this).attr('data-id')
-            var el = $('<div>')
-            el.addClass('alert alert-danger')
-            el.hide()
-            start_loader()
-            $.ajax({
-                url:_base_url_+'classes/Master.php?f=update_cart_qty',
-                method:'POST',
-                data:{cart_id:cart_id,number_of_traveler:qty},
-                dataType:'json',
-                error:err=>{
-                    console.error(err)
-                    alert_toast('An error occurred.','error')
-                    end_loader()
-                },
-                success:function(resp){
-                    if(resp.status =='success'){
-                        location.reload()
-                    }else if(!!resp.msg){
-                        el.text(resp.msg)
-                        $('#msg').append(el)
-                        el.show('slow')
-                        $('html, body').scrollTop(0)
-                     }else{
-                        el.text("An error occurred. Please try to refresh this page.")
-                        $('#msg').append(el)
-                        el.show('slow')
-                        $('html, body').scrollTop(0)
-                    }
-                    end_loader()
-                }
-            })
-            
-        })
-        $('.min-qty').click(function(){
-            var group = $(this).closest('.input-group')
-            if(parseFloat(group.find('input').val()) == 1){
-                return false;
+            group.find('input').val(qty);
+            var cart_id = $(this).attr('data-id');
+            updateCartQty(cart_id, qty);
+            saveToLocalStorage(cart_id, qty);
+        });
+
+        // Minus button click event
+        $('.min-qty').click(function () {
+            var group = $(this).closest('.input-group');
+            var qty = parseFloat(group.find('input').val());
+
+            // Ensure the quantity does not go below 1
+            if (qty > 1) {
+                qty -= 1;
+                group.find('input').val(qty);
+                var cart_id = $(this).attr('data-id');
+                updateCartQty(cart_id, qty);
+                saveToLocalStorage(cart_id, qty);
             }
-            var qty = parseFloat(group.find('input').val()) - 1;
-            group.find('input').val(qty)
-            var cart_id = $(this).attr('data-id')
-            var el = $('<div>')
-            el.addClass('alert alert-danger')
-            el.hide()
-            start_loader()
-            $.ajax({
-                url:_base_url_+'classes/Master.php?f=update_cart_qty',
-                method:'POST',
-                data:{cart_id:cart_id,number_of_traveler:qty},
-                dataType:'json',
-                error:err=>{
-                    console.error(err)
-                    alert_toast('An error occurred.','error')
-                    end_loader()
-                },
-                success:function(resp){
-                    if(resp.status =='success'){
-                        location.reload()
-                    }else if(!!resp.msg){
-                        el.text(resp.msg)
-                        $('#msg').append(el)
-                        el.show('slow')
-                        $('html, body').scrollTop(0)
-                    }else{
-                        el.text("An error occurred. Please try to refresh this page.")
-                        $('#msg').append(el)
-                        el.show('slow')
-                        $('html, body').scrollTop(0)
-                    }
-                    end_loader()
-                }
-            })
-        })
+        });
 
-        $('.rem_item').click(function(){
-            _conf("Are you sure you want to cancel this booking?",'delete_cart',[$(this).attr('data-id')])
-        })
-    })
+        // Manual input change event
+        $('.qty-input').change(function () {
+            var qty = parseFloat($(this).val());
+            var cart_id = $(this).attr('data-id');
 
+            // Ensure the quantity does not go below 1
+            if (qty < 1) {
+                qty = 1;
+                $(this).val(qty);
+            }
+
+            updateCartQty(cart_id, qty);
+            saveToLocalStorage(cart_id, qty);
+        });
+
+        // Function to save quantity to local storage
+        function saveToLocalStorage(cart_id, qty) {
+            localStorage.setItem('cart_qty_' + cart_id, qty);
+        }
+
+        // Retrieve and set stored quantity on page load
+        $('.qty-input').each(function () {
+            var cart_id = $(this).data('id');
+            var storedQty = localStorage.getItem('cart_qty_' + cart_id);
+            if (storedQty !== null) {
+                $(this).val(storedQty);
+            }
+        });
+
+        // Confirm button click event
+        $('.confirm-btn').click(function () {
+            var cart_id = $(this).attr('data-id');
+            var qty = parseFloat($('.qty-input[data-id="' + cart_id + '"]').val());
+
+            // You can perform any additional logic here if needed before refreshing the page
+
+            // Reload the page
+            location.reload();
+        });
+
+        // Remove item click event
+        $('.rem_item').click(function () {
+            _conf("Are you sure you want to cancel this booking?", 'delete_cart', [$(this).attr('data-id')]);
+        });
+    });
 //----------------------------------------------------------------------------------------------------------------
     // TRAVEL TYPE SELECTION
     function updateTravelTypeInDatabase(prodId, travelTypeId) {
