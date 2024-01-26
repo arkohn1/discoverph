@@ -419,7 +419,7 @@
 
                                 <div class="form-group">
                                     <label for="message" class="text-muted">Message</label>
-                                    <textarea name="message" id="message" rows="4" class="form-control form-control-sm rounded-0" maxlength="300" required placeholder="Write your message here"></textarea>
+                                    <textarea name="message" id="message" rows="4" class="form-control form-control-sm rounded-0" maxlength="3000" required placeholder="Write your message here"></textarea>
                                 </div>
 
                                 <div class="form-group text-center">
@@ -564,7 +564,7 @@
         nameInputs.forEach(function (input) {
             input.addEventListener('input', function () {
                 var inputValue = this.value;
-                var sanitizedValue = inputValue.replace(/[^A-Za-z.]/g, ''); // Remove characters other than letters and periods
+                var sanitizedValue = inputValue.replace(/[^A-Za-z.\s]/g, ''); // Allow letters, periods, and spaces
                 this.value = sanitizedValue;
             });
         });

@@ -139,7 +139,7 @@
                                 </form>
                             </div>
 
-                            <div class="col-lg-4 col-md-2 col-sm-12">
+                            <!--<div class="col-lg-4 col-md-2 col-sm-12">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-white border-right-0">
@@ -158,7 +158,7 @@
                                         <?php endwhile; ?>
                                     </select>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="row" id="package_list" style="display: flex; flex-wrap: wrap;">
                             <?php 
