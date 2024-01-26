@@ -260,7 +260,7 @@
         nameInputs.forEach(function (input) {
             input.addEventListener('input', function () {
                 var inputValue = this.value;
-                var sanitizedValue = inputValue.replace(/[^A-Za-z.]/g, ''); // Remove characters other than letters and periods
+                var sanitizedValue = inputValue.replace(/[^A-Za-z.\s]/g, ''); // Allow letters, periods, and space
                 this.value = sanitizedValue;
             });
         });

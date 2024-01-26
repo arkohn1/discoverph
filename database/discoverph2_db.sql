@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2024 at 08:53 PM
+-- Generation Time: Jan 26, 2024 at 06:16 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -49,11 +49,9 @@ CREATE TABLE `agency_list` (
 --
 
 INSERT INTO `agency_list` (`id`, `code`, `agency_type_id`, `agency_name`, `agency_owner`, `email`, `contact`, `username`, `password`, `avatar`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(4, '202311-00001', 4, 'Basta Resort', 'Jose P. Rizal', 'bastaresort@gmail.com', '091234567891', 'bastaresort', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travel_agencies/4.png?v=1699820359', 1, 0, '2023-11-13 04:19:19', '2023-12-17 22:43:27'),
-(5, '202311-00002', 3, 'Ibang Resort', 'Optimus Prime', '', '09123456789', 'ibangresort', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travel_agencies/5.png?v=1699820607', 1, 0, '2023-11-13 04:23:27', '2023-11-13 04:23:27'),
-(8, '202311-00004', 4, 'MMC Travel and Tours', 'Jose Rizal', 'mmctravelandtours@gmail.com', '090123456789', 'mmc', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travel_agencies/8.png?v=1702749323', 1, 0, '2023-11-30 13:25:57', '2023-12-17 01:55:23'),
-(9, '202312-00001', 4, 'test 1', 'test 1', 'test1@gmail.com', '09123456789', 'test1', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travel_agencies/9.png?v=1702749218', 1, 0, '2023-12-16 19:09:33', '2023-12-17 01:53:38'),
-(10, '202312-00002', 4, 'test 2', 'test 2', 'test2@gmail.com', '0901-234-5678', 'test2', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travel_agencies/10.png?v=1702749192', 1, 0, '2023-12-17 01:51:41', '2023-12-17 01:53:12');
+(8, '202311-00004', 4, 'MMC Travel and Tours', 'Mark Delos Reyes', 'mmctravelandtours@gmail.com', '090123456789', 'mmc', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travel_agencies/8.png?v=1702749323', 1, 0, '2023-11-30 13:25:57', '2024-01-26 23:25:16'),
+(11, '202401-00001', 4, 'Pakisuyo Travel', 'Roy Calicadan Jr.', 'plantours@gmail.com', '0901-234-5678', 'pakisuyo_travel', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travel_agencies/11.png?v=1706282653', 1, 0, '2024-01-26 22:55:20', '2024-01-26 23:25:27'),
+(12, '202401-00002', 4, 'LaagTa Travel and Tours', 'Benedict Salio Timbol', 'laagta@gmail.com', '0912-345-6789', 'laagta', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travel_agencies/12.png?v=1706286727', 1, 0, '2024-01-27 00:32:07', '2024-01-27 00:32:07');
 
 -- --------------------------------------------------------
 
@@ -109,25 +107,13 @@ CREATE TABLE `booked_packages` (
 --
 
 INSERT INTO `booked_packages` (`id`, `booked_packages_id`, `package_id`, `number_of_traveler`, `travel_type_id`, `days`, `price`, `check_in`, `check_out`, `payment_type_id`, `payment_amount`, `payments_id`, `date_created`) VALUES
-(29, 34, 9, 1, 1, 1, 850, '2023-11-01', '2023-11-01', 1, 0, 2, '2023-11-20 00:47:07'),
-(30, 35, 9, 2, 1, 1, 850, '2023-11-01', '2023-11-01', 1, 0, 2, '2023-11-20 01:04:04'),
-(31, 36, 11, 3, 1, 2, 3200, '2023-11-03', '2023-11-04', 1, 0, 1, '2023-11-20 04:30:22'),
-(33, 38, 9, 1, 1, 1, 850, '2023-11-01', '2023-11-01', 1, 0, 2, '2023-11-24 05:30:45'),
-(34, 39, 9, 2, 1, 3, 850, '2023-11-01', '2023-11-03', 1, 0, 2, '2023-11-27 02:08:08'),
-(35, 40, 9, 2, 1, 2, 850, '2023-11-01', '2023-11-03', 1, 0, 2, '2023-11-27 05:19:15'),
-(36, 41, 9, 1, 1, 1, 850, '2023-11-01', '2023-11-01', 1, 0, 2, '2023-11-27 05:22:30'),
-(37, 42, 9, 3, 1, 3, 850, '2023-11-03', '2023-11-05', 1, 0, 2, '2023-11-27 05:52:14'),
-(38, 43, 9, 2, 1, 3, 850, '2023-11-01', '2023-11-03', 1, 0, 2, '2023-11-27 20:49:53'),
-(39, 44, 9, 1, 1, 1, 850, '0000-00-00', '0000-00-00', 1, 0, 1, '2023-11-30 08:27:49'),
-(40, 45, 18, 2, 1, 1, 799, '2023-12-09', '0000-00-00', 1, 0, 11, '2023-12-05 13:41:11'),
 (43, 48, 18, 2, 2, 1, 799, '2023-12-22', '0000-00-00', 2, 1598, 12, '2023-12-15 23:03:55'),
 (44, 49, 18, 3, 2, 1, 799, '2023-12-26', '0000-00-00', 1, 2000, 12, '2023-12-15 23:14:33'),
 (45, 50, 18, 1, 2, 1, 799, '2023-12-25', '0000-00-00', 1, 200, 11, '2023-12-16 19:56:09'),
 (47, 52, 19, 2, 2, 1, 2499, '2024-01-11', '0000-00-00', 1, 1000, 11, '2023-12-17 02:33:42'),
-(48, 53, 18, 4, 4, 1, 799, '2024-01-21', '0000-00-00', 1, 1000, 12, '2023-12-17 02:34:52'),
 (49, 54, 19, 5, 2, 1, 2499, '2024-01-25', '0000-00-00', 1, 5000, 11, '2023-12-18 21:03:51'),
 (50, 55, 19, 5, 2, 1, 2499, '2024-01-10', '0000-00-00', 1, 2000, 11, '2023-12-19 10:12:32'),
-(51, 56, 18, 1, 2, 1, 799, '0000-00-00', '0000-00-00', 1, 500, 12, '2024-01-20 17:05:07');
+(52, 57, 19, 2, 1, 1, 2499, '2024-02-14', '0000-00-00', 1, 1000, 11, '2024-01-24 14:15:26');
 
 -- --------------------------------------------------------
 
@@ -154,17 +140,6 @@ CREATE TABLE `booked_packages_list` (
 --
 
 INSERT INTO `booked_packages_list` (`id`, `code`, `traveler_id`, `agency_id`, `total_amount`, `receipt`, `notes`, `status`, `payment_status`, `date_created`, `date_updated`) VALUES
-(34, '202311-00007', 3, 4, 850, 'uploads/receipt/34_655b1231a2cd0_AAA.jpg', 'bdo 850 1 day gcash', 1, 1, '2023-11-20 00:47:07', '2023-11-20 17:04:33'),
-(35, '202311-00008', 3, 4, 1700, 'uploads/receipt/35_655b0ed211f39_AAA.jpg', 'gcash 1700', 0, 0, '2023-11-20 01:04:04', '2023-11-20 17:00:26'),
-(36, '202311-00001', 3, 4, 19200, 'uploads/receipt/36_655b19a01a938_AAA.jpg', 'cash 3 rooms 2 days', 0, 1, '2023-11-20 04:30:22', '2023-11-20 17:03:16'),
-(38, '202311-00003', 3, 4, 850, 'uploads/receipt/38_656135d6029df_Arkohn try.jpg', '1 night', 3, 0, '2023-11-24 05:30:45', '2023-11-26 09:02:17'),
-(39, '202311-00004', 3, 4, 5100, 'uploads/receipt/39_656389b776bfd_AAA.jpg', '123', 0, 0, '2023-11-27 02:08:08', '2023-11-27 02:08:55'),
-(40, '202311-00005', 3, 4, 3400, 'uploads/receipt/3_6563b65303f4a_AAA.jpg', 'testing001', 3, 1, '2023-11-27 05:19:15', '2023-11-28 07:26:04'),
-(41, '202311-00006', 3, 4, 850, 'uploads/receipt/3_6563b716c034b_rc.jpg', 'checkout all 1', 0, 0, '2023-11-27 05:22:30', '2023-11-27 05:22:30'),
-(42, '202311-00009', 3, 4, 7650, 'uploads/receipt/3_6563be0e96023_AAA.jpg', '3 days 3 rooms testing', 3, 1, '2023-11-27 05:52:14', '2023-11-27 06:26:17'),
-(43, '202311-00010', 3, 4, 5100, 'uploads/receipt/3_6564907200d23_376357602_831507191701156_1441885424189076074_n.jpg', '2 rooms 3 days gcash 5100', 3, 0, '2023-11-27 20:49:53', '2023-11-28 07:26:31'),
-(44, '202311-00011', 3, 4, 850, '', '123', 0, 0, '2023-11-30 08:27:49', '2023-11-30 08:27:49'),
-(45, '202312-00001', 3, 8, 1598, 'uploads/receipt/3_656eb7f7a40df_DDD.jpg', 'sample booking 1', 1, 0, '2023-12-05 13:41:11', '2024-01-20 17:17:57'),
 (48, '202312-00004', 3, 8, 1598, 'uploads/receipt/3_657c6adbe2f00_376357602_831507191701156_1441885424189076074_n.jpg', 'testing travel type', 0, 0, '2023-12-15 23:03:55', '2023-12-17 02:03:35'),
 (49, '202312-00005', 3, 8, 2397, 'uploads/receipt/3_657c6d5944aaf_376357602_831507191701156_1441885424189076074_n.jpg', 'test book 3', 2, 1, '2023-12-15 23:14:33', '2023-12-16 04:57:26'),
 (50, '202312-00006', 3, 8, 799, 'uploads/receipt/3_657d90599320a_sdasd.jpg', 'test book ', 3, 1, '2023-12-16 19:56:09', '2023-12-17 02:05:06'),
@@ -172,7 +147,7 @@ INSERT INTO `booked_packages_list` (`id`, `code`, `traveler_id`, `agency_id`, `t
 (53, '202312-00003', 6, 8, 3196, 'uploads/receipt/6_657dedcc552db_DDD.jpg', 'test book sopi part 2', 1, 2, '2023-12-17 02:34:52', '2023-12-17 03:38:44'),
 (54, '202312-00007', 7, 8, 12495, 'uploads/receipt/7_65804337291d4_376357602_831507191701156_1441885424189076074_n.jpg', 'test book khistan 1', 1, 2, '2023-12-18 21:03:51', '2023-12-18 21:04:33'),
 (55, '202312-00008', 6, 8, 12495, 'uploads/receipt/6_6580fc1054f71_CCC.jpg', 'test  book', 2, 1, '2023-12-19 10:12:32', '2023-12-19 10:15:30'),
-(56, '202401-00001', 3, 8, 799, 'uploads/receipt/3_65ab8cc364769_BBB.jpg', 'hahaha', 0, 0, '2024-01-20 17:05:07', '2024-01-20 17:05:07');
+(57, '202401-00002', 3, 8, 4998, 'uploads/receipt/3_65b0aafe90885_CCC.jpg', 'gikhi', 2, 2, '2024-01-24 14:15:26', '2024-01-24 14:17:11');
 
 -- --------------------------------------------------------
 
@@ -201,7 +176,7 @@ CREATE TABLE `booking_list` (
 INSERT INTO `booking_list` (`id`, `traveler_id`, `package_id`, `payments_id`, `payment_type_id`, `payment_amount`, `number_of_traveler`, `travel_type_id`, `days`, `check_in`, `check_out`) VALUES
 (314, 7, 19, NULL, 1, 0, 1, NULL, 1, '0000-00-00', '0000-00-00'),
 (323, 6, 19, NULL, NULL, 0, 1, NULL, 1, '0000-00-00', '0000-00-00'),
-(343, 3, 18, NULL, 1, 0, 2, NULL, 1, '0000-00-00', '0000-00-00');
+(367, 3, 24, NULL, NULL, 0, 2, NULL, 1, '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -225,12 +200,10 @@ CREATE TABLE `category_list` (
 --
 
 INSERT INTO `category_list` (`id`, `agency_id`, `name`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(10, 4, 'Regular', '1 room, 1 medium-sized bed, aircon', 1, 0, '2023-11-13 04:31:45', NULL),
-(11, 4, 'Premium', '1 room, 2 large sized beds, aircon, widescreen tv, wifi', 1, 0, '2023-11-13 04:32:24', NULL),
-(12, 4, 'Deluxe', '1 room, 4 large sized beds, aircon, widescreen tv, wifi, karaoke, billiards', 1, 0, '2023-11-14 01:36:22', NULL),
-(16, 5, 'Whole Resort', 'Rent the whole resort.', 1, 0, '2023-11-20 04:33:02', NULL),
 (18, 8, 'Day Tour', 'sample description', 1, 0, '2023-11-30 13:32:51', NULL),
-(20, 8, '2 Days 1 Night', 'sample description', 1, 0, '2023-12-17 02:15:48', '2023-12-17 02:17:28');
+(20, 8, '2 Days 1 Night', 'sample description', 1, 0, '2023-12-17 02:15:48', '2023-12-17 02:17:28'),
+(21, 11, '3 Days 2 Nights', 'Holy Week ', 1, 0, '2024-01-26 22:58:15', NULL),
+(22, 11, 'Day Tour', 'Cavite Day Tour', 1, 0, '2024-01-27 00:05:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -254,14 +227,6 @@ CREATE TABLE `inquiries` (
 --
 
 INSERT INTO `inquiries` (`id`, `traveler_id`, `package_id`, `agency_id`, `subject`, `message`, `status`, `date_created`) VALUES
-(13, 3, 9, 4, 'sample', 'SAMPLE', 1, '2023-11-16 01:10:30'),
-(14, 3, 9, 4, 'hi', 'hi', 1, '2023-11-16 01:17:59'),
-(15, 3, 9, 4, 'gg', 'gg', 1, '2023-11-16 01:20:57'),
-(25, 3, 9, 4, 'mamako', 'mamako', 1, '2023-11-16 01:50:07'),
-(35, 3, 10, 4, 'try ', 'try', 1, '2023-11-17 03:54:23'),
-(37, 3, 9, 4, '123', '123', 0, '2023-11-20 03:28:48'),
-(38, 3, 10, 4, '123', '123', 0, '2023-11-20 03:28:56'),
-(39, 3, 11, 4, '123', '123', 0, '2023-11-20 03:29:09'),
 (43, 3, 18, 8, 'test inquire', 'test message', 1, '2023-12-16 19:51:10'),
 (47, 6, 19, 8, 'test inquire 2', 'test message 2', 1, '2023-12-17 23:55:05');
 
@@ -309,7 +274,8 @@ INSERT INTO `message_list` (`id`, `fullname`, `contact`, `email`, `message`, `st
 (33, '1221', '2123121', '22@12312', '21312312312312', 1, '2023-11-27 01:32:33'),
 (34, '321312', '213231', '223@231231', '231231', 1, '2023-11-27 01:32:58'),
 (35, 'mark', 'mark', 'mark@mark', 'markmark', 1, '2023-11-27 06:15:02'),
-(36, 'Dustin Sophie Luna', '0901-234-5678', 'dustin@gmail.com', 'test message', 1, '2023-12-17 01:47:22');
+(36, 'Dustin Sophie Luna', '0901-234-5678', 'dustin@gmail.com', 'test message', 1, '2023-12-17 01:47:22'),
+(37, 'HannahJoyOliveros', '0901-234-5678', 'arkohn@gmail.com', 'jojojojojo', 1, '2024-01-24 14:18:24');
 
 -- --------------------------------------------------------
 
@@ -340,11 +306,10 @@ CREATE TABLE `package_list` (
 --
 
 INSERT INTO `package_list` (`id`, `agency_id`, `category_id`, `room_id`, `name`, `address`, `map`, `description`, `gallery_path`, `price`, `image_path`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(9, 4, 10, NULL, 'Basta Resort (Regular)', 'Pansol, Calamba, Laguna', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30945.865595277177!2d121.1876487!3d14.1811152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd61e359982a35%3A0x1924c55513a3e849!2sMakiling%20Spring%20Resorts!5e0!3m2!1sen!2sph!4v1699900463925!5m2!1sen!2sph', '&lt;p&gt;Welcome to &lt;b&gt;Basta Resort&lt;/b&gt;, where tranquility meets luxury in a picturesque setting. Nestled amidst lush greenery and surrounded by breathtaking views, Basta Resort is your escape to a world of comfort and relaxation.&lt;/p&gt;&lt;p&gt;Our regular rooms are designed with your utmost comfort in mind, offering a perfect blend of modern amenities and charming decor. Each room is thoughtfully appointed to ensure a serene and enjoyable stay. Sink into plush beds with crisp linens, unwind in the cozy seating area, and take in the stunning vistas from your private balcony.&lt;/p&gt;&lt;p&gt;At Basta Resort, we understand the importance of creating a home away from home. Our regular rooms are equipped with all the essentials for a seamless stay, including air conditioning, flat-screen TVs, complimentary Wi-Fi, and well-appointed bathrooms with indulgent toiletries.&lt;/p&gt;&lt;p&gt;As our guest, you\'ll have access to the resort\'s world-class facilities and services. Lounge by the sparkling pool, rejuvenate your senses at the spa, or savor delectable cuisine at our onsite restaurant. Whether you\'re seeking a romantic getaway, a family retreat, or a solo adventure, Basta Resort provides the perfect backdrop for your dream vacation.&lt;/p&gt;&lt;p&gt;Come experience the beauty of Basta Resort, where every moment is an opportunity to unwind and create lasting memories. Book your stay today and embark on a journey of relaxation and indulgence.&lt;/p&gt;', 'uploads/packages/9_gallery_0.png,uploads/packages/9_gallery_1.png,uploads/packages/9_gallery_2.png,uploads/packages/9_gallery_3.png,uploads/packages/9_gallery_4.png,uploads/packages/9_gallery_5.png,uploads/packages/9_gallery_6.png', 850, 'uploads/packages/9.png', 0, 0, '2023-11-13 04:34:11', '2023-12-19 08:21:43'),
-(10, 4, 11, NULL, 'Basta Resort (Premium)', 'Pansol, Calamba, Laguna ', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30945.865595277177!2d121.1876487!3d14.1811152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd61e359982a35%3A0x1924c55513a3e849!2sMakiling%20Spring%20Resorts!5e0!3m2!1sen!2sph!4v1699900463925!5m2!1sen!2sph', '&lt;p&gt;Indulge in the epitome of luxury with our Premium Rooms at Basta Resort, where opulence and sophistication seamlessly blend to create an unparalleled retreat. Designed to exceed your expectations, our Premium Rooms offer an elevated experience, ensuring a stay that is both lavish and memorable.&lt;/p&gt;&lt;p&gt;Step into a world of refined comfort as you enter your spacious Premium Room. Immerse yourself in the plush surroundings, where premium furnishings and stylish decor create an ambiance of elegance. The room is thoughtfully curated with high-end amenities to cater to your every need, ensuring a stay that is both indulgent and relaxing.&lt;/p&gt;&lt;p&gt;Relish the exclusive perks that come with our Premium Rooms, including breathtaking panoramic views from your private balcony, personalized concierge services, and access to a dedicated lounge where you can unwind in an intimate setting. Enjoy a restful night\'s sleep on a luxurious king-size bed with premium linens, and wake up to the gentle sounds of nature just beyond your window.&lt;/p&gt;&lt;p&gt;At Basta Resort, we believe in offering an experience that goes beyond the ordinary. Our Premium Rooms boast additional amenities such as in-room coffee makers, deluxe toiletries, and spacious work areas for those who need to stay connected. Whether you\'re celebrating a special occasion or simply seeking a heightened level of comfort, our Premium Rooms are designed to exceed your expectations.&lt;/p&gt;&lt;p&gt;As a guest in our Premium accommodations, you\'ll also enjoy priority access to our resort\'s exclusive facilities, including a private pool and a fitness center. Elevate your stay at Basta Resort with our Premium Rooms, where luxury meets tranquility for an unforgettable escape. Book your indulgent retreat today and let us pamper you in style.&lt;/p&gt;', 'uploads/packages/10_gallery_0.png,uploads/packages/10_gallery_1.png,uploads/packages/10_gallery_2.png', 2500, 'uploads/packages/10.png?v=1699903935', 0, 0, '2023-11-14 03:32:13', '2023-12-19 08:21:36'),
-(11, 4, 12, NULL, 'Basta Resort (Deluxe)', 'Pansol, Calamba, Laguna', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30945.865595277177!2d121.1876487!3d14.1811152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd61e359982a35%3A0x1924c55513a3e849!2sMakiling%20Spring%20Resorts!5e0!3m2!1sen!2sph!4v1699900463925!5m2!1sen!2sph', '&lt;p&gt;Experience a heightened sense of luxury in our Deluxe Rooms at Basta Resort, where sophistication meets comfort in an environment designed to exceed expectations. Our Deluxe Rooms are thoughtfully crafted to provide a refined retreat, ensuring an indulgent stay that caters to your every desire.&lt;/p&gt;&lt;p&gt;Step into an oasis of serenity as you enter your Deluxe Room, adorned with tasteful decor and premium furnishings. The spacious layout creates a sense of openness, allowing you to unwind in style. Sink into the comfort of a sumptuous bed with high-quality linens, and take in the tranquil ambiance that surrounds you.&lt;/p&gt;&lt;p&gt;Our Deluxe Rooms are equipped with a range of amenities to enhance your stay, including a well-appointed en-suite bathroom with deluxe toiletries, a flat-screen TV for entertainment, and complimentary high-speed Wi-Fi for seamless connectivity. Enjoy the convenience of a designated work area, perfect for business travelers or those who need a quiet space to catch up on tasks.&lt;/p&gt;&lt;p&gt;Indulge in the luxury of your private balcony, where you can soak in breathtaking views or enjoy a quiet moment with a refreshing beverage. The attention to detail in our Deluxe Rooms extends to every corner, ensuring that your stay is as comfortable as it is memorable.&lt;/p&gt;&lt;p&gt;As a guest in our Deluxe accommodations, you\'ll have access to all the resort\'s amenities, from the inviting pool area to the delectable offerings at our onsite restaurant. Whether you\'re traveling for business or leisure, our Deluxe Rooms provide a haven of relaxation and sophistication.&lt;/p&gt;&lt;p&gt;Book your stay at Basta Resort and discover the perfect blend of luxury and tranquility in our Deluxe Rooms. Immerse yourself in an experience designed to elevate your journey and create lasting memories.&lt;/p&gt;', '', 3200, 'uploads/packages/11.png?v=1699904675', 0, 0, '2023-11-14 03:44:33', '2023-12-19 08:21:30'),
-(18, 8, 18, NULL, 'Secret River Laguna Day Tour', 'Calamba, Laguna', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25277.479490670084!2d121.1521302399552!3d14.21679047698094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd618f60320ffd%3A0xe5b4e3a1ea2fb845!2sSan%20Juan%20River!5e0!3m2!1sen!2sph!4v1701323066923!5m2!1sen!2sph', '&lt;div&gt;✅ENJOY 9+(1 FREE)TRAVEL PACKAGE PROMO&lt;/div&gt;&lt;div&gt;✅ OPEN TO ALL AGES&lt;/div&gt;&lt;div&gt;✅NO REQUIREMENTS NEEDED&lt;/div&gt;&lt;div&gt;✅OPEN FOR SOLO , JOINERS, GROUP AND EXCLUSIVE.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;INCLUSIONS:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;✔️RT Van Transfer Mnl-Zambales-Mnl&lt;/div&gt;&lt;div&gt;✔️Gas,Toll,Drivers fee,Drivers Meals&lt;/div&gt;&lt;div&gt;✔️Ecological Fee&lt;/div&gt;&lt;div&gt;✔️Parking fees,&lt;/div&gt;&lt;div&gt;✔️Coordinator on Board&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;DEPARTURE:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 1rem;&quot;&gt;A NIGHT BEFORE OF YOUR TOUR DATE&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;PICK-UP TIME AND PLACE:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;11:30PM - MOA ECOM CHOWKING&nbsp;&lt;/div&gt;&lt;div&gt;12:30AM - 7 ELEVEN GREENFIELD SHAW EDSA ( TELEPERFORMANCE )&nbsp;&lt;/div&gt;&lt;div&gt;1:00AM&nbsp; - MCDO CENTRIS BMW&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;FOR BOOKING / RESERVATION :&lt;/span&gt;&lt;/div&gt;&lt;div&gt;A Reservation of 500/person DAYTOUR and 1000/person for 2D1N is required to secure your slots. All deposits will be deducted to the balance, remaining balance and exclusions will be collected on the travel date itself.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;&quot;NO DEPOSIT NO RESERVATION POLICY&quot;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;Limited slots only! Reservations are on a first-come, first-serve basis. Promo is not valid during Holy week and peak seasons. Reservation depends on the availability of the Tour schedule. We also have combined tours for small groups, private tours can also be set on your preferred Travel date with free pick-up and drop-off within Metro Manila only.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;MMC TRAVEL AND TOURS&lt;/span&gt;&lt;/div&gt;&lt;div&gt;02-7000-7258 LANDLINE/GLOBE/TM&lt;/div&gt;&lt;div&gt;09778527841 GLOBE&lt;/div&gt;&lt;div&gt;www.facebook.com/www.mmctravelandtours.com.ph&lt;/div&gt;', 'uploads/packages/18_gallery_0.png,uploads/packages/18_gallery_1.png,uploads/packages/18_gallery_2.png,uploads/packages/18_gallery_3.png,uploads/packages/18_gallery_4.png,uploads/packages/18_gallery_5.png,uploads/packages/18_gallery_6.png', 799, 'uploads/packages/18.png', 1, 0, '2023-11-30 13:47:50', '2023-12-19 08:31:57'),
-(19, 8, 20, NULL, 'Secret River Laguna 2D1N', 'Calamba, Laguna', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25277.479490670084!2d121.1521302399552!3d14.21679047698094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd618f60320ffd%3A0xe5b4e3a1ea2fb845!2sSan%20Juan%20River!5e0!3m2!1sen!2sph!4v1701323066923!5m2!1sen!2sph', '&lt;div&gt;✅ENJOY 9+(1 FREE)TRAVEL PACKAGE PROMO&lt;/div&gt;&lt;div&gt;✅ OPEN TO ALL AGES&lt;/div&gt;&lt;div&gt;✅NO REQUIREMENTS NEEDED&lt;/div&gt;&lt;div&gt;✅OPEN FOR SOLO , JOINERS, GROUP AND EXCLUSIVE.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;INCLUSIONS:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;✔️RT Van Transfer Mnl-Zambales-Mnl&lt;/div&gt;&lt;div&gt;✔️Gas,Toll,Drivers fee,Drivers Meals&lt;/div&gt;&lt;div&gt;✔️Ecological Fee&lt;/div&gt;&lt;div&gt;✔️Parking fees,&lt;/div&gt;&lt;div&gt;✔️Coordinator on Board&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;DEPARTURE:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 1rem;&quot;&gt;A NIGHT BEFORE OF YOUR TOUR DATE&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;PICK-UP TIME AND PLACE:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;11:30PM - MOA ECOM CHOWKING&nbsp;&lt;/div&gt;&lt;div&gt;12:30AM - 7 ELEVEN GREENFIELD SHAW EDSA ( TELEPERFORMANCE )&nbsp;&lt;/div&gt;&lt;div&gt;1:00AM&nbsp; - MCDO CENTRIS BMW&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;FOR BOOKING / RESERVATION :&lt;/span&gt;&lt;/div&gt;&lt;div&gt;A Reservation of 500/person DAYTOUR and 1000/person for 2D1N is required to secure your slots. All deposits will be deducted to the balance, remaining balance and exclusions will be collected on the travel date itself.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;&quot;NO DEPOSIT NO RESERVATION POLICY&quot;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;Limited slots only! Reservations are on a first-come, first-serve basis. Promo is not valid during Holy week and peak seasons. Reservation depends on the availability of the Tour schedule. We also have combined tours for small groups, private tours can also be set on your preferred Travel date with free pick-up and drop-off within Metro Manila only.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;MMC TRAVEL AND TOURS&lt;/span&gt;&lt;/div&gt;&lt;div&gt;02-7000-7258 LANDLINE/GLOBE/TM&lt;/div&gt;&lt;div&gt;09778527841 GLOBE&lt;/div&gt;&lt;div&gt;www.facebook.com/www.mmctravelandtours.com.ph&lt;/div&gt;', 'uploads/packages/19_gallery_0.png,uploads/packages/19_gallery_1.png,uploads/packages/19_gallery_2.png,uploads/packages/19_gallery_3.png,uploads/packages/19_gallery_4.png,uploads/packages/19_gallery_5.png,uploads/packages/19_gallery_6.png', 2499, 'uploads/packages/18.png', 1, 0, '2023-12-01 02:21:54', '2023-12-19 08:31:44');
+(18, 8, 18, NULL, 'Secret River Laguna Day Tour', 'Calamba, Laguna', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25277.479490670084!2d121.1521302399552!3d14.21679047698094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd618f60320ffd%3A0xe5b4e3a1ea2fb845!2sSan%20Juan%20River!5e0!3m2!1sen!2sph!4v1701323066923!5m2!1sen!2sph', '&lt;div&gt;ENJOY 9+(1 FREE)TRAVEL PACKAGE PROMO&lt;/div&gt;&lt;div&gt;OPEN TO ALL AGES&lt;/div&gt;&lt;div&gt;NO REQUIREMENTS NEEDED&lt;/div&gt;&lt;div&gt;OPEN FOR SOLO , JOINERS, GROUP AND EXCLUSIVE.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;INCLUSIONS:&lt;/span&gt;&lt;/div&gt;&lt;ul&gt;&lt;li&gt;RT Van Transfer Mnl-Zambales-Mnl&lt;/li&gt;&lt;li&gt;Gas,Toll,Drivers fee,Drivers Meals&lt;/li&gt;&lt;li&gt;Ecological Fee&lt;/li&gt;&lt;li&gt;Parking fees,&lt;/li&gt;&lt;li&gt;Coordinator on Board&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;DEPARTURE:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 1rem;&quot;&gt;A NIGHT BEFORE OF YOUR TOUR DATE&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;PICK-UP TIME AND PLACE:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;11:30PM - MOA ECOM CHOWKING&amp;nbsp;&lt;/div&gt;&lt;div&gt;12:30AM - 7 ELEVEN GREENFIELD SHAW EDSA ( TELEPERFORMANCE )&amp;nbsp;&lt;/div&gt;&lt;div&gt;1:00AM&amp;nbsp; - MCDO CENTRIS BMW&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;FOR BOOKING / RESERVATION :&lt;/span&gt;&lt;/div&gt;&lt;div&gt;A Reservation of 500/person DAYTOUR and 1000/person for 2D1N is required to secure your slots. All deposits will be deducted to the balance, remaining balance and exclusions will be collected on the travel date itself.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;&quot;NO DEPOSIT NO RESERVATION POLICY&quot;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;Limited slots only! Reservations are on a first-come, first-serve basis. Promo is not valid during Holy week and peak seasons. Reservation depends on the availability of the Tour schedule. We also have combined tours for small groups, private tours can also be set on your preferred Travel date with free pick-up and drop-off within Metro Manila only.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;MMC TRAVEL AND TOURS&lt;/span&gt;&lt;/div&gt;&lt;div&gt;02-7000-7258 LANDLINE/GLOBE/TM&lt;/div&gt;&lt;div&gt;09778527841 GLOBE&lt;/div&gt;&lt;div&gt;www.facebook.com/www.mmctravelandtours.com.ph&lt;/div&gt;', 'uploads/packages/18_gallery_0.png,uploads/packages/18_gallery_1.png,uploads/packages/18_gallery_2.png,uploads/packages/18_gallery_3.png,uploads/packages/18_gallery_4.png,uploads/packages/18_gallery_5.png,uploads/packages/18_gallery_6.png', 799, 'uploads/packages/18.png', 1, 0, '2023-11-30 13:47:50', '2024-01-26 23:37:01'),
+(19, 8, 20, NULL, 'Secret River Laguna 2D1N', 'Calamba, Laguna', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61909.09072646383!2d120.9277331437874!3d14.117376936390048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd777b1ab54c8f%3A0x6ecc514451ce2be8!2sTagaytay%2C%20Cavite!5e0!3m2!1sen!2sph!4v1706282881376!5m2!1sen!2sph\" width=\"600\" height=\"450\" ', '&lt;div&gt;ENJOY 9+(1 FREE)TRAVEL PACKAGE PROMO&lt;/div&gt;&lt;div&gt;OPEN TO ALL AGES&lt;/div&gt;&lt;div&gt;NO REQUIREMENTS NEEDED&lt;/div&gt;&lt;div&gt;OPEN FOR SOLO , JOINERS, GROUP AND EXCLUSIVE.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;INCLUSIONS:&lt;/span&gt;&lt;/div&gt;&lt;ul&gt;&lt;li&gt;RT Van Transfer Mnl-Zambales-Mnl&lt;/li&gt;&lt;li&gt;Gas,Toll,Drivers fee,Drivers Meals&lt;/li&gt;&lt;li&gt;Ecological Fee&lt;/li&gt;&lt;li&gt;Parking fees,&lt;/li&gt;&lt;li&gt;Coordinator on Board&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;DEPARTURE:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 1rem;&quot;&gt;A NIGHT BEFORE OF YOUR TOUR DATE&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;PICK-UP TIME AND PLACE:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;11:30PM - MOA ECOM CHOWKING&nbsp;&lt;/div&gt;&lt;div&gt;12:30AM - 7 ELEVEN GREENFIELD SHAW EDSA ( TELEPERFORMANCE )&nbsp;&lt;/div&gt;&lt;div&gt;1:00AM&nbsp; - MCDO CENTRIS BMW&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;FOR BOOKING / RESERVATION :&lt;/span&gt;&lt;/div&gt;&lt;div&gt;A Reservation of 500/person DAYTOUR and 1000/person for 2D1N is required to secure your slots. All deposits will be deducted to the balance, remaining balance and exclusions will be collected on the travel date itself.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;&quot;NO DEPOSIT NO RESERVATION POLICY&quot;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;Limited slots only! Reservations are on a first-come, first-serve basis. Promo is not valid during Holy week and peak seasons. Reservation depends on the availability of the Tour schedule. We also have combined tours for small groups, private tours can also be set on your preferred Travel date with free pick-up and drop-off within Metro Manila only.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;MMC TRAVEL AND TOURS&lt;/span&gt;&lt;/div&gt;&lt;div&gt;02-7000-7258 LANDLINE/GLOBE/TM&lt;/div&gt;&lt;div&gt;09778527841 GLOBE&lt;/div&gt;&lt;div&gt;www.facebook.com/www.mmctravelandtours.com.ph&lt;/div&gt;', 'uploads/packages/19_gallery_0.png,uploads/packages/19_gallery_1.png,uploads/packages/19_gallery_2.png,uploads/packages/19_gallery_3.png,uploads/packages/19_gallery_4.png,uploads/packages/19_gallery_5.png,uploads/packages/19_gallery_6.png', 2499, 'uploads/packages/19.png', 1, 0, '2023-12-01 02:21:54', '2024-01-27 00:23:22'),
+(24, 11, 21, NULL, 'Tagaytay 3D2N', 'Tagaytay, Cavite', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61909.09072646383!2d120.9277331437874!3d14.117376936390048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd777b1ab54c8f%3A0x6ecc514451ce2be8!2sTagaytay%2C%20Cavite!5e0!3m2!1sen!2sph!4v1706282881376!5m2!1sen!2sph', '&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;INCLUSIONS:&lt;/span&gt;&lt;/div&gt;&lt;ul&gt;&lt;li&gt;A/C Van Roundtrip Transfers from SMX to Tagaytay - SMX&lt;/li&gt;&lt;li&gt;2 NIghts Hotel Accommodation at RIVERA HOTEL with daily breakfast (Quad &amp; Triple Sharing)&lt;/li&gt;&lt;li&gt;Tours &amp; Entrance Fees&lt;/li&gt;&lt;li&gt;Assistance of DOT Accredited Tour Guide on Day 2 Full Day Tour&lt;/li&gt;&lt;li&gt;1 Bottle of Mineral Water per day&lt;/li&gt;&lt;li&gt;Travel Insurance&lt;/li&gt;&lt;li&gt;Travel Kit&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;EXCLUSIONS:&lt;/span&gt;&lt;/div&gt;&lt;ul&gt;&lt;li&gt;Other expenses /tours not included in the itinerary&lt;/li&gt;&lt;li&gt;Tipping for Driver &amp; Tour Guide&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;ITINERARY:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;DAY 1:&lt;/p&gt;&lt;p&gt;08:00 am&nbsp; - 0900am Pick up SMX . Proceed to Tagaytay. Dropby Pink Sisters Monastery.&nbsp; Check In at Rivera Hotel.&nbsp; Free Time for&nbsp; Prayers and Meditation (Good Friday). Lunch and Dinner own pax account&lt;span style=&quot;font-size: 1rem;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 1rem;&quot;&gt;DAY 2:&nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Full Day Tour. Breakfast inside Hotel. Proceed to Twin Lakes for sightseeing and Photo Opportunity, visit Puzzle Mansion (Biggest Collection of Puzzles - World\'s Guiness Book of Record),&nbsp; Visit Our Lady of Manaoag Shrine, People\'s Park in the Sky then free time at Picnic Grove. Proceed to Good Shepeherd . Sky Ranch Photo Opp only (optional entrance) then back to Hotel.&nbsp; Lunch and Dinner own pax account.&lt;/p&gt;&lt;p&gt;DAY 3:&lt;/p&gt;&lt;p&gt;Breakfast inside Hotel. Breakfast inside Hotel. Check out. Visit Pasalubong Center. Passby Acienda Premium Outlet in Silang, Easter Sunday Visit at La Salette Shrine in Silang . Back to Manila. Dropby SMX.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;CONTACT US:&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Manila - Rm 323 FUBC Bldg, Escolta St., Binondo, Manila 09178053266 Tel Nos (02) 6646918/ 7031813&lt;/p&gt;&lt;p&gt;Email: manila@pakisuyotravel.com&lt;/p&gt;&lt;p&gt;info@pakisuyocenter.com&lt;/p&gt;&lt;table class=&quot;table table-bordered&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;p&gt;Manila - Rm 323 FUBC Bldg, Escolta St., Binondo, Manila 09178053266 Tel Nos (02) 6646918/ 7031813 |&nbsp;&lt;span style=&quot;background-color: transparent; color: inherit; font-size: 1rem;&quot;&gt;Email: manila@pakisuyotravel.com |&nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: inherit; font-size: 1rem;&quot;&gt;info@pakisuyocenter.com&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Dasmarinas - Camerino corner San Juan Streets., Dasmarinas, Cavite 09186037357 (046) 4166537 and 6831711 dasma@pakisuyotravel.com&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Gen Trias - The Plaza Florida Sun Estates, Manggahan, Gen. Trias, Cavite 09175215127 (046) 4242288 info@pakisuyogentrias.com&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Alfonso - 04 Alas-as St., Barangay V, Alfonso, Cavite 0908 411 9344 (046) 4233361 info@pakisuyoalfonso.com&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;PAYMENT OPTIONS:&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Cash deposit to our BDO &amp; BPI Accounts&lt;/li&gt;&lt;li&gt;Remittance Centers&lt;/li&gt;&lt;li&gt;Credit Card&nbsp;&lt;/li&gt;&lt;li&gt;Paypal&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;For your inquires, please feel free to contact any of our branches.&lt;/p&gt;&lt;p&gt;PAKISUYO TRAVEL is duly accredited by the Department of Tourism with Accreditation Nos. TOP RO4A 00004479-2018(M) and a member of :&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Philippine Tour Operators Association&lt;/li&gt;&lt;li&gt;Network of Independent Travel &amp; Allied Services&lt;/li&gt;&lt;li&gt;Cavite Travel &amp; Tours Association, inc.&lt;/li&gt;&lt;/ul&gt;', 'uploads/packages/24_gallery_0.png,uploads/packages/24_gallery_1.png,uploads/packages/24_gallery_2.png,uploads/packages/24_gallery_3.png,uploads/packages/24_gallery_4.png,uploads/packages/24_gallery_5.png', 4888, 'uploads/packages/24.png', 1, 0, '2024-01-26 23:35:11', '2024-01-26 23:58:42'),
+(25, 11, 22, NULL, 'Cavite Day Tour', 'Cavite', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247457.51720969166!2d120.65457848250725!3d14.280976528625802!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d4eae8163c71%3A0xf0c4d0843bdde727!2sCavite!5e0!3m2!1sen!2sph!4v1706285650124!5m2!1sen!2sph', '&lt;div&gt;&lt;span style=&quot;font-weight: bolder;&quot;&gt;INCLUSIONS:&lt;/span&gt;&lt;/div&gt;&lt;ul&gt;&lt;li&gt;A/C Van Roundtrip Transfers from SMX to Tagaytay - SMX&lt;/li&gt;&lt;li&gt;Tours &amp; Entrance Fees&lt;/li&gt;&lt;li&gt;Assistance of DOT Accredited Tour Guide on Day 2 Full Day Tour&lt;/li&gt;&lt;li&gt;1 Bottle of Mineral Water&lt;/li&gt;&lt;li&gt;Travel Insurance&lt;/li&gt;&lt;li&gt;Travel Kit&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;EXCLUSIONS:&lt;/span&gt;&lt;/div&gt;&lt;ul&gt;&lt;li&gt;Other expenses /tours not included in the itinerary&lt;/li&gt;&lt;li&gt;Tipping for Driver &amp; Tour Guide&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;ITINERARY:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Morning (08:00 am - 10:30 am): Pick up SMX, travel to Tagaytay, stop at Pink Sisters Monastery.&lt;/p&gt;&lt;p&gt;Lunch (12:00 pm): Free time for personal activities.&lt;/p&gt;&lt;p&gt;Afternoon (01:00 pm - 06:00 pm): Explore Twin Lakes, Puzzle Mansion, Our Lady of Manaoag Shrine, People\'s Park in the Sky, Picnic Grove, and Good Shepherd. Optional photo opportunity at Sky Ranch.&lt;/p&gt;&lt;p&gt;Evening (06:00 pm): Return to SMX or drop-off location. Dinner at your own expense.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;CONTACT US:&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Manila - Rm 323 FUBC Bldg, Escolta St., Binondo, Manila 09178053266 Tel Nos (02) 6646918/ 7031813&lt;/p&gt;&lt;p&gt;Email: manila@pakisuyotravel.com&lt;/p&gt;&lt;p&gt;info@pakisuyocenter.com&lt;/p&gt;&lt;table class=&quot;table table-bordered&quot; style=&quot;width: 537.475px; color: rgb(33, 37, 41); background-color: rgb(255, 255, 255);&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;p&gt;Manila - Rm 323 FUBC Bldg, Escolta St., Binondo, Manila 09178053266 Tel Nos (02) 6646918/ 7031813 |&nbsp;&lt;span style=&quot;background-color: transparent; color: inherit; font-size: 1rem;&quot;&gt;Email: manila@pakisuyotravel.com |&nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: inherit; font-size: 1rem;&quot;&gt;info@pakisuyocenter.com&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Dasmarinas - Camerino corner San Juan Streets., Dasmarinas, Cavite 09186037357 (046) 4166537 and 6831711 dasma@pakisuyotravel.com&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Gen Trias - The Plaza Florida Sun Estates, Manggahan, Gen. Trias, Cavite 09175215127 (046) 4242288 info@pakisuyogentrias.com&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Alfonso - 04 Alas-as St., Barangay V, Alfonso, Cavite 0908 411 9344 (046) 4233361 info@pakisuyoalfonso.com&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;PAYMENT OPTIONS:&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Cash deposit to our BDO &amp; BPI Accounts&lt;/li&gt;&lt;li&gt;Remittance Centers&lt;/li&gt;&lt;li&gt;Credit Card&nbsp;&lt;/li&gt;&lt;li&gt;Paypal&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;For your inquires, please feel free to contact any of our branches.&lt;/p&gt;&lt;p&gt;PAKISUYO TRAVEL is duly accredited by the Department of Tourism with Accreditation Nos. TOP RO4A 00004479-2018(M) and a member of :&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Philippine Tour Operators Association&lt;/li&gt;&lt;li&gt;Network of Independent Travel &amp; Allied Services&lt;/li&gt;&lt;li&gt;Cavite Travel &amp; Tours Association, inc.&lt;/li&gt;&lt;/ul&gt;', 'uploads/packages/25_gallery_0.png,uploads/packages/25_gallery_1.png,uploads/packages/25_gallery_2.png,uploads/packages/25_gallery_3.png,uploads/packages/25_gallery_4.png,uploads/packages/25_gallery_5.png', 999, 'uploads/packages/25.png', 1, 0, '2024-01-27 00:21:09', '2024-01-27 00:21:23');
 
 -- --------------------------------------------------------
 
@@ -369,12 +334,6 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`id`, `agency_id`, `name`, `description`, `status`, `qr_code`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(1, 4, 'Cash', 'Please provide payment (cash) on check-in day.', 1, 'uploads/qr/1.png', 0, '2023-11-18 05:36:08', NULL),
-(2, 4, 'GCash', '09123456789', 1, 'uploads/qr/2.png', 0, '2023-11-18 05:37:47', NULL),
-(4, 4, 'BDO', '(sample bank details)', 1, 'uploads/qr/4.png', 0, '2023-11-18 07:22:05', NULL),
-(6, 4, 'PayMaya', '09123456789', 1, 'uploads/qr/6.png', 0, '2023-11-18 07:56:23', NULL),
-(7, 5, 'Cash', '123', 1, NULL, 0, '2023-11-19 01:04:23', NULL),
-(9, 5, 'abc', 'abc', 1, 'uploads/qr/1.png', 0, '2023-11-19 01:06:48', NULL),
 (10, 8, 'Cash', 'Please provide payment (cash) on tour day.', 0, 'uploads/qr/1.png', 0, '2023-12-01 19:10:09', NULL),
 (11, 8, 'GCash', 'Jose Rizal | 0901-234-5678', 1, 'uploads/qr/11.png', 0, '2023-12-01 19:16:27', NULL),
 (12, 8, 'BDO', '(sample bank details)', 1, 'uploads/qr/12.png', 0, '2023-12-01 19:17:39', NULL),
@@ -421,29 +380,6 @@ CREATE TABLE `ratings_reviews` (
 --
 
 INSERT INTO `ratings_reviews` (`id`, `package_id`, `traveler_id`, `agency_id`, `rating`, `review`, `status`, `date_created`) VALUES
-(1, 9, 3, 4, 5, 'Maganda and malinis mga pools at kwarto nila. I love it!!!', 1, '2023-11-17 02:03:04'),
-(32, 9, 3, 4, 3, 'di na nya ako mahal gaisss :((', 0, '2023-11-17 02:03:31'),
-(33, 9, 3, 4, 3, '123', 0, '2023-11-17 02:21:38'),
-(35, 9, 3, 4, 1, 'nice one pareh', 1, '2023-11-17 02:22:15'),
-(36, 9, 3, 4, 5, 'gegege', 1, '2023-11-17 02:22:34'),
-(38, 9, 3, 4, 4, 'number 2', 1, '2023-11-17 02:24:59'),
-(48, 9, 3, 4, 1, 'Very Nice!!!', 0, '2023-11-17 03:19:20'),
-(49, 9, 3, 4, 5, 'gg', 0, '2023-11-17 03:19:54'),
-(50, 9, 3, 4, 4, '2 star', 0, '2023-11-17 03:23:40'),
-(51, 9, 3, 4, 1, 'try 5', 0, '2023-11-17 03:27:30'),
-(52, 9, 3, 4, 4, 'try 4', 0, '2023-11-17 03:28:48'),
-(53, 9, 3, 4, 1, 'try 1', 0, '2023-11-17 03:29:09'),
-(54, 9, 3, 4, 0, 'try 2', 0, '2023-11-17 03:29:15'),
-(55, 9, 3, 4, 2, 'try 2', 0, '2023-11-17 03:29:21'),
-(56, 9, 3, 4, 3, 'try 3', 0, '2023-11-17 03:29:27'),
-(57, 9, 3, 4, 4, 'try 4', 0, '2023-11-17 03:29:31'),
-(58, 9, 3, 4, 5, 'try 5', 0, '2023-11-17 03:29:40'),
-(60, 9, 3, 4, 0, 'sda', 0, '2023-11-17 03:31:22'),
-(61, 9, 3, 4, 0, 'dsf', 0, '2023-11-17 03:34:30'),
-(62, 9, 3, 4, 0, 'dsad', 0, '2023-11-17 03:38:20'),
-(66, 10, 3, 4, 4, 'try', 1, '2023-11-17 03:52:36'),
-(69, 11, 3, 4, 5, 'okay naman maganda dito', 0, '2023-11-20 02:48:39'),
-(71, 9, 3, 4, 3, 'testing 123', 0, '2023-11-25 22:25:14'),
 (73, 18, 3, 8, 3, 'maganda naman sya solid ang experience', 0, '2023-12-01 21:43:11'),
 (74, 18, 3, 8, 1, 'hindi na niya ako mahal gaiss :(((', 0, '2023-12-01 21:43:35'),
 (75, 18, 3, 8, 5, 'try lang magreview :))', 0, '2023-12-03 08:33:08'),
@@ -454,7 +390,9 @@ INSERT INTO `ratings_reviews` (`id`, `package_id`, `traveler_id`, `agency_id`, `
 (87, 19, 6, 8, 4, 'test review', 1, '2023-12-17 02:32:25'),
 (91, 19, 7, 8, 1, 'test review', 0, '2023-12-18 20:14:44'),
 (93, 19, 6, 8, 5, 'test review masaya', 0, '2023-12-19 10:16:33'),
-(94, 18, 3, 8, 4, 'wow', 0, '2024-01-20 17:08:40');
+(94, 18, 3, 8, 4, 'wow', 0, '2024-01-20 17:08:40'),
+(95, 24, 3, 11, 5, 'Thank you! I had a wonderful experience. Super solid din ng staff and driver huhu <3\n', 0, '2024-01-26 23:59:26'),
+(96, 25, 3, 11, 4, 'I recently booked this travel package and am thrilled with the experience. The booking process was smooth, the accommodations exceeded expectations, and the local guides were knowledgeable and passionate. Overall, it was a well-organized and memorable journey, and I would highly recommend this package to fellow travelers.', 0, '2024-01-27 00:26:40');
 
 -- --------------------------------------------------------
 
@@ -479,16 +417,6 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`id`, `agency_id`, `name`, `package_category`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(1, 4, 'Room 101', 'Regular', 'Regular', 0, 0, '2023-11-15 03:55:01', NULL),
-(2, 4, 'Room 102', 'Regular', 'Regular', 0, 0, '2023-11-15 03:57:33', NULL),
-(3, 4, 'Room 103', 'Regular', 'Regular', 1, 0, '2023-11-15 03:57:44', NULL),
-(4, 4, 'Room 104', 'Regular', 'Regular', 1, 0, '2023-11-15 03:57:51', NULL),
-(5, 4, 'Room 105', 'Regular', 'Regular', 0, 0, '2023-11-15 03:57:57', NULL),
-(6, 4, 'Room 106', 'Premium', 'Premium', 1, 0, '2023-11-15 03:58:20', NULL),
-(7, 4, 'Room 107', 'Premium', 'Premium', 1, 0, '2023-11-15 03:58:29', NULL),
-(8, 4, 'Room 108', 'Premium', 'Premium', 1, 0, '2023-11-15 03:58:42', NULL),
-(9, 4, 'Room 109', 'Deluxe', 'Deluxe', 1, 0, '2023-11-15 03:58:52', NULL),
-(10, 4, 'Room 110', 'Deluxe', 'Deluxe', 1, 0, '2023-11-15 03:59:05', NULL),
 (19, 8, 'Seat 1', 'Day Tour', 'Shotgun', 1, 0, '2023-12-16 04:26:43', NULL),
 (20, 8, 'Seat 2', 'Day Tour', 'Middle Left', 0, 0, '2023-12-16 05:01:52', NULL);
 
@@ -547,7 +475,7 @@ CREATE TABLE `traveler_list` (
 --
 
 INSERT INTO `traveler_list` (`id`, `code`, `firstname`, `middlename`, `lastname`, `gender`, `contact`, `address`, `email`, `password`, `avatar`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(3, '202311-00001', 'Arkohn', 'Jose', 'Rizal', 'Male', '09278709744', 'San Pedro, Laguna, 4023', 'arkohn@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/3.png?v=1702675918', 1, 0, '2023-11-12 22:05:00', '2023-12-16 05:31:58'),
+(3, '202311-00001', 'Arkohn', 'Josesa', 'Rizal', 'Male', '09278709744', 'San Pedro, Laguna, 4023', 'arkohn@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/3.png?v=1702675918', 1, 0, '2023-11-12 22:05:00', '2024-01-26 23:21:25'),
 (5, '202312-00001', 'John Mark', 'Dauan', 'Garapan', 'Male', '09278709744', 'San Pedro, Laguna', 'johnmarkgarapan@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/5.png?v=1701755465', 0, 0, '2023-12-05 13:51:05', '2023-12-18 01:07:32'),
 (6, '202312-00002', 'Dustin', 'Sophie', 'Luna', 'Female', '090123456789', 'Santa Rosa', 'dustin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/6.png?v=1702748109', 1, 0, '2023-12-17 01:32:29', '2023-12-17 01:37:00'),
 (7, '202312-00003', 'Khistan', '', 'Salliao', 'Male', '0901-234-5678', 'Santa Rosa, Laguna', 'khistan@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/7.png?v=1702901190', 1, 0, '2023-12-18 20:06:30', '2023-12-18 20:06:30');
@@ -568,10 +496,8 @@ CREATE TABLE `travel_type` (
 --
 
 INSERT INTO `travel_type` (`id`, `travel_type_name`) VALUES
-(1, 'Solo'),
-(2, 'Joiner'),
-(3, 'Group'),
-(4, 'Exclusive');
+(1, 'Joiner'),
+(2, 'Exclusive');
 
 -- --------------------------------------------------------
 
@@ -740,7 +666,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `agency_list`
 --
 ALTER TABLE `agency_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `agency_type_list`
@@ -752,25 +678,25 @@ ALTER TABLE `agency_type_list`
 -- AUTO_INCREMENT for table `booked_packages`
 --
 ALTER TABLE `booked_packages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `booked_packages_list`
 --
 ALTER TABLE `booked_packages_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `booking_list`
 --
 ALTER TABLE `booking_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=344;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=368;
 
 --
 -- AUTO_INCREMENT for table `category_list`
 --
 ALTER TABLE `category_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `inquiries`
@@ -782,13 +708,13 @@ ALTER TABLE `inquiries`
 -- AUTO_INCREMENT for table `message_list`
 --
 ALTER TABLE `message_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `package_list`
 --
 ALTER TABLE `package_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -806,7 +732,7 @@ ALTER TABLE `payment_type`
 -- AUTO_INCREMENT for table `ratings_reviews`
 --
 ALTER TABLE `ratings_reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `rooms`

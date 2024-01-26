@@ -207,10 +207,10 @@
             <p class="mb-0"><a href="./login.php" class="btn btn-primary rounded-pill px-5 py-3 shadow-sm">Traveler</a></p>
           </div>
           <div class="col-12 text-center mb-3">
-            <p class="mb-0"><a href="./agency_admin" class="btn btn-success rounded-pill px-5 py-3 shadow-sm">Travel Agency</a></p>
+            <p class="mb-0"><a href="./agency_admin/login.php" class="btn btn-success rounded-pill px-5 py-3 shadow-sm">Travel Agency</a></p>
           </div>
           <div class="col-12 text-center">
-          <p class="mb-0"><a href="./admin" class="btn btn-danger rounded-pill px-5 py-3 shadow-sm">DOT IV-A</a></p>
+          <p class="mb-0"><a href="./admin/login.php" class="btn btn-danger rounded-pill px-5 py-3 shadow-sm">DOT IV-A</a></p>
           </div>
         </div>
       </div>

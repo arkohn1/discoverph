@@ -4,7 +4,7 @@
         height: 27px;
         width: 27px;
         object-fit: cover;
-        left: -15%;
+        left: -8%;
         top: -12%;
   }
   .btn-rounded{
@@ -49,7 +49,7 @@
           <li class="nav-item">
             <div class="btn-group nav-link">
                   <button type="button" class="btn btn-rounded badge badge-light dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                    <span><img src="<?php echo validate_image($_settings->userdata('avatar')) ?>" class="user-img" alt="User Image"></span>
+                    <span><img src="<?php echo validate_image($_settings->userdata('avatar')) ?>" class="img-circle user-img" alt="User Image"></span>
                     <span class="ml-3"><?php echo ucwords($_settings->userdata('username')) ?></span>
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
