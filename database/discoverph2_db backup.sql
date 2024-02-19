@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2024 at 08:15 AM
+-- Generation Time: Jan 26, 2024 at 06:16 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -176,7 +176,7 @@ CREATE TABLE `booking_list` (
 INSERT INTO `booking_list` (`id`, `traveler_id`, `package_id`, `payments_id`, `payment_type_id`, `payment_amount`, `number_of_traveler`, `travel_type_id`, `days`, `check_in`, `check_out`) VALUES
 (314, 7, 19, NULL, 1, 0, 1, NULL, 1, '0000-00-00', '0000-00-00'),
 (323, 6, 19, NULL, NULL, 0, 1, NULL, 1, '0000-00-00', '0000-00-00'),
-(377, 3, 19, 11, NULL, 0, 1, NULL, 1, '0000-00-00', '0000-00-00');
+(367, 3, 24, NULL, NULL, 0, 2, NULL, 1, '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -251,7 +251,31 @@ CREATE TABLE `message_list` (
 --
 
 INSERT INTO `message_list` (`id`, `fullname`, `contact`, `email`, `message`, `status`, `date_created`) VALUES
-(28, 'Arkohn Mamamo Mamako', '09278709744', 'arkohgn@gmail.com', 'gusto ko sana ireklamo si hannah', 1, '2023-11-27 01:20:19');
+(7, 'Mark', '123', 'mark@gmail.com', 'mamamo', 1, '0000-00-00 00:00:00'),
+(8, 'Mark', '123', 'mark@gmail.com', 'mamako', 1, '2023-11-13 01:15:32'),
+(9, 'Grace', '123456', 'grace@gmail.com', 'mamanaten', 1, '2023-11-13 02:33:20'),
+(10, 'Arkohn', '123456', 'arkohn@gmail.com', 'mamanila', 1, '2023-11-13 04:08:07'),
+(14, '123', '123', '123@123', '123', 1, '2023-11-15 20:22:44'),
+(18, 'arkohn', '123', '123@123', 'hello', 1, '2023-11-16 01:19:14'),
+(19, 'dasda', '213', '123@1313', 'asdadwasdasd', 1, '2023-11-17 02:48:48'),
+(20, '123123', '1243123', '123@dda', 'aasdadasda', 1, '2023-11-17 02:48:55'),
+(21, 'sdasda', '2313', '213@wdzc', 'zxczxczcx', 1, '2023-11-17 02:49:07'),
+(22, 'Jose Rizal', '09123456789', 'joserizal@gmail.com', 'Gusto ko sana magreklamo about sa Basta Resort...', 1, '2023-11-20 04:14:25'),
+(23, 'Dorothy Grace Dauan', '090123456789', 'dorothy@gmail.com', 'sample inquiry', 1, '2023-11-24 06:52:04'),
+(24, '1223', '123', '123@123', '123', 0, '2023-11-26 21:55:46'),
+(25, '123', '123', '123@122', '122', 0, '2023-11-26 21:56:12'),
+(26, '111', '111', '111@111', '111', 0, '2023-11-27 00:23:42'),
+(27, '222', '222', '222@222', '222', 1, '2023-11-27 00:29:11'),
+(28, 'Arkohn Mamamo Mamako', '09278709744', 'arkohgn@gmail.com', 'gusto ko sana ireklamo si hannah', 1, '2023-11-27 01:20:19'),
+(29, '112', '112', '112@112', '112', 0, '2023-11-27 01:25:32'),
+(30, '222', '222', '222@222', '222', 0, '2023-11-27 01:26:14'),
+(31, 'mark', '123', 'mark@123', 'mark123', 1, '2023-11-27 01:29:52'),
+(32, '555', '555', '555@555', '555', 1, '2023-11-27 01:30:46'),
+(33, '1221', '2123121', '22@12312', '21312312312312', 1, '2023-11-27 01:32:33'),
+(34, '321312', '213231', '223@231231', '231231', 1, '2023-11-27 01:32:58'),
+(35, 'mark', 'mark', 'mark@mark', 'markmark', 1, '2023-11-27 06:15:02'),
+(36, 'Dustin Sophie Luna', '0901-234-5678', 'dustin@gmail.com', 'test message', 1, '2023-12-17 01:47:22'),
+(37, 'HannahJoyOliveros', '0901-234-5678', 'arkohn@gmail.com', 'jojojojojo', 1, '2024-01-24 14:18:24');
 
 -- --------------------------------------------------------
 
@@ -312,7 +336,7 @@ CREATE TABLE `payments` (
 INSERT INTO `payments` (`id`, `agency_id`, `name`, `description`, `status`, `qr_code`, `delete_flag`, `date_created`, `date_updated`) VALUES
 (10, 8, 'Cash', 'Please provide payment (cash) on tour day.', 0, 'uploads/qr/1.png', 0, '2023-12-01 19:10:09', NULL),
 (11, 8, 'GCash', 'Jose Rizal | 0901-234-5678', 1, 'uploads/qr/11.png', 0, '2023-12-01 19:16:27', NULL),
-(12, 8, 'BDO', 'Account Number: 01233-22133-12312\r\nName: Jose Rizal', 1, 'uploads/qr/12.png', 0, '2023-12-01 19:17:39', NULL),
+(12, 8, 'BDO', '(sample bank details)', 1, 'uploads/qr/12.png', 0, '2023-12-01 19:17:39', NULL),
 (13, 8, 'PayMaya', 'Jose Rizal | 0901-234-5678', 1, 'uploads/qr/13.png', 0, '2023-12-01 19:19:45', NULL);
 
 -- --------------------------------------------------------
@@ -666,7 +690,7 @@ ALTER TABLE `booked_packages_list`
 -- AUTO_INCREMENT for table `booking_list`
 --
 ALTER TABLE `booking_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=378;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=368;
 
 --
 -- AUTO_INCREMENT for table `category_list`
@@ -684,7 +708,7 @@ ALTER TABLE `inquiries`
 -- AUTO_INCREMENT for table `message_list`
 --
 ALTER TABLE `message_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `package_list`
