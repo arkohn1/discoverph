@@ -319,7 +319,7 @@ Class Users extends DBConnection {
 					if(strpos($_SERVER['HTTP_REFERER'], 'client/register.php') > -1){
 						$resp['msg'] = " Your account has been registered successfully.";
 					}else{
-						$resp['msg'] = " Traveler's Account has been registered successfully.";
+						$resp['msg'] = " Traveler's Account has been registered successfully. Please verify your email address.";
 					}
 				}else{
 					if($this->settings->userdata('login_type') == 3){

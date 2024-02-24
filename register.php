@@ -58,7 +58,7 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="firstname" class="control-label">First Name</label>
-                                <input type="text" id="firstname" autofocus name="firstname" class="form-control form-control-sm form-control-border" maxlength="50" required pattern="[A-Za-z.]+">
+                                <input type="text" id="firstname" autofocus name="firstname" class="form-control form-control-sm form-control-border" maxlength="50">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="middlename" class="control-label">Middle Name</label>
@@ -250,7 +250,7 @@
         nameInputs.forEach(function (input) {
             input.addEventListener('input', function () {
                 var inputValue = this.value;
-                var sanitizedValue = inputValue.replace(/[^A-Za-z.]/g, ''); // Remove characters other than letters and periods
+                var sanitizedValue = inputValue.replace(/[^A-Za-z.\s]/g, ''); // Allow letters, periods, and spaces
                 this.value = sanitizedValue;
             });
         });

@@ -132,7 +132,7 @@
         <?php if (!($_settings->userdata('id') > 0 && $_settings->userdata('login_type') == 3)) : ?>
           <!-- Modal Trigger Button for users who are not logged in -->
           <li class="nav-item">
-            <a class="nav-link" data-toggle="modal" data-target="#loginModal" href="javascript:void(0)">Sign In</a>
+            <a class="nav-link" href="./login.php">Sign In</a>
           </li>
         <?php endif; ?>
 
@@ -197,8 +197,10 @@
 }
 
 </style>
+
+
 <!-- Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+<!--<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content border-0 bg-transparent shadow-none">
       <div class="modal-body">
@@ -217,7 +219,7 @@
     </div>
   </div>
 </div>
-
+-->
 
 <!-- /.navbar -->
 
