@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2024 at 08:15 AM
+-- Generation Time: Jul 15, 2024 at 12:02 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -176,7 +176,7 @@ CREATE TABLE `booking_list` (
 INSERT INTO `booking_list` (`id`, `traveler_id`, `package_id`, `payments_id`, `payment_type_id`, `payment_amount`, `number_of_traveler`, `travel_type_id`, `days`, `check_in`, `check_out`) VALUES
 (314, 7, 19, NULL, 1, 0, 1, NULL, 1, '0000-00-00', '0000-00-00'),
 (323, 6, 19, NULL, NULL, 0, 1, NULL, 1, '0000-00-00', '0000-00-00'),
-(377, 3, 19, 11, NULL, 0, 1, NULL, 1, '0000-00-00', '0000-00-00');
+(380, 3, 19, 11, 2, 2499, 1, NULL, 1, '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -440,6 +440,7 @@ CREATE TABLE `traveler_list` (
   `email` text NOT NULL,
   `password` text NOT NULL,
   `avatar` text DEFAULT NULL,
+  `verify_token` varchar(100) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
@@ -450,11 +451,13 @@ CREATE TABLE `traveler_list` (
 -- Dumping data for table `traveler_list`
 --
 
-INSERT INTO `traveler_list` (`id`, `code`, `firstname`, `middlename`, `lastname`, `gender`, `contact`, `address`, `email`, `password`, `avatar`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(3, '202311-00001', 'Arkohn', 'Josesa', 'Rizal', 'Male', '09278709744', 'San Pedro, Laguna, 4023', 'arkohn@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/3.png?v=1702675918', 1, 0, '2023-11-12 22:05:00', '2024-01-26 23:21:25'),
-(5, '202312-00001', 'John Mark', 'Dauan', 'Garapan', 'Male', '09278709744', 'San Pedro, Laguna', 'johnmarkgarapan@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/5.png?v=1701755465', 0, 0, '2023-12-05 13:51:05', '2023-12-18 01:07:32'),
-(6, '202312-00002', 'Dustin', 'Sophie', 'Luna', 'Female', '090123456789', 'Santa Rosa', 'dustin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/6.png?v=1702748109', 1, 0, '2023-12-17 01:32:29', '2023-12-17 01:37:00'),
-(7, '202312-00003', 'Khistan', '', 'Salliao', 'Male', '0901-234-5678', 'Santa Rosa, Laguna', 'khistan@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/7.png?v=1702901190', 1, 0, '2023-12-18 20:06:30', '2023-12-18 20:06:30');
+INSERT INTO `traveler_list` (`id`, `code`, `firstname`, `middlename`, `lastname`, `gender`, `contact`, `address`, `email`, `password`, `avatar`, `verify_token`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
+(3, '202311-00001', 'Arkohn', 'Dauan', 'Garapan', 'Male', '09278709744', 'San Pedro, Laguna, 4023', 'johnmarkkgarapan2@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/3.png?v=1702675918', '', 1, 0, '2023-11-12 22:05:00', '2024-02-21 13:22:56'),
+(5, '202312-00001', 'John Mark', 'Dauan', 'Garapan', 'Male', '09278709744', 'San Pedro, Laguna', 'johnmarkgarapan@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/5.png?v=1701755465', '', 0, 0, '2023-12-05 13:51:05', '2023-12-18 01:07:32'),
+(6, '202312-00002', 'Dustin', 'Sophie', 'Luna', 'Female', '090123456789', 'Santa Rosa', 'dustin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/6.png?v=1702748109', '', 1, 0, '2023-12-17 01:32:29', '2023-12-17 01:37:00'),
+(7, '202312-00003', 'Khistan', '', 'Salliao', 'Male', '0901-234-5678', 'Santa Rosa, Laguna', 'khistan@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/7.png?v=1702901190', '', 1, 0, '2023-12-18 20:06:30', '2023-12-18 20:06:30'),
+(17, '202402-00001', 'John Mark', '', 'Garapan', 'Male', '0927-870-9744', 'San Pedro', 'johnmarkgarapan2@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/17.png?v=1708483215', 'b2c5e2a5773700d087394ca3fc13ac75', 1, 0, '2024-02-21 10:40:15', '2024-02-21 10:40:15'),
+(18, '202402-00002', 'John Mark', 'Dauan', 'Garapan', 'Male', '0927-870-9744', 'San Pedro', 'johnmarkgarapann2@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/travelers/18.png?v=1708493082', '', 1, 0, '2024-02-21 13:24:42', '2024-02-21 13:24:42');
 
 -- --------------------------------------------------------
 
@@ -666,7 +669,7 @@ ALTER TABLE `booked_packages_list`
 -- AUTO_INCREMENT for table `booking_list`
 --
 ALTER TABLE `booking_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=378;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=381;
 
 --
 -- AUTO_INCREMENT for table `category_list`
@@ -726,7 +729,7 @@ ALTER TABLE `system_info`
 -- AUTO_INCREMENT for table `traveler_list`
 --
 ALTER TABLE `traveler_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `travel_type`
