@@ -6,15 +6,21 @@
         object-position:center center;
         border-radius:100%;
     }
+
+	.badge {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 0.375rem;
+    }
 </style>
-<div class="card card-outline card-info rounded-0">
+<div class="card card-primary rounded-0 shadow">
 	<div class="card-header">
-		<h3 class="card-title">List of Inquiries</h3>
+		<h3 class="card-title">Inquiries</h3>
 	</div>
 	<div class="card-body">
 		<div class="container-fluid">
         <div class="container-fluid">
-			<table class="table table-hover table-striped">
+			<table class="table table-bordered table-striped">
 				<colgroup>
 					<col width="5%">
 					<col width="15%">
@@ -25,7 +31,7 @@
 					<col width="10%">
 				</colgroup>
 				<thead>
-					<tr>
+					<tr class="bg-secondary">
 						<th>#</th>
 						<th>Name</th>
 						<th>Email</th>
@@ -50,12 +56,12 @@
 
 							<td class="text-center">
 								<?php if($row['status'] == 1): ?>
-									<span class="badge badge-pill badge-success">Read</span>
+									<span class="badge badge-success px-3 rounded-pill">Read</span>
 								<?php else: ?>
-								<span class="badge badge-pill badge-primary">Unread</span>
+								<span class="badge badge-primary px-3 rounded-pill">Unread</span>
 								<?php endif; ?>
 							</td>
-							<td align="center">
+							<td class="align-middle" align="center">
 								 <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
 				                  		Action
 				                    <span class="sr-only">Toggle Dropdown</span>

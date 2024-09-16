@@ -18,6 +18,12 @@ if(isset($_GET['id'])){
     #uni_modal .modal-content>.modal-footer{
         display:none;
     }
+
+    .close-btn {
+        background-color: #6c757d;
+        color: #fff;
+        border: 1px solid #6c757d;
+    }
 </style>
 <div class="container-fluid">
     <div class="row">
@@ -56,7 +62,7 @@ if(isset($_GET['id'])){
     </div>
     <div class="row">
         <div class="col-12 text-right">
-            <button class="btn btn-flat btn-sm btn-dark" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+            <button class="btn close-btn" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
         </div>
     </div>
 </div>

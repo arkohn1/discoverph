@@ -26,7 +26,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 <div class="container-fluid">
 	<form action="" id="category-form">
 		<input type="hidden" name ="id" value="<?php echo isset($id) ? $id : '' ?>">
-		<input type="hidden" name ="vendor_id" value="<?= $_settings->userdata('id') ?>">
+		<input type="hidden" name ="agency_id" value="<?= $_settings->userdata('id') ?>">
 		<div class="form-group">
 			<label for="name" class="control-label">Name</label>
 			<input name="name" id="name" type="text"class="form-control form-control-sm form-control-border" value="<?php echo isset($name) ? $name : ''; ?>" required>

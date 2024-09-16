@@ -3,8 +3,8 @@
       <aside class="main-sidebar sidebar-dark-primary elevation-4 sidebar-no-expand">
         <!-- Brand Logo -->
         <a href="<?php echo base_url ?>admin" class="brand-link bg-primary text-sm">
-        <img src="<?php echo validate_image($_settings->info('logo'))?>" alt="Store Logo" class="brand-image img-circle elevation-3" style="opacity: .8;width: 1.6rem;height: 1.6rem;max-height: unset">
-        <span class="brand-text font-weight-light"><?php echo $_settings->info('short_name') ?></span>
+        <img src="<?php echo validate_image($_settings->info('logo'))?>" alt="Store Logo" class="brand-image <!--img-circle elevation-3-->" style="opacity: .8;width: 1.6rem;height: 1.6rem;max-height: unset">
+        <span class="brand-text font-weight-light"><b><?php echo $_settings->info('short_name')?></b></span>
         </a>
         <!-- Sidebar -->
         <div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-transition os-host-scrollbar-horizontal-hidden">
@@ -32,34 +32,34 @@
                       </a>
                     </li> 
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=products" class="nav-link nav-products">
+                      <a href="<?php echo base_url ?>admin/?page=packages" class="nav-link nav-packages">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>
-                          Resort Packages
+                          Travel Packages
                         </p>
                       </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=orders" class="nav-link nav-orders">
+                      <a href="<?php echo base_url ?>admin/?page=bookings" class="nav-link nav-bookings">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
-                          Bookings / Reservations
+                          Bookings
                         </p>
                       </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=vendors" class="nav-link nav-vendors">
+                      <a href="<?php echo base_url ?>admin/?page=agencies" class="nav-link nav-agencies">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
-                          Registered Resorts
+                          Travel Agencies
                         </p>
                       </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=clients" class="nav-link nav-clients">
+                      <a href="<?php echo base_url ?>admin/?page=travelers" class="nav-link nav-travelers">
                         <i class="nav-icon fas fa-user-friends"></i>
                         <p>
-                          Customers
+                          Travelers
                         </p>
                       </a>
                     </li>
@@ -73,23 +73,23 @@
                     </li>
                     <li class="nav-header">Maintenance</li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=reports/order_reports" class="nav-link nav-reports_order_reports">
+                      <a href="<?php echo base_url ?>admin/?page=reports/booking_reports" class="nav-link nav-reports_booking_reports">
                         <i class="nav-icon fas fa-calendar"></i>
                         <p>
-                          Monthly Booking Report
+                          Reports
                         </p>
                       </a>
                     </li>
                     <?php if($_settings->userdata('type') == 1): ?>
                     <li class="nav-header">Maintenance</li>
-                    <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=shop_types" class="nav-link nav-shop_types">
+                    <!--<li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=agency_types" class="nav-link nav-agency_types">
                         <i class="nav-icon fas fa-th-list"></i>
                         <p>
-                          Resort Types
+                          Travel Agency Types
                         </p>
                       </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=user/list" class="nav-link nav-user_list">
                         <i class="nav-icon fas fa-users-cog"></i>

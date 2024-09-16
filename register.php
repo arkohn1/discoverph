@@ -3,68 +3,70 @@
 <html lang="en" class="" style="height: auto;">
  <?php require_once('inc/header.php') ?>
 <body class="hold-transition">
-  <script>
-    start_loader()
-  </script>
-  <style>
-      html,body{
-          height: calc(100%);
-          width: calc(100%);
-      }
-      body{
-          width:calc(100%);
-          height:calc(100%);
-          background-image:url('<?= validate_image($_settings->info('cover')) ?>');
-          background-repeat: no-repeat;
-          background-size:cover;
-      }
-      #logo-img{
-          width:15em;
-          height:15em;
-          object-fit:scale-down;
-          object-position:center center;
-      }
-      #system_name{
-        color:#fff;
-        text-shadow: 3px 3px 3px #000;
-      }
-      #cimg{
-          width:200px;
-          height:200px;
-          object-fit:scale-down;
-          object-position:center center
-      }
-  </style>
-  <script>
-  </script>
+    <script>
+        start_loader()
+    </script>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            background-image: url('<?= validate_image($_settings->info('cover')) ?>');
+            background-repeat: no-repeat;
+            background-size: cover;
+            backdrop-filter: blur(3px); /* Adjust the blur amount as needed */
+        }
+
+        #logo-img {
+            width: 15em;
+            height: 15em;
+            object-fit: scale-down;
+            object-position: center center;
+        }
+
+        #system_name {
+            color: #fff;
+            /*text-shadow: 3px 3px 3px #000;*/
+        }
+
+        #cimg {
+            width: 100px;
+            height: 100px;
+            object-fit: scale-down;
+            object-position: center center;
+        }
+    </style>
+
   <div class="d-flex justify-content-center align-items-center flex-row h-100">
         <div class="col-5">
-            <center><img src="<?= validate_image($_settings->info('logo')) ?>" alt="System Logo" class="img-thumbnail rounded-circle" id="logo-img"></center>
+            <center><img src="<?= validate_image($_settings->info('logo')) ?>" alt="System Logo" class="<!--img-thumbnail rounded-circle-->" id="logo-img"></center>
             <h1 class="text-center" id="system_name"><?= $_settings->info('name') ?></h1>
         </div>
         <div class="col-7 h-100 bg-gradient-light px-4">
             <div class="d-flex justify-content-center align-items-center w-100 h-100">
-                <div class="card card-outline card-primary col-12 rounded-0 shadow">
+                <div class="card card-outline card-primary col-12 rounded-0 shadow"> <!-- add h-100 to extend height of creation of account background-->
                     <div class="card-header text-center">
-                    <a href="./register.php" class="h1"><b>Create an Account</b></a>
+                    <a href="./register.php" class="h3"><b>Create an Account</b></a>
                     </div>
                     <div class="card-body">
-                    <p class="login-box-msg">Sign in to start your session</p>
-
                     <form id="cregister-frm" action="" method="post">
                         <input type="hidden" name="id">
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="firstname" class="control-label">First Name</label>
-                                <input type="text" id="firstname" autofocus name="firstname" class="form-control form-control-sm form-control-border" required>
+                                <input type="text" id="firstname" autofocus name="firstname" class="form-control form-control-sm form-control-border" maxlength="50">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="middlename" class="control-label">Middle Name</label>
-                                <input type="text" id="middlename" name="middlename" class="form-control form-control-sm form-control-border" placeholder="optional">
+                                <input type="text" id="middlename" name="middlename" class="form-control form-control-sm form-control-border" maxlength="50" placeholder="optional">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="lastname" class="control-label">Last Name</label>
-                                <input type="text" id="lastname" name="lastname" class="form-control form-control-sm form-control-border" required>
+                                <input type="text" id="lastname" name="lastname" class="form-control form-control-sm form-control-border" maxlength="50" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="gender" class="control-label">Gender</label>
@@ -74,27 +76,26 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="contact" class="control-label">Contact #</label>
-                                <input type="text" id="contact" name="contact" class="form-control form-control-sm form-control-border" required>
+                                <label for="contact" class="control-label">Contact</label>
+                                <input type="text" id="contact" name="contact" class="form-control form-control-sm form-control-border" maxlength="13" placeholder="09XX-XXX-XXXX" required pattern="^09[0-9]{2}-?[0-9]{3}-?[0-9]{4}$">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="email" class="control-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-control form-control-sm form-control-border" maxlength="50" required>
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label for="address" class="control-label">Address</label>
-                                <textarea rows="3" id="address" name="address" class="form-control form-control-sm rounded-0" required></textarea>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="email" class="control-label">Email</label>
-                                <input type="email" id="email" name="email" class="form-control form-control-sm form-control-border" required>
+                                <input type="text" id="address" name="address" class="form-control form-control-sm form-control-border" maxlength="200" required></textarea>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="password" class="control-label">Password</label>
                                 <div class="input-group input-group-sm">
-                                    <input type="password" id="password" name="password" class="form-control form-control-sm form-control-border" required>
+                                    <input type="password" id="password" name="password" class="form-control form-control-sm form-control-border" maxlength="50" required>
                                     <div class="input-group-append bg-transparent border-top-0 border-left-0 border-right-0 rounded-0">
                                         <span class="input-group-text bg-transparent border-top-0 border-left-0 border-right-0 rounded-0">
                                             <a href="javascript:void(0)" class="text-reset text-decoration-none pass_view"> <i class="fa fa-eye-slash"></i></a>
@@ -129,27 +130,17 @@
                             <div class="col-8">
                                 <a href="<?= base_url ?>">Back to Site</a>
                             </div>
-                            <!-- /.col -->
                             <div class="col-4">
                                 <button type="submit" class="btn btn-primary btn-block btn-flat">Create Account</button>
                             </div>
                             <div class="col-12 text-center">
                             <a href="<?= base_url.'./login.php' ?>">Already have an Account</a>
                             </div>
-                        <!-- /.col -->
                         </div>
                     </form>
-                    <!-- /.social-auth-links -->
-
-                    <!-- <p class="mb-1">
-                        <a href="forgot-password.html">I forgot my password</a>
-                    </p> -->
-                    
                     </div>
-                    <!-- /.card-body -->
                 </div>
             </div>
-            
         </div>
   </div>
 
@@ -250,6 +241,61 @@
         })
     })
   })
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var nameInputs = document.querySelectorAll('input[name^="firstname"], input[name^="middlename"], input[name^="lastname"]');
+
+        nameInputs.forEach(function (input) {
+            input.addEventListener('input', function () {
+                var inputValue = this.value;
+                var sanitizedValue = inputValue.replace(/[^A-Za-z.\s]/g, ''); // Allow letters, periods, and spaces
+                this.value = sanitizedValue;
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var contactInput = document.getElementById('contact');
+
+        contactInput.addEventListener('input', function () {
+            var inputValue = this.value.replace(/\D/g, ''); // Remove non-numeric characters
+            var formattedValue = formatPhoneNumber(inputValue);
+            this.value = formattedValue;
+
+            if (/^09[0-9]{2}-?[0-9]{3}-?[0-9]{4}$/.test(inputValue)) {
+                this.setCustomValidity('');
+            } else {
+                this.setCustomValidity('Invalid format. Must start with 09 and follow the pattern 09XX-XXX-XXXX.');
+            }
+        });
+
+        function formatPhoneNumber(value) {
+            // Add hyphens after the 4th and 7th characters as the user types
+            var formattedValue = value.replace(/^(\d{4})(\d{3})(\d{4})$/, '$1-$2-$3');
+            return formattedValue;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var emailInput = document.getElementById('email');
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        emailInput.addEventListener('input', function () {
+            if (emailPattern.test(this.value)) {
+                this.classList.remove('is-invalid');
+            } else {
+                this.classList.add('is-invalid');
+            }
+        });
+
+        emailInput.addEventListener('blur', function () {
+            if (!emailPattern.test(this.value)) {
+                this.classList.add('is-invalid');
+            }
+        });
+    });
 </script>
 </body>
 </html>

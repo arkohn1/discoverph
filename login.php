@@ -13,6 +13,8 @@
           background-image:url('<?= validate_image($_settings->info('cover')) ?>');
           background-repeat: no-repeat;
           background-size:cover;
+          backdrop-filter: blur(3px); /* Adjust the blur amount as needed */
+
       }
       #logo-img{
           width:15em;
@@ -22,7 +24,7 @@
       }
       #system_name{
         color:#fff;
-        text-shadow: 3px 3px 3px #000;
+        /*text-shadow: 3px 3px 3px #000;*/
       }
   </style>
    <?php if($_settings->chk_flashdata('success')): ?>
@@ -30,7 +32,7 @@
         alert_toast("<?php echo $_settings->flashdata('success') ?>",'success')
       </script>
     <?php endif;?>
-  <center><img src="<?= validate_image($_settings->info('logo')) ?>" alt="System Logo" class="img-thumbnail rounded-circle" id="logo-img"></center>
+  <center><img src="<?= validate_image($_settings->info('logo')) ?>" alt="System Logo" class="<!--img-thumbnail rounded-circle-->" id="logo-img"></center>
 <h1 class="text-center" id="system_name"><?= $_settings->info('name') ?></h1>
   <div class="clear-fix my-2"></div>
 <div class="login-box">
@@ -38,7 +40,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="./login.php" class="h1 text-decoration-none" style="font-size: 1.5rem;"><b>Customer Login</b></a>
+      <a href="./login.php" class="h1 text-decoration-none" style="font-size: 1.5rem;"><b>Traveler Login</b></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>

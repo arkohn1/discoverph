@@ -35,7 +35,7 @@
 				<tbody>
 					<?php 
 					$i = 1;
-						$qry = $conn->query("SELECT * from `category_list` where delete_flag = 0 and `vendor_id` = '{$_settings->userdata('id')}' order by `name` asc ");
+						$qry = $conn->query("SELECT * from `category_list` where delete_flag = 0 and `agency_id` = '{$_settings->userdata('id')}' order by `name` asc ");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>
